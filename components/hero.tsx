@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { Shield, Star, Award, ArrowRight, CheckCircle } from 'lucide-react'
 import { LeadCaptureForm } from '@/components/lead-capture-form'
 import { Reveal } from '@/components/ui/reveal'
@@ -21,13 +20,11 @@ export function HeroSection() {
 
       {/* Full-bleed background photo */}
       <div className="absolute inset-0">
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=90&fit=crop&crop=top"
           alt="Expert roofing team working on a residential home"
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
+          className="w-full h-full object-cover object-center"
         />
         {/* Layered overlays for depth */}
         <div className="absolute inset-0 bg-gradient-to-r from-forest-900 via-forest-900/85 to-forest-900/30" />

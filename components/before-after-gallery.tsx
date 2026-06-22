@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useState, useRef, useCallback } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
@@ -97,12 +96,11 @@ function SliderCard({
         style={{ cursor: isDragging ? 'ew-resize' : 'col-resize' }}
       >
         {/* After image (full) */}
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={project.after}
           alt={`${project.label} - after Peak Roofing Co`}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+          className="absolute inset-0 w-full h-full object-cover"
           draggable={false}
         />
 
@@ -112,12 +110,11 @@ function SliderCard({
           style={{ width: `${sliderPos}%` }}
         >
           <div className="absolute inset-0" style={{ width: `${100 * 100 / sliderPos}%` }}>
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={project.before}
               alt={`${project.label} - before Peak Roofing Co`}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+              className="absolute inset-0 w-full h-full object-cover"
               draggable={false}
             />
           </div>
