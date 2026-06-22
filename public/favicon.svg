@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Gold rounded square background -->
+  <rect width="32" height="32" rx="6" fill="#F59E0B"/>
+  <!-- Roof triangle -->
+  <polygon points="16,4 28,16 4,16" fill="#0A140A"/>
+  <!-- Wall/body below roof -->
+  <rect x="9" y="16" width="14" height="11" rx="1" fill="#0A140A"/>
+</svg>
