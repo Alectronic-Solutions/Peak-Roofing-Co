@@ -24,8 +24,7 @@ export const metadata: Metadata = {
     'Licensed roofing contractors serving the region. Storm damage, replacements, inspections. 24/7 emergency line.',
   keywords: ['roofing contractor', 'roof replacement', 'storm damage', 'roof repair'],
   icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
+    icon: '/Peak-Roofing-Co/favicon.svg',
   },
 }
 
