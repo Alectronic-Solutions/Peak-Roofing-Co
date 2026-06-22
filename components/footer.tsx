@@ -241,7 +241,7 @@ export function Footer() {
               <ul className="flex gap-4 sm:gap-5 flex-wrap">
                 <li><Link href="/privacy-policy/" className="text-slate-400 text-xs hover:text-white transition-colors">Privacy Policy</Link></li>
                 <li><Link href="/terms/" className="text-slate-400 text-xs hover:text-white transition-colors">Terms of Service</Link></li>
-                <li><Link href="/sitemap.xml" className="text-slate-400 text-xs hover:text-white transition-colors">Sitemap</Link></li>
+                <li><Link href="/sitemap" className="text-slate-400 text-xs hover:text-white transition-colors">Sitemap</Link></li>
               </ul>
             </nav>
           </div>
