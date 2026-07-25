@@ -6,10 +6,12 @@ import { StormCallout } from '@/components/storm-callout'
 import { TestimonialsSection } from '@/components/testimonials-section'
 import { ContactForm } from '@/components/contact-form'
 import { Footer } from '@/components/footer'
+import LocalSeoSchema from '@/components/local-seo-schema'
 
 export default function HomePage() {
   return (
-    <main>
+    <>
+      <LocalSeoSchema pageType="home" />
       <HeroSection />
       <ServicesSection />
       <BeforeAfterGallery />
@@ -18,6 +20,6 @@ export default function HomePage() {
       <TestimonialsSection />
       <ContactForm />
       <Footer />
-    </main>
+    </>
   )
 }

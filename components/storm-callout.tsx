@@ -36,6 +36,7 @@ export function StormCallout() {
     const img = imgRef.current
     const section = sectionRef.current
     if (!img || !section) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     let rafId: number
     const onScroll = () => {
@@ -111,7 +112,7 @@ export function StormCallout() {
             <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-10">
               {[
                 { icon: Clock, stat: '< 2 hrs', label: 'Response Time' },
-                { icon: Shield, stat: '100%', label: 'Claims Handled' },
+                { icon: Shield, stat: '24/7', label: 'Claims Support' },
                 { icon: DollarSign, stat: '$0', label: 'Avg. Out-of-Pocket' },
               ].map(({ icon: Icon, stat, label }) => (
                 <div key={label} className="bg-white/[0.04] border border-white/[0.08] rounded-xl p-4 text-center">

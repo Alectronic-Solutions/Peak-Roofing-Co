@@ -125,7 +125,7 @@ export function ContactForm() {
                     value={fields.name}
                     onChange={(e) => update('name', e.target.value)}
                     placeholder="Jane Smith"
-                    className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-500 focus-visible:ring-0 focus-visible:border-gold-400/70 min-h-[48px] rounded-xl hover:border-white/20 transition-colors"
+                    className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-400 focus-visible:ring-0 focus-visible:border-gold-400/70 min-h-[48px] rounded-xl hover:border-white/20 transition-colors"
                   />
                 </div>
                 <div className="space-y-2">
@@ -139,7 +139,7 @@ export function ContactForm() {
                     value={fields.phone}
                     onChange={(e) => update('phone', e.target.value)}
                     placeholder="(555) 000-0000"
-                    className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-500 focus-visible:ring-0 focus-visible:border-gold-400/70 min-h-[48px] rounded-xl hover:border-white/20 transition-colors"
+                    className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-400 focus-visible:ring-0 focus-visible:border-gold-400/70 min-h-[48px] rounded-xl hover:border-white/20 transition-colors"
                   />
                 </div>
               </div>
@@ -156,7 +156,7 @@ export function ContactForm() {
                   value={fields.email}
                   onChange={(e) => update('email', e.target.value)}
                   placeholder="jane@example.com"
-                  className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-500 focus-visible:ring-0 focus-visible:border-gold-400/70 min-h-[48px] rounded-xl hover:border-white/20 transition-colors"
+                  className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-400 focus-visible:ring-0 focus-visible:border-gold-400/70 min-h-[48px] rounded-xl hover:border-white/20 transition-colors"
                 />
               </div>
 
@@ -170,20 +170,21 @@ export function ContactForm() {
                   value={fields.address}
                   onChange={(e) => update('address', e.target.value)}
                   placeholder="123 Main St, Springfield, IL 62701"
-                  className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-500 focus-visible:ring-0 focus-visible:border-gold-400/70 min-h-[48px] rounded-xl hover:border-white/20 transition-colors"
+                  className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-400 focus-visible:ring-0 focus-visible:border-gold-400/70 min-h-[48px] rounded-xl hover:border-white/20 transition-colors"
                 />
               </div>
 
               {/* Service selector */}
               <div className="space-y-2">
-                <Label className="text-slate-300 text-[13px] font-medium">
+                <Label id="cf-service-label" className="text-slate-300 text-[13px] font-medium">
                   What do you need?
                 </Label>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2" role="group" aria-labelledby="cf-service-label">
                   {SERVICES.map((s) => (
                     <button
                       key={s}
                       type="button"
+                      aria-pressed={selectedService === s}
                       onClick={() => setSelectedService(s === selectedService ? '' : s)}
                       className={`text-xs font-semibold px-3.5 py-2 rounded-full border transition-all duration-200 ${
                         selectedService === s
@@ -208,7 +209,7 @@ export function ContactForm() {
                   value={fields.description}
                   onChange={(e) => update('description', e.target.value)}
                   placeholder="Describe your situation - roof age, visible damage, urgency, questions about insurance..."
-                  className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-500 focus-visible:ring-0 focus-visible:border-gold-400/70 rounded-xl hover:border-white/20 transition-colors resize-none"
+                  className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-400 focus-visible:ring-0 focus-visible:border-gold-400/70 rounded-xl hover:border-white/20 transition-colors resize-none"
                 />
               </div>
 
@@ -222,6 +223,7 @@ export function ContactForm() {
               <button
                 type="submit"
                 disabled={formState === 'submitting'}
+                aria-live="polite"
                 className="w-full bg-gold-500 hover:bg-gold-400 text-forest-950 font-bold
                            text-[15px] min-h-[56px] rounded-xl
                            shadow-[0_4px_24px_rgba(245,158,11,0.3)]

@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: 'Roofing Service Areas | Springfield IL & Surrounding Communities | Peak Roofing Co',
   description:
     'Peak Roofing Co serves Springfield, Westbrook, Chatham, Sherman, Auburn, Rochester, Riverton, and Lakeview Heights. Licensed roofing contractors since 1987.',
+  alternates: { canonical: '/service-areas/' },
 }
 
 export default function ServiceAreasPage() {
@@ -50,18 +51,18 @@ export default function ServiceAreasPage() {
                 </div>
                 {/* 35 mi label */}
                 <div className="absolute bottom-1 right-0 left-0 flex justify-end pr-2">
-                  <span className="text-gold-500/60 text-[10px] font-medium">35 mi radius</span>
+                  <span className="text-gold-400/70 text-[10px] font-medium">35 mi radius</span>
                 </div>
               </div>
 
               {/* Coverage details */}
               <div className="flex-1 min-w-0">
-                <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-2">Coverage Zone</p>
+                <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-2">Coverage Zone</p>
                 <h2 className="font-display font-bold text-white text-2xl sm:text-3xl mb-3">
                   Springfield Metro &amp; Central Illinois
                 </h2>
                 <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                  We serve residential and commercial properties within a 35-mile radius of Springfield —
+                  We serve residential and commercial properties within a 35-mile radius of Springfield,
                   covering Sangamon, Morgan, Menard, Logan, and Christian Counties.
                 </p>
                 {/* Cities grid */}
@@ -87,7 +88,7 @@ export default function ServiceAreasPage() {
       <section className="bg-forest-900 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3 text-center">
+            <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3 text-center">
               Communities We Serve
             </p>
             <h2 className="font-display font-bold text-white text-3xl sm:text-4xl text-center mb-12">
@@ -107,7 +108,7 @@ export default function ServiceAreasPage() {
                   </h3>
                   <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-gold-400 group-hover:translate-x-0.5 transition-all shrink-0 mt-1" />
                 </div>
-                <p className="text-slate-500 text-xs mb-4">{city.county}</p>
+                <p className="text-slate-400 text-xs mb-4">{city.county}</p>
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-xs text-slate-400">
                     <span className="w-1.5 h-1.5 rounded-full bg-gold-500/60" />

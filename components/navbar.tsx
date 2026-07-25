@@ -85,16 +85,29 @@ export function Navbar() {
                     className="relative"
                     onMouseEnter={() => setServicesOpen(true)}
                     onMouseLeave={() => setServicesOpen(false)}
+                    onFocus={() => setServicesOpen(true)}
+                    onBlur={(e) => {
+                      if (!e.currentTarget.contains(e.relatedTarget as Node)) setServicesOpen(false)
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Escape') {
+                        setServicesOpen(false)
+                        ;(e.currentTarget.querySelector('button') as HTMLButtonElement | null)?.focus()
+                      }
+                    }}
                   >
                     <button
+                      id="services-menu-trigger"
                       className="flex items-center gap-1 px-4 py-2.5 text-sm font-medium text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-white/5"
                       aria-expanded={servicesOpen}
+                      aria-haspopup="true"
+                      aria-controls="services-menu"
                     >
                       {link.label}
                       <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {servicesOpen && (
-                      <div className="absolute top-full left-0 pt-2 w-56 animate-fade-in">
+                      <div id="services-menu" className="absolute top-full left-0 pt-2 w-56 animate-fade-in">
                         <div className="bg-forest-800 border border-white/10 rounded-xl shadow-2xl shadow-black/60 overflow-hidden py-1">
                           {link.children.map((child) => (
                             <Link
@@ -159,6 +172,7 @@ export function Navbar() {
                 onClick={() => setMobileOpen(!mobileOpen)}
                 aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={mobileOpen}
+                aria-controls="mobile-menu"
               >
                 {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -168,6 +182,7 @@ export function Navbar() {
 
         {/* Mobile menu */}
         <div
+          id="mobile-menu"
           className={`lg:hidden border-t border-white/[0.08] bg-forest-900/98 backdrop-blur-xl transition-all duration-300 overflow-hidden ${
             mobileOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
           }`}

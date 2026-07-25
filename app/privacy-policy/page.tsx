@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer'
 export const metadata: Metadata = {
   title: 'Privacy Policy | Peak Roofing Co',
   description: 'Privacy policy for Peak Roofing Co: how we collect, use, and protect your information.',
+  alternates: { canonical: '/privacy-policy/' },
 }
 
 export default function PrivacyPolicyPage() {

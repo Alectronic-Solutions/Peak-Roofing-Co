@@ -4,13 +4,14 @@ import { useState } from 'react'
 import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, ArrowUp } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
 import Link from 'next/link'
+import { YEARS_IN_BUSINESS } from '@/lib/company'
 
 const SERVICES = [
   { label: 'Roof Replacement', href: '/services/roof-replacement/' },
   { label: 'Storm Damage Repair', href: '/services/storm-damage/' },
   { label: 'Drone Inspections', href: '/services/drone-inspections/' },
   { label: 'Insurance Claims', href: '/services/insurance-claims/' },
-  { label: 'Financing', href: '/financing/' },
+  { label: 'Financing', href: '/services/financing/' },
   { label: 'Commercial Roofing', href: '/services/commercial-roofing/' },
 ]
 
@@ -69,7 +70,7 @@ function NewsletterForm() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email"
         required
-        className="flex-1 min-w-0 bg-white/[0.05] border border-white/[0.10] text-white placeholder-slate-500 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-gold-500/50"
+        className="flex-1 min-w-0 bg-white/[0.05] border border-white/[0.10] text-white placeholder-slate-400 rounded-xl px-3 py-2 text-sm focus-visible:ring-0 focus-visible:border-gold-400/70 focus:outline-none"
       />
       <button
         type="submit"
@@ -89,10 +90,10 @@ export function Footer() {
     <footer className="bg-forest-950 border-t border-white/[0.08]">
 
       {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-14 pb-10">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-14 pb-24 lg:pb-10">
         <Reveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-10 sm:gap-x-8 sm:gap-y-12 lg:gap-12 mb-12">
 
-          {/* Brand column — spans full width on mobile, 2 cols on sm */}
+          {/* Brand column: spans full width on mobile, 2 cols on sm */}
           <div className="sm:col-span-2 lg:col-span-1">
             {/* Logo */}
             <Link href="/" className="inline-flex items-center gap-3 mb-5 group" aria-label="Peak Roofing Co - Home">
@@ -114,7 +115,7 @@ export function Footer() {
 
             <p className="text-slate-300 text-sm leading-relaxed max-w-sm mb-6">
               Serving Springfield and surrounding communities with integrity, craftsmanship, and
-              guaranteed results for over 37 years.
+              guaranteed results for over {YEARS_IN_BUSINESS} years.
             </p>
 
             {/* Credentials */}
@@ -241,14 +242,14 @@ export function Footer() {
               <ul className="flex gap-4 sm:gap-5 flex-wrap">
                 <li><Link href="/privacy-policy/" className="text-slate-400 text-xs hover:text-white transition-colors">Privacy Policy</Link></li>
                 <li><Link href="/terms/" className="text-slate-400 text-xs hover:text-white transition-colors">Terms of Service</Link></li>
-                <li><Link href="/sitemap" className="text-slate-400 text-xs hover:text-white transition-colors">Sitemap</Link></li>
+                <li><Link href="/sitemap/" className="text-slate-400 text-xs hover:text-white transition-colors">Sitemap</Link></li>
               </ul>
             </nav>
           </div>
 
           {/* Bottom row: designed by + back to top */}
           <div className="flex justify-between items-center">
-            <p className="text-slate-500 text-xs">
+            <p className="text-slate-400 text-xs">
               Designed by{' '}
               <a
                 href="https://alectronicsolutions.com"

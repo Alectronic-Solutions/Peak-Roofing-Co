@@ -1,3 +1,5 @@
+import { SITE_URL } from '@/lib/company'
+
 interface LocalSeoSchemaProps {
   pageType?: 'home' | 'service' | 'city' | 'about'
   serviceName?: string
@@ -8,7 +10,7 @@ export default function LocalSeoSchema({ pageType = 'home', serviceName, cityNam
   const business = {
     '@type': ['LocalBusiness', 'RoofingContractor'],
     name: 'Peak Roofing Co',
-    url: 'https://www.peakroofingco.com',
+    url: SITE_URL,
     telephone: '+15555550100',
     email: 'info@peakroofingco.com',
     foundingDate: '1987',
@@ -33,7 +35,7 @@ export default function LocalSeoSchema({ pageType = 'home', serviceName, cityNam
     },
     openingHoursSpecification: [
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '07:00', closes: '18:00' },
-      { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '08:00', closes: '16:00' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '08:00', closes: '14:00' },
     ],
     priceRange: '$$',
     currenciesAccepted: 'USD',

@@ -7,10 +7,11 @@ import FaqAccordion from '@/components/faq-accordion'
 import LocalSeoSchema from '@/components/local-seo-schema'
 import { Footer } from '@/components/footer'
 import { SERVICES, type Service } from '@/lib/services'
+import { YEARS_IN_BUSINESS } from '@/lib/company'
 
 const REVIEWS = [
   { name: 'Margaret T.', location: 'Springfield', quote: 'Peak had a drone over my house within 90 minutes. Claim approved, new roof installed. I paid my deductible and nothing else.', service: 'storm-damage' },
-  { name: 'Robert K.', location: 'Springfield', quote: '37 years in Springfield and they still answer the phone themselves. Best contractor experience I\'ve had in decades.', service: 'roof-replacement' },
+  { name: 'Robert K.', location: 'Springfield', quote: `${YEARS_IN_BUSINESS} years in Springfield and they still answer the phone themselves. Best contractor experience I've had in decades.`, service: 'roof-replacement' },
   { name: 'David P.', location: 'Westbrook', quote: 'The financing process was painless. Approved same day, crew showed up next week. Incredible experience.', service: 'financing' },
   { name: 'Linda W.', location: 'Chatham', quote: 'They were the only company that showed us drone footage of exactly what needed fixing. No question who to hire.', service: 'drone-inspections' },
   { name: 'Susan M.', location: 'Westbrook', quote: 'They handled our insurance claim completely. We signed one document and everything else was taken care of.', service: 'insurance-claims' },
@@ -19,9 +20,10 @@ const REVIEWS = [
 
 interface ServicePageTemplateProps {
   service: Service
+  children?: React.ReactNode
 }
 
-export default function ServicePageTemplate({ service }: ServicePageTemplateProps) {
+export default function ServicePageTemplate({ service, children }: ServicePageTemplateProps) {
   const related = SERVICES.filter((s) => service.relatedSlugs.includes(s.slug))
   const reviews = REVIEWS.filter((r) => r.service === service.slug).slice(0, 2)
   if (reviews.length === 0) reviews.push(REVIEWS[0], REVIEWS[1])
@@ -50,7 +52,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="grid lg:grid-cols-2 gap-12 items-start">
             <div>
-              <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3">What We Do</p>
+              <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3">What We Do</p>
               <h2 className="font-display font-bold text-white text-3xl sm:text-4xl mb-8 leading-tight">
                 Everything included. Nothing hidden.
               </h2>
@@ -64,7 +66,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
               </ul>
             </div>
             <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-7">
-              <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3">Pricing & Expectations</p>
+              <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3">Pricing & Expectations</p>
               <h3 className="font-display font-bold text-white text-xl mb-4">{service.price}</h3>
               <p className="text-slate-300 text-sm leading-relaxed">{service.pricingNote}</p>
             </div>
@@ -76,7 +78,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
       <section className="bg-forest-950 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3 text-center">How It Works</p>
+            <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3 text-center">How It Works</p>
             <h2 className="font-display font-bold text-white text-3xl sm:text-4xl text-center mb-12">
               Your {service.shortTitle.toLowerCase()}, step by step
             </h2>
@@ -99,7 +101,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
       <section className="bg-forest-900 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3 text-center">
+            <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3 text-center">
               What Homeowners Say
             </p>
             <h2 className="font-display font-bold text-white text-3xl text-center mb-10">
@@ -117,7 +119,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
                 <p className="text-slate-300 text-sm leading-relaxed mb-4 italic">{r.quote}</p>
                 <div>
                   <p className="text-white font-semibold text-sm">{r.name}</p>
-                  <p className="text-slate-500 text-xs">{r.location}</p>
+                  <p className="text-slate-400 text-xs">{r.location}</p>
                 </div>
               </div>
             ))}
@@ -129,7 +131,7 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
       <section className="bg-forest-950 py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3 text-center">
+            <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3 text-center">
               Common Questions
             </p>
             <h2 className="font-display font-bold text-white text-3xl text-center mb-10">
@@ -164,6 +166,8 @@ export default function ServicePageTemplate({ service }: ServicePageTemplateProp
           </Reveal>
         </div>
       </section>
+
+      {children}
 
       <InlineCta
         heading={`Ready to get started with ${service.shortTitle.toLowerCase()}?`}

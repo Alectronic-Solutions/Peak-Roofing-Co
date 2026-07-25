@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Drone Roof Inspections Springfield IL | FAA Certified | Peak Roofing Co',
   description:
     'FAA Part 107 certified drone roof inspections in Springfield IL. Full 4K report in 24 hours. Free with estimate. Standalone: $149.',
+  alternates: { canonical: '/services/drone-inspections/' },
 }
 
 export default function DroneInspectionsPage() {

@@ -1,6 +1,8 @@
+import Image from 'next/image'
 import { Star, Quote } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
 import { CountUp } from '@/components/ui/count-up'
+import { YEARS_IN_BUSINESS } from '@/lib/company'
 
 const REVIEWS = [
   {
@@ -46,7 +48,7 @@ const REVIEWS = [
     avatar: 'https://i.pravatar.cc/64?img=51',
     rating: 5,
     date: 'July 2024',
-    title: '37 years in business shows in every detail',
+    title: `${YEARS_IN_BUSINESS} years in business shows in every detail`,
     body: 'You can tell immediately this is a company with real experience. Every crew member knew exactly what they were doing. The foreman walked me through every stage, explained what they found, and why every decision was made. Old-school professionalism you just don\'t see anymore.',
     service: 'Complete Tear-Off & Install',
     verified: true,
@@ -165,11 +167,12 @@ export function TestimonialsSection() {
 
               {/* Reviewer */}
               <div className="flex items-center gap-3 pt-4 border-t border-white/[0.08]">
-                <img
+                <Image
                   src={review.avatar}
                   alt={`${review.name} profile photo`}
+                  width={40}
+                  height={40}
                   className="w-10 h-10 rounded-full object-cover border-2 border-white/[0.08]"
-                  loading="lazy"
                 />
                 <div className="flex-1 min-w-0">
                   <p className="text-white text-sm font-semibold leading-none">{review.name}</p>

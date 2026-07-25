@@ -26,8 +26,8 @@ const SERVICES = [
   {
     icon: FileText,
     title: 'Insurance Claims',
-    description: 'Our licensed public adjusters navigate your claim from first call to final check. Over 1,200 claims filed with 100% approval rate.',
-    detail: '100% approval rate',
+    description: 'Our licensed public adjusters navigate your claim from first call to final check. Over 1,200 claims filed on behalf of homeowners.',
+    detail: 'No extra fee',
     href: '#contact',
   },
   {

@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: 'Roofing Services | Replacement, Storm Repair, Inspections | Peak Roofing Co',
   description:
     'Roof replacement, storm damage repair, drone inspections, insurance claim assistance, financing, and commercial roofing in Springfield IL. Licensed since 1987.',
+  alternates: { canonical: '/services/' },
 }
 
 const COMPARISON = [
@@ -69,7 +70,7 @@ export default function ServicesPage() {
       <section className="bg-forest-950 py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3 text-center">
+            <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3 text-center">
               Why Peak Roofing
             </p>
             <h2 className="font-display font-bold text-white text-3xl sm:text-4xl text-center mb-12">
@@ -84,7 +85,7 @@ export default function ServicesPage() {
                 <span className="text-gold-400 font-bold text-sm">Peak Roofing Co</span>
               </div>
               <div className="text-center">
-                <span className="text-slate-500 font-semibold text-sm">The Other Guy</span>
+                <span className="text-slate-400 font-semibold text-sm">The Other Guy</span>
               </div>
             </div>
             {COMPARISON.map((row, i) => (
@@ -111,7 +112,7 @@ export default function ServicesPage() {
       <section className="bg-forest-900 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3 text-center">
+            <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3 text-center">
               How It Works
             </p>
             <h2 className="font-display font-bold text-white text-3xl sm:text-4xl text-center mb-12">

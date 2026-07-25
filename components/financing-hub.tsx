@@ -125,8 +125,8 @@ export function FinancingHub() {
                     ${principal.toLocaleString('en-US', { maximumFractionDigits: 0 })}
                   </p>
                 </div>
-                <div className="bg-gold-400/10 border border-gold-400/25 rounded-xl p-4 text-center">
-                  <p className="text-gold-300 text-[11px] mb-1.5 uppercase tracking-wider">Monthly</p>
+                <div className="bg-white/[0.04] rounded-xl p-4 text-center ring-1 ring-inset ring-gold-400/30">
+                  <p className="text-slate-400 text-[11px] mb-1.5 uppercase tracking-wider">Monthly</p>
                   <p className="font-display text-lg font-bold text-gold-400">
                     ${Math.round(monthly)}/mo
                   </p>
@@ -148,6 +148,7 @@ export function FinancingHub() {
                 <button
                   key={t.name}
                   onClick={() => setSelectedTier(i)}
+                  aria-pressed={i === selectedTier}
                   className={`relative rounded-xl p-4 text-left border transition-all duration-300 ${
                     i === selectedTier
                       ? 'bg-gold-400/10 border-gold-400/50 shadow-[0_0_24px_rgba(245,158,11,0.12)]'

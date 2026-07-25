@@ -1,6 +1,8 @@
 import { Shield, Star, Award, ArrowRight, CheckCircle } from 'lucide-react'
 import { LeadCaptureForm } from '@/components/lead-capture-form'
 import { Reveal } from '@/components/ui/reveal'
+import { HeroVideoBackground } from '@/components/hero-video-background'
+import { YEARS_IN_BUSINESS } from '@/lib/company'
 
 const TRUST_ITEMS = [
   { icon: Shield, label: 'Licensed & Insured', sub: 'State Lic. #RC-20847' },
@@ -18,14 +20,9 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-forest-900">
 
-      {/* Full-bleed background photo */}
+      {/* Full-bleed background video crossfade */}
       <div className="absolute inset-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=90&fit=crop&crop=top"
-          alt="Expert roofing team working on a residential home"
-          className="w-full h-full object-cover object-center"
-        />
+        <HeroVideoBackground />
         {/* Layered overlays for depth */}
         <div className="absolute inset-0 bg-gradient-to-r from-forest-900 via-forest-900/85 to-forest-900/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-forest-900 via-transparent to-forest-900/40" />
@@ -76,7 +73,7 @@ export function HeroSection() {
             <Reveal as="p" delay={160} className="mt-7 text-slate-300 text-lg leading-[1.75] max-w-xl">
               Storm damage or planned replacement - we deliver{' '}
               <span className="text-white font-medium">industry-leading results</span> backed
-              by 37 years of craftsmanship and a warranty that actually means something.
+              by {YEARS_IN_BUSINESS} years of craftsmanship and a warranty that actually means something.
             </Reveal>
 
             {/* Quick fact checklist */}

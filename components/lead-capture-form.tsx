@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, FormEvent } from 'react'
+import Image from 'next/image'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
@@ -95,10 +96,12 @@ export function LeadCaptureForm() {
         <div className="flex items-center gap-2 py-3 px-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
           <div className="flex -space-x-2">
             {['12', '5', '33'].map((seed) => (
-              <img
+              <Image
                 key={seed}
                 src={`https://i.pravatar.cc/32?img=${seed}`}
                 alt=""
+                width={28}
+                height={28}
                 className="w-7 h-7 rounded-full border-2 border-forest-800 object-cover"
               />
             ))}
@@ -125,7 +128,7 @@ export function LeadCaptureForm() {
               name="name"
               required
               placeholder="John Smith"
-              className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-500
+              className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-400
                          focus-visible:ring-0 focus-visible:border-gold-400/70 min-h-[48px] rounded-xl
                          transition-colors duration-200 hover:border-white/20"
             />
@@ -142,7 +145,7 @@ export function LeadCaptureForm() {
                 type="tel"
                 required
                 placeholder="(555) 000-0000"
-                className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-500
+                className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-400
                            focus-visible:ring-0 focus-visible:border-gold-400/70 min-h-[48px] rounded-xl
                            transition-colors duration-200 hover:border-white/20"
               />
@@ -158,7 +161,7 @@ export function LeadCaptureForm() {
                 placeholder="62701"
                 maxLength={5}
                 pattern="[0-9]{5}"
-                className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-500
+                className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-400
                            focus-visible:ring-0 focus-visible:border-gold-400/70 min-h-[48px] rounded-xl
                            transition-colors duration-200 hover:border-white/20"
               />
@@ -166,12 +169,16 @@ export function LeadCaptureForm() {
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-slate-300 text-[13px] font-medium">
+            <Label id="lead-roof-age-label" className="text-slate-300 text-[13px] font-medium">
               How old is your roof?
             </Label>
             <Select onValueChange={setRoofAge}>
-              <SelectTrigger className="bg-white/[0.04] border-white/[0.10] text-white min-h-[48px] rounded-xl focus:ring-0 focus:border-gold-400/70 hover:border-white/20 transition-colors">
-                <SelectValue placeholder="Select age range" className="text-slate-500" />
+              <SelectTrigger
+                id="lead-roof-age"
+                aria-labelledby="lead-roof-age-label"
+                className="bg-white/[0.04] border-white/[0.10] text-white min-h-[48px] rounded-xl focus:ring-0 focus:border-gold-400/70 hover:border-white/20 transition-colors"
+              >
+                <SelectValue placeholder="Select age range" className="text-slate-400" />
               </SelectTrigger>
               <SelectContent className="bg-forest-800 border-white/10 rounded-xl shadow-2xl">
                 {ROOF_AGES.map((v) => (
@@ -194,6 +201,7 @@ export function LeadCaptureForm() {
         <Button
           type="submit"
           disabled={state === 'submitting'}
+          aria-live="polite"
           className="w-full bg-gold-500 hover:bg-gold-400 text-forest-950 font-bold
                      text-[15px] min-h-[52px] rounded-xl
                      shadow-[0_4px_24px_rgba(245,158,11,0.35)]

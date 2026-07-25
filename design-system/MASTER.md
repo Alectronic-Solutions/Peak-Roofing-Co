@@ -49,7 +49,7 @@ Fonts are loaded via `next/font/google` at build time (self-hosted). Never use C
 - Neon gradients (e.g., purple-to-pink, teal-to-cyan)
 - Generic stock photo illustrations or AI-generated cartoons
 - Skeuomorphic shadows or embossed textures
-- Bright backgrounds — all sections remain dark
+- Bright backgrounds: all sections remain dark
 - More than 2 colors in any single button
 
 ## Static Export Rules

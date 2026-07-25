@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer'
 export const metadata: Metadata = {
   title: 'Terms of Service | Peak Roofing Co',
   description: 'Terms of service for Peak Roofing Co: service agreements, warranties, and governing law.',
+  alternates: { canonical: '/terms/' },
 }
 
 export default function TermsPage() {

@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useRef, useCallback } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
 import { CountUp } from '@/components/ui/count-up'
+import { BeforeAfterSlider } from '@/components/ui/before-after-slider'
+import { YEARS_IN_BUSINESS, ROOFS_COMPLETED_DISPLAY } from '@/lib/company'
 
 const PROJECTS = [
   {
@@ -39,8 +40,8 @@ const PROJECTS = [
 ]
 
 const STATS = [
-  { value: '1,200+', label: 'Roofs Completed' },
-  { value: '37', label: 'Years in Business' },
+  { value: ROOFS_COMPLETED_DISPLAY, label: 'Roofs Completed' },
+  { value: String(YEARS_IN_BUSINESS), label: 'Years in Business' },
   { value: '$0', label: 'Avg. Out-of-Pocket' },
   { value: '4.9★', label: 'Google Rating' },
 ]
@@ -52,73 +53,19 @@ function SliderCard({
   project: (typeof PROJECTS)[0]
   tall?: boolean
 }) {
-  const [sliderPos, setSliderPos] = useState(55)
-  const [isDragging, setIsDragging] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  const updateSlider = useCallback((clientX: number) => {
-    if (!containerRef.current) return
-    const rect = containerRef.current.getBoundingClientRect()
-    const pos = Math.max(5, Math.min(95, ((clientX - rect.left) / rect.width) * 100))
-    setSliderPos(pos)
-  }, [])
-
-  const onMouseDown = (e: React.MouseEvent) => {
-    e.preventDefault()
-    setIsDragging(true)
-    const onMove = (ev: MouseEvent) => updateSlider(ev.clientX)
-    const onUp = () => {
-      setIsDragging(false)
-      window.removeEventListener('mousemove', onMove)
-      window.removeEventListener('mouseup', onUp)
-    }
-    window.addEventListener('mousemove', onMove)
-    window.addEventListener('mouseup', onUp)
-  }
-
-  const onTouchStart = (e: React.TouchEvent) => {
-    const onMove = (ev: TouchEvent) => updateSlider(ev.touches[0].clientX)
-    const onEnd = () => {
-      window.removeEventListener('touchmove', onMove)
-      window.removeEventListener('touchend', onEnd)
-    }
-    window.addEventListener('touchmove', onMove, { passive: true })
-    window.addEventListener('touchend', onEnd)
-  }
-
-  const heightClass = tall ? 'h-full min-h-[520px]' : 'h-64 lg:h-72'
+  const heightClass = tall ? 'h-full min-h-[340px] sm:min-h-[420px] lg:min-h-[520px]' : 'h-64 lg:h-72'
 
   return (
     <div className={`relative overflow-hidden rounded-2xl group ${tall ? 'row-span-2' : ''}`}>
-      <div
-        ref={containerRef}
-        className={`relative w-full overflow-hidden select-none ${heightClass}`}
-        style={{ cursor: isDragging ? 'ew-resize' : 'col-resize' }}
-      >
-        {/* After image (full) */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={project.after}
-          alt={`${project.label} - after Peak Roofing Co`}
-          className="absolute inset-0 w-full h-full object-cover"
-          draggable={false}
+      <div className={`relative w-full ${heightClass}`}>
+        <BeforeAfterSlider
+          beforeSrc={project.before}
+          afterSrc={project.after}
+          beforeAlt={`${project.label} - before Peak Roofing Co`}
+          afterAlt={`${project.label} - after Peak Roofing Co`}
+          ariaLabel={`Before and after comparison: ${project.label}`}
+          initialPosition={55}
         />
-
-        {/* Before image (clipped by parent div width) */}
-        <div
-          className="absolute inset-0 overflow-hidden"
-          style={{ width: `${sliderPos}%` }}
-        >
-          <div className="absolute inset-0" style={{ width: `${100 * 100 / sliderPos}%` }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={project.before}
-              alt={`${project.label} - before Peak Roofing Co`}
-              className="absolute inset-0 w-full h-full object-cover"
-              draggable={false}
-            />
-          </div>
-        </div>
 
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
@@ -133,21 +80,6 @@ function SliderCard({
           <span className="text-xs font-bold uppercase tracking-wider text-gold-400 bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-md border border-gold-400/30">
             After
           </span>
-        </div>
-
-        {/* Slider handle */}
-        <div
-          className="absolute top-0 bottom-0 z-20 flex items-center justify-center"
-          style={{ left: `${sliderPos}%`, transform: 'translateX(-50%)' }}
-          onMouseDown={onMouseDown}
-          onTouchStart={onTouchStart}
-        >
-          <div className="w-0.5 h-full bg-white/60 absolute" />
-          <div className="relative w-9 h-9 bg-white rounded-full shadow-[0_2px_16px_rgba(0,0,0,0.6)] flex items-center justify-center border border-white/20 z-10">
-            <svg viewBox="0 0 20 20" className="w-4 h-4 fill-slate-800" aria-hidden="true">
-              <path d="M7 4l-4 6 4 6M13 4l4 6-4 6" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-            </svg>
-          </div>
         </div>
 
         {/* Project info */}

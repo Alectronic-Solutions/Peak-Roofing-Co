@@ -1,8 +1,8 @@
-'use client'
-
+import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronRight, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { SITE_URL } from '@/lib/company'
 
 interface BreadcrumbItem {
   label: string
@@ -34,12 +34,31 @@ export default function PageHero({
 }: PageHeroProps) {
   const isEmergency = variant === 'emergency'
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((crumb, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: crumb.label,
+      item: `${SITE_URL}${crumb.href}`,
+    })),
+  }
+
   return (
     <section className="relative min-h-[52vh] flex items-center overflow-hidden pt-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url('${bgImage}')` }}
+      <Image
+        src={bgImage}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
       />
       <div className={`absolute inset-0 ${isEmergency ? 'bg-red-950/85' : 'bg-forest-950/85'}`} />
       <div className="absolute inset-0 bg-gradient-to-r from-forest-950/60 via-forest-950/30 to-transparent" />
@@ -49,7 +68,7 @@ export default function PageHero({
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Breadcrumbs */}
-        <nav className="flex items-center gap-1.5 text-sm text-slate-400 mb-6" aria-label="Breadcrumb">
+        <nav className="flex flex-wrap items-center gap-1.5 text-sm text-slate-400 mb-6" aria-label="Breadcrumb">
           {breadcrumbs.map((crumb, i) => (
             <span key={crumb.href} className="flex items-center gap-1.5">
               {i < breadcrumbs.length - 1 ? (
@@ -76,7 +95,7 @@ export default function PageHero({
           )}
           <span
             className={`text-xs font-bold tracking-widest uppercase ${
-              isEmergency ? 'text-red-400' : 'text-gold-500'
+              isEmergency ? 'text-red-400' : 'text-gold-400'
             }`}
           >
             {eyebrow}

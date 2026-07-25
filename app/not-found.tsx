@@ -6,7 +6,7 @@ import { Footer } from '@/components/footer'
 export default function NotFound() {
   return (
     <>
-      <main className="min-h-screen bg-forest-950 flex flex-col items-center justify-center px-4 text-center">
+      <div className="min-h-screen bg-forest-950 flex flex-col items-center justify-center px-4 text-center">
         <div className="max-w-lg">
           {/* Logo mark */}
           <div className="w-16 h-16 bg-gold-500 rounded-2xl flex items-center justify-center mx-auto mb-8">
@@ -16,7 +16,7 @@ export default function NotFound() {
             </svg>
           </div>
 
-          <p className="text-gold-500 text-sm font-bold uppercase tracking-widest mb-2">404: Page Not Found</p>
+          <p className="text-gold-400 text-sm font-bold uppercase tracking-widest mb-2">404: Page Not Found</p>
           <h1 className="font-display font-bold text-white text-5xl sm:text-6xl mb-4">
             This page took a wrong turn at the ridge line.
           </h1>
@@ -41,7 +41,7 @@ export default function NotFound() {
             Or call us: (555) 555-0100
           </a>
         </div>
-      </main>
+      </div>
       <Footer />
     </>
   )

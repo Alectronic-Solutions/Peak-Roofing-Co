@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   return {
     title: `${city.name} Roofing Contractor | Peak Roofing Co | Since 1987`,
     description: `Licensed roofing contractor in ${city.name}, ${city.state}. Storm damage repair, roof replacement, free drone inspection. ${city.roofsCompleted} roofs completed. Call (555) 555-0100.`,
+    alternates: { canonical: `/service-areas/${city.slug}/` },
   }
 }
 
@@ -132,7 +133,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
         <section className="bg-forest-950 py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Reveal>
-              <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3">
+              <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3">
                 From {city.name} Homeowners
               </p>
               <h2 className="font-display font-bold text-white text-3xl mb-10">
@@ -183,7 +184,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
               </div>
               <p className="text-slate-300 text-sm">123 Industrial Blvd</p>
               <p className="text-slate-300 text-sm mb-3">Springfield, IL 62701</p>
-              <p className="text-slate-400 text-xs">Mon–Fri 7am–6pm · Sat 8am–4pm</p>
+              <p className="text-slate-400 text-xs">Mon–Fri 7am–6pm · Sat 8am–2pm</p>
               <p className="text-red-400 text-xs font-semibold mt-1">● 24/7 Storm Hotline</p>
             </div>
             <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-6">

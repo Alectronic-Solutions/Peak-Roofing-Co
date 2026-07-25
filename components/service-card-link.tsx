@@ -40,7 +40,7 @@ export default function ServiceCardLink({ slug, title, description, price, icon,
       </h3>
       <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">{description}</p>
       <div className="flex items-center justify-between">
-        <span className="text-gold-500 text-xs font-semibold">{price}</span>
+        <span className="text-gold-400 text-xs font-semibold">{price}</span>
         <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-gold-400 group-hover:translate-x-0.5 transition-all" />
       </div>
     </Link>

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { CheckCircle2, Award, Users, Heart } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
 import { CountUp } from '@/components/ui/count-up'
@@ -6,16 +7,17 @@ import PageHero from '@/components/page-hero'
 import InlineCta from '@/components/inline-cta'
 import LocalSeoSchema from '@/components/local-seo-schema'
 import { Footer } from '@/components/footer'
+import { YEARS_IN_BUSINESS, ROOFS_COMPLETED_DISPLAY } from '@/lib/company'
 
 export const metadata: Metadata = {
   title: 'About Peak Roofing Co | Springfield\'s Trusted Roofer Since 1987',
-  description:
-    'Learn about Peak Roofing Co: 37 years of roofing craftsmanship in Springfield, IL. GAF Master Elite certified, BBB A+, family owned.',
+  description: `Learn about Peak Roofing Co: ${YEARS_IN_BUSINESS} years of roofing craftsmanship in Springfield, IL. GAF Master Elite certified, BBB A+, family owned.`,
+  alternates: { canonical: '/about/' },
 }
 
 const STATS = [
-  { value: '37 yrs', label: 'In Business' },
-  { value: '1,200+', label: 'Roofs Completed' },
+  { value: `${YEARS_IN_BUSINESS} yrs`, label: 'In Business' },
+  { value: ROOFS_COMPLETED_DISPLAY, label: 'Roofs Completed' },
   { value: '4.9★', label: 'Average Rating' },
   { value: '847', label: 'Reviews' },
 ]
@@ -55,7 +57,7 @@ const TEAM = [
   {
     name: 'James Harlow',
     title: 'Founder & Owner',
-    tenure: '37 years',
+    tenure: `${YEARS_IN_BUSINESS} years`,
     bio: 'Started Peak Roofing with one truck and a three-person crew. Still personally reviews every estimate.',
     image: 'https://i.pravatar.cc/256?img=57',
   },
@@ -82,7 +84,7 @@ const TIMELINE = [
   { year: 2008, event: 'Achieved GAF Master Elite® certification. Top 2% of U.S. contractors.' },
   { year: 2015, event: 'Launched FAA-certified drone inspection fleet.' },
   { year: 2020, event: 'Added in-house licensed insurance adjuster for storm claim assistance.' },
-  { year: 2024, event: 'Surpassed 1,200 completed roofs. 4.9-star average across 847 reviews.' },
+  { year: 2024, event: `Surpassed ${ROOFS_COMPLETED_DISPLAY.replace('+', '')} completed roofs. 4.9-star average across 847 reviews.` },
 ]
 
 export default function AboutPage() {
@@ -92,7 +94,7 @@ export default function AboutPage() {
 
       <PageHero
         eyebrow="Our Story"
-        title="37 Years. One Promise."
+        title={`${YEARS_IN_BUSINESS} Years. One Promise.`}
         subtitle="Family-owned since 1987. We still answer the phone ourselves."
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'About', href: '/about/' }]}
         bgImage="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80"
@@ -104,9 +106,9 @@ export default function AboutPage() {
           <Reveal className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             {/* Copy */}
             <div>
-              <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3">How We Got Here</p>
+              <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3">How We Got Here</p>
               <h2 className="font-display font-bold text-white text-3xl sm:text-4xl mb-6 leading-tight">
-                One truck. Three crew. 37 years later.
+                One truck. Three crew. {YEARS_IN_BUSINESS} years later.
               </h2>
               <div className="space-y-4 text-slate-300 text-base leading-relaxed">
                 <p>
@@ -120,7 +122,7 @@ export default function AboutPage() {
                   nationwide.
                 </p>
                 <p>
-                  Today we operate a 20-person crew with a full drone fleet, an in-house insurance adjuster, and 1,200+
+                  Today we operate a 20-person crew with a full drone fleet, an in-house insurance adjuster, and {ROOFS_COMPLETED_DISPLAY}
                   completed roofs across Springfield and the surrounding region. James still reviews every estimate.
                 </p>
               </div>
@@ -135,7 +137,7 @@ export default function AboutPage() {
                     {i < TIMELINE.length - 1 && <div className="w-px flex-1 bg-white/10 mt-1" />}
                   </div>
                   <div className="pb-4">
-                    <span className="text-gold-500 text-xs font-bold">{item.year}</span>
+                    <span className="text-gold-400 text-xs font-bold">{item.year}</span>
                     <p className="text-slate-300 text-sm mt-0.5">{item.event}</p>
                   </div>
                 </div>
@@ -168,7 +170,7 @@ export default function AboutPage() {
       <section className="bg-forest-900 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3 text-center">
+            <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3 text-center">
               What We Stand For
             </p>
             <h2 className="font-display font-bold text-white text-3xl sm:text-4xl text-center mb-12">
@@ -194,7 +196,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3">Licensed & Certified</p>
+              <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3">Licensed & Certified</p>
               <h2 className="font-display font-bold text-white text-3xl sm:text-4xl mb-6">
                 Every credential. No shortcuts.
               </h2>
@@ -208,7 +210,7 @@ export default function AboutPage() {
               </ul>
             </div>
             <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-8">
-              <p className="text-xs font-bold uppercase tracking-widest text-gold-500 mb-6">Recognition & Awards</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-gold-400 mb-6">Recognition & Awards</p>
               <div className="grid grid-cols-3 gap-5">
                 {['GAF Master Elite®', 'BBB A+', 'Angi Top Pro', 'HomeAdvisor Elite', "OSHA Certified", 'FAA Part 107'].map(
                   (award) => (
@@ -230,7 +232,7 @@ export default function AboutPage() {
       <section className="bg-forest-900 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-3 text-center">
+            <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3 text-center">
               The People Behind the Work
             </p>
             <h2 className="font-display font-bold text-white text-3xl sm:text-4xl text-center mb-12">
@@ -243,20 +245,20 @@ export default function AboutPage() {
                 key={member.name}
                 className="bg-white/[0.04] border border-white/[0.08] rounded-2xl overflow-hidden"
               >
-                <div className="aspect-[4/3] bg-forest-800 overflow-hidden">
-                  <img
+                <div className="relative aspect-[4/3] bg-forest-800 overflow-hidden">
+                  <Image
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover opacity-80"
-                    width={256}
-                    height={256}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    className="object-cover opacity-80"
                   />
                 </div>
                 <div className="p-6">
                   <div className="flex items-start justify-between gap-2 mb-2">
                     <div>
                       <h3 className="font-display font-bold text-white text-lg">{member.name}</h3>
-                      <p className="text-gold-500 text-xs font-semibold">{member.title}</p>
+                      <p className="text-gold-400 text-xs font-semibold">{member.title}</p>
                     </div>
                     <span className="text-[10px] font-bold uppercase tracking-widest bg-gold-500/10 text-gold-400 border border-gold-500/20 rounded-full px-2.5 py-1 shrink-0">
                       {member.tenure}
@@ -278,7 +280,7 @@ export default function AboutPage() {
               <Users className="w-5 h-5 text-gold-500" />
             </div>
             <div>
-              <p className="text-gold-500 text-xs font-bold uppercase tracking-widest mb-2">Giving Back</p>
+              <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-2">Giving Back</p>
               <h3 className="font-display font-bold text-white text-2xl mb-3">Rooted in Springfield</h3>
               <p className="text-slate-300 leading-relaxed max-w-2xl">
                 Every fall, we partner with Habitat for Humanity to donate crew time and materials for low-income

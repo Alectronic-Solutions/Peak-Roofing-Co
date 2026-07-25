@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Roof Replacement Springfield IL | GAF Master Elite | Peak Roofing Co',
   description:
     'Full roof replacement in Springfield IL. GAF Timberline shingles, 30-year warranty, drone post-install inspection. From $4.50/sq ft. Free estimate.',
+  alternates: { canonical: '/services/roof-replacement/' },
 }
 
 export default function RoofReplacementPage() {
