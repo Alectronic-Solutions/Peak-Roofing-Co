@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, FormEvent } from 'react'
-import Image from 'next/image'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
@@ -94,18 +93,6 @@ export function LeadCaptureForm() {
 
         {/* Inline social proof */}
         <div className="flex items-center gap-2 py-3 px-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
-          <div className="flex -space-x-2">
-            {['12', '5', '33'].map((seed) => (
-              <Image
-                key={seed}
-                src={`https://i.pravatar.cc/32?img=${seed}`}
-                alt=""
-                width={28}
-                height={28}
-                className="w-7 h-7 rounded-full border-2 border-forest-800 object-cover"
-              />
-            ))}
-          </div>
           <div className="flex items-center gap-1.5">
             <div className="flex">
               {[1,2,3,4,5].map((s) => (

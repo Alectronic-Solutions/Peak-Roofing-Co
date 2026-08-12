@@ -1,5 +1,6 @@
 'use client'
 
+import { Pause, Play } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 const CLIPS = [
@@ -14,6 +15,7 @@ export function HeroVideoBackground() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [preloadedIndex, setPreloadedIndex] = useState(0)
   const [reducedMotion, setReducedMotion] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([])
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export function HeroVideoBackground() {
     const current = videoRefs.current[activeIndex]
     if (current) {
       current.currentTime = 0
-      current.play().catch(() => {})
+      if (!isPaused) current.play().catch(() => {})
     }
     // Start preloading the next clip once the active one is playing, so it's
     // ready by the time this one ends, without preloading all three upfront.
@@ -54,8 +56,16 @@ export function HeroVideoBackground() {
     )
   }
 
+  const togglePlayback = () => {
+    const current = videoRefs.current[activeIndex]
+    if (!current) return
+    if (isPaused) current.play().catch(() => {})
+    else current.pause()
+    setIsPaused((paused) => !paused)
+  }
+
   return (
-    <>
+    <div className="absolute inset-0">
       {CLIPS.map((clip, i) => (
         <video
           key={clip.src}
@@ -66,8 +76,14 @@ export function HeroVideoBackground() {
           poster={clip.poster}
           muted
           playsInline
+          autoPlay={i === 0}
           preload={i === activeIndex || i === preloadedIndex ? 'auto' : 'none'}
-          onEnded={() => setActiveIndex((i + 1) % CLIPS.length)}
+          onCanPlay={() => {
+            if (i === activeIndex && !isPaused) videoRefs.current[i]?.play().catch(() => {})
+          }}
+          onEnded={() => {
+            if (!isPaused && i === activeIndex) setActiveIndex((i + 1) % CLIPS.length)
+          }}
           className="absolute inset-0 w-full h-full object-cover object-center transition-opacity ease-in-out"
           style={{
             transitionDuration: `${CROSSFADE_MS}ms`,
@@ -76,6 +92,14 @@ export function HeroVideoBackground() {
           aria-hidden="true"
         />
       ))}
-    </>
+      <button
+        type="button"
+        onClick={togglePlayback}
+        className="absolute bottom-5 right-5 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-forest-950/40 text-white backdrop-blur-sm transition hover:bg-forest-950/70 focus-visible:outline-none"
+        aria-label={isPaused ? 'Play background video' : 'Pause background video'}
+      >
+        {isPaused ? <Play className="h-3.5 w-3.5" aria-hidden="true" /> : <Pause className="h-3.5 w-3.5" aria-hidden="true" />}
+      </button>
+    </div>
   )
 }

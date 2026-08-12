@@ -1,4 +1,4 @@
-import { Shield, Star, Award, ArrowRight, CheckCircle } from 'lucide-react'
+import { Shield, Star, Award, ArrowRight, CheckCircle, Clock3, PhoneCall } from 'lucide-react'
 import { LeadCaptureForm } from '@/components/lead-capture-form'
 import { Reveal } from '@/components/ui/reveal'
 import { HeroVideoBackground } from '@/components/hero-video-background'
@@ -71,7 +71,7 @@ export function HeroSection() {
             </Reveal>
 
             <Reveal as="p" delay={160} className="mt-7 text-slate-300 text-lg leading-[1.75] max-w-xl">
-              Storm damage or planned replacement - we deliver{' '}
+              Storm damage or planned replacement — we deliver{' '}
               <span className="text-white font-medium">industry-leading results</span> backed
               by {YEARS_IN_BUSINESS} years of craftsmanship and a warranty that actually means something.
             </Reveal>
@@ -108,7 +108,14 @@ export function HeroSection() {
             </Reveal>
 
             {/* Secondary CTA row */}
-            <Reveal delay={400} className="mt-8 flex items-center gap-6">
+            <Reveal delay={400} className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-lg bg-gold-500 px-5 py-3 text-sm font-bold text-forest-950 shadow-[0_8px_30px_rgba(245,158,11,0.3)] transition hover:-translate-y-0.5 hover:bg-gold-400 hover:shadow-[0_12px_38px_rgba(245,158,11,0.45)]"
+              >
+                Get a free estimate
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
               <a
                 href="#gallery"
                 className="flex items-center gap-2 text-slate-300 hover:text-gold-300 text-sm font-medium transition-colors group"
@@ -121,8 +128,13 @@ export function HeroSection() {
                 href="tel:+15555550100"
                 className="flex items-center gap-2 px-4 py-2 rounded-md border border-white/20 bg-white/10 text-white text-sm font-medium hover:bg-white/20 transition-colors"
               >
-                Or call us now
+                <PhoneCall className="h-3.5 w-3.5 text-gold-400" aria-hidden="true" />
+                Emergency repair
               </a>
+            </Reveal>
+            <Reveal delay={460} className="mt-5 flex items-center gap-2 text-xs font-medium text-slate-300">
+              <Clock3 className="h-3.5 w-3.5 text-gold-400" aria-hidden="true" />
+              Same-day inspection appointments available.
             </Reveal>
           </div>
 
