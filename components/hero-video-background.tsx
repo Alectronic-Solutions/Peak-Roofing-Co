@@ -10,6 +10,8 @@ const CLIPS = [
 ]
 
 const CROSSFADE_MS = 1200
+const BASE_PATH = process.env.NODE_ENV === 'production' ? '/Peak-Roofing-Co' : ''
+const assetUrl = (path: string) => `${BASE_PATH}${path}`
 
 export function HeroVideoBackground() {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -49,7 +51,7 @@ export function HeroVideoBackground() {
   if (reducedMotion) {
     return (
       <img
-        src={CLIPS[0].poster}
+        src={assetUrl(CLIPS[0].poster)}
         alt="Expert roofing team working on a residential home"
         className="w-full h-full object-cover object-center"
       />
@@ -72,8 +74,8 @@ export function HeroVideoBackground() {
           ref={(el) => {
             videoRefs.current[i] = el
           }}
-          src={clip.src}
-          poster={clip.poster}
+          src={assetUrl(clip.src)}
+          poster={assetUrl(clip.poster)}
           muted
           playsInline
           autoPlay={i === 0}
