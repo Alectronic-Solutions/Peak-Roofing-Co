@@ -115,7 +115,7 @@ export function BeforeAfterGallery() {
             </p>
           </div>
           <a
-            href="#contact"
+            href="/gallery/"
             className="inline-flex items-center gap-2 text-sm font-semibold text-gold-400 hover:text-gold-300 transition-colors group flex-shrink-0"
           >
             See all projects
@@ -139,7 +139,7 @@ export function BeforeAfterGallery() {
           <Reveal delay={120} className="md:col-span-2 lg:col-span-2 h-full">
             <div className="h-full bg-white/[0.04] border border-white/[0.08] rounded-2xl p-6 lg:p-8 flex flex-wrap items-center justify-around gap-6">
               {STATS.map(({ value, label }) => (
-                <div key={label} className="text-center min-w-[100px]">
+                <div key={label} className="text-center min-w-[120px] flex-1">
                   <p className="font-display text-[2.25rem] font-bold text-gold-400 leading-none">
                     <CountUp value={value} />
                   </p>

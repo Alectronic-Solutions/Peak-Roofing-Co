@@ -19,11 +19,11 @@ export default function EmergencyBar() {
   if (!visible) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-red-600 text-white">
-      <div className="flex items-center justify-between px-4 py-3 gap-3">
+    <div className="safe-area-bottom fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-red-600 text-white shadow-[0_-8px_24px_rgba(0,0,0,0.22)]">
+      <div className="flex items-center justify-between px-4 py-3 gap-3 max-w-lg mx-auto">
         <a
           href="tel:+15555550100"
-          className="flex items-center gap-2 font-bold text-sm flex-1"
+          className="flex items-center gap-2 font-bold text-sm flex-1 leading-tight"
         >
           <span className="relative flex h-2 w-2 shrink-0">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-60" />

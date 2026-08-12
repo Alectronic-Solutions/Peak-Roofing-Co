@@ -34,9 +34,24 @@ export function Navbar() {
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40)
+    handler()
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
+
+  useEffect(() => {
+    setMobileOpen(false)
+    setServicesOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    if (!mobileOpen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [mobileOpen])
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/'
@@ -183,23 +198,53 @@ export function Navbar() {
         {/* Mobile menu */}
         <div
           id="mobile-menu"
-          className={`lg:hidden border-t border-white/[0.08] bg-forest-900/98 backdrop-blur-xl transition-all duration-300 overflow-hidden ${
-            mobileOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+          className={`lg:hidden border-t border-white/[0.08] bg-forest-900/98 backdrop-blur-xl transition-all duration-300 overflow-y-auto ${
+            mobileOpen ? 'max-h-[calc(100svh-72px)] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
           }`}
         >
           <nav className="px-5 py-4 space-y-1">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={`block px-4 py-3 text-sm font-medium rounded-lg hover:bg-white/5 transition-colors ${
-                  isActive(link.href) ? 'text-gold-400' : 'text-slate-300 hover:text-white'
-                }`}
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) =>
+              link.children ? (
+                <div key={link.label} className="rounded-xl bg-white/[0.03] border border-white/[0.06] px-2 py-2">
+                  <Link
+                    href={link.href}
+                    className={`block px-2 py-2 text-sm font-semibold transition-colors ${
+                      isActive(link.href) ? 'text-gold-400' : 'text-white'
+                    }`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                  <div className="grid grid-cols-2 gap-1">
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.label}
+                        href={child.href}
+                        className={`rounded-lg px-2 py-2.5 text-xs leading-tight transition-colors ${
+                          isActive(child.href)
+                            ? 'bg-gold-400/10 text-gold-300'
+                            : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                        }`}
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={`block px-4 py-3 text-sm font-medium rounded-lg hover:bg-white/5 transition-colors ${
+                    isActive(link.href) ? 'text-gold-400' : 'text-slate-300 hover:text-white'
+                  }`}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
             <div className="pt-3 pb-1 border-t border-white/10 mt-3 flex flex-col gap-3">
               <a
                 href="tel:+15555550100"

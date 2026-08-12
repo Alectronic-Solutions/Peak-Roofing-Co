@@ -121,7 +121,7 @@ export function LeadCaptureForm() {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-3 min-w-0">
+          <div className="grid grid-cols-1 min-[380px]:grid-cols-2 gap-3 min-w-0">
             <div className="space-y-1.5">
               <Label htmlFor="lead-phone" className="text-slate-300 text-[13px] font-medium">
                 Phone <span className="text-red-400">*</span>

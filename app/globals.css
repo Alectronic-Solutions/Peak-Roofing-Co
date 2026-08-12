@@ -36,6 +36,7 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
   }
 
   body {
@@ -43,6 +44,13 @@
     background-color: #07261B;
     color: #E2E8F0;
     scrollbar-gutter: stable;
+    overflow-x: clip;
+  }
+
+  img,
+  video,
+  svg {
+    max-width: 100%;
   }
 
   /* Premium text selection */
@@ -71,6 +79,12 @@
     outline: 2px solid rgba(245, 158, 11, 0.7);
     outline-offset: 2px;
     border-radius: 4px;
+  }
+}
+
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-area-bottom {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
   }
 }
 

@@ -18,7 +18,7 @@ const QUICK_FACTS = [
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-forest-900">
+    <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-forest-900">
 
       {/* Full-bleed background video crossfade */}
       <div className="absolute inset-0">
@@ -108,7 +108,7 @@ export function HeroSection() {
             </Reveal>
 
             {/* Secondary CTA row */}
-            <Reveal delay={400} className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Reveal delay={400} className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
               <a
                 href="#contact"
                 className="inline-flex items-center gap-2 rounded-lg bg-gold-500 px-5 py-3 text-sm font-bold text-forest-950 shadow-[0_8px_30px_rgba(245,158,11,0.3)] transition hover:-translate-y-0.5 hover:bg-gold-400 hover:shadow-[0_12px_38px_rgba(245,158,11,0.45)]"
@@ -123,7 +123,7 @@ export function HeroSection() {
                 View our work
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
               </a>
-              <div className="h-4 w-px bg-white/10" aria-hidden="true" />
+              <div className="hidden sm:block h-4 w-px bg-white/10" aria-hidden="true" />
               <a
                 href="tel:+15555550100"
                 className="flex items-center gap-2 px-4 py-2 rounded-md border border-white/20 bg-white/10 text-white text-sm font-medium hover:bg-white/20 transition-colors"
