@@ -215,7 +215,7 @@ export function Navbar() {
                   >
                     {link.label}
                   </Link>
-                  <div className="grid grid-cols-2 gap-1">
+                  <div className="grid grid-cols-1 min-[380px]:grid-cols-2 gap-1">
                     {link.children.map((child) => (
                       <Link
                         key={child.label}

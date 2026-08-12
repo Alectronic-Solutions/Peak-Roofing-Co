@@ -83,12 +83,12 @@ export default function GalleryPageClient() {
       {/* Filter Bar */}
       <section className="bg-forest-950 py-8 sticky top-[72px] lg:top-[80px] z-40 border-b border-white/[0.08]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-2 flex-wrap">
+          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0" aria-label="Project filters">
             {FILTERS.map((f) => (
               <button
                 key={f.value}
                 onClick={() => setFilter(f.value)}
-                className={`text-sm font-semibold rounded-xl px-5 py-2.5 transition-all ${
+                className={`shrink-0 text-sm font-semibold rounded-xl px-5 py-2.5 transition-all ${
                   filter === f.value
                     ? 'bg-gold-500 text-forest-950'
                     : 'bg-white/[0.05] text-slate-300 hover:bg-white/[0.09] hover:text-white border border-white/[0.08]'

@@ -81,7 +81,7 @@ export function LeadCaptureForm() {
       />
       <form
         onSubmit={handleSubmit}
-        className="relative bg-forest-800/95 border border-white/[0.08] rounded-2xl p-7 lg:p-8 backdrop-blur-xl shadow-[0_24px_80px_rgba(0,0,0,0.6)] space-y-5"
+        className="relative bg-forest-800/95 border border-white/[0.08] rounded-2xl p-5 sm:p-7 lg:p-8 backdrop-blur-xl shadow-[0_24px_80px_rgba(0,0,0,0.6)] space-y-5"
       >
         {/* Header */}
         <div className="pb-1">
@@ -92,7 +92,7 @@ export function LeadCaptureForm() {
         </div>
 
         {/* Inline social proof */}
-        <div className="flex items-center gap-2 py-3 px-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
+        <div className="flex items-center gap-2 py-3 px-3 sm:px-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
           <div className="flex items-center gap-1.5">
             <div className="flex">
               {[1,2,3,4,5].map((s) => (
