@@ -108,9 +108,9 @@ export default function ServicePageTemplate({ service, children }: ServicePageTe
               Real results. Real customers.
             </h2>
           </Reveal>
-          <Reveal className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <Reveal className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
             {reviews.map((r) => (
-              <div key={r.name} className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-6">
+              <div key={r.name} className="w-full sm:w-[calc(50%-0.75rem)] bg-white/[0.04] border border-white/[0.08] rounded-2xl p-6">
                 <div className="flex gap-0.5 mb-4">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <span key={i} className="text-gold-400 text-sm">★</span>

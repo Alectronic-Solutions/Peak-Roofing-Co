@@ -1,4 +1,5 @@
 import { Home, CloudLightning, Search, FileText, CreditCard, Building2, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 import { Reveal } from '@/components/ui/reveal'
 
 const SERVICES = [
@@ -71,31 +72,35 @@ export function ServicesSection() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06] rounded-2xl overflow-hidden border border-white/[0.08]">
           {SERVICES.map((service, i) => (
             <Reveal
-              as="a"
               key={service.title}
               delay={(i % 3) * 80}
-              href={service.href}
-              className="group relative bg-forest-900 p-8 hover:bg-forest-800 transition-colors duration-300 flex flex-col"
+              className="h-full"
             >
-              {/* Icon */}
-              <div className="w-11 h-11 rounded-xl bg-gold-400/10 border border-gold-400/25 flex items-center justify-center mb-5 group-hover:bg-gold-400/20 group-hover:border-gold-400/45 transition-all duration-300">
-                <service.icon className="w-5 h-5 text-gold-400" aria-hidden="true" />
-              </div>
+              <Link
+                href={service.href}
+                aria-label={`Learn more about ${service.title}`}
+                className="group relative h-full bg-forest-900 p-8 hover:bg-forest-800 transition-colors duration-300 flex flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gold-400"
+              >
+                {/* Icon */}
+                <div className="w-11 h-11 rounded-xl bg-gold-400/10 border border-gold-400/25 flex items-center justify-center mb-5 group-hover:bg-gold-400/20 group-hover:border-gold-400/45 transition-all duration-300">
+                  <service.icon className="w-5 h-5 text-gold-400" aria-hidden="true" />
+                </div>
 
-              <h3 className="font-display text-lg font-bold text-white mb-2.5 group-hover:text-gold-300 transition-colors">
-                {service.title}
-              </h3>
-              <p className="text-slate-300 text-sm leading-relaxed flex-1">
-                {service.description}
-              </p>
+                <h3 className="font-display text-lg font-bold text-white mb-2.5 group-hover:text-gold-300 transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-slate-300 text-sm leading-relaxed flex-1">
+                  {service.description}
+                </p>
 
-              {/* Detail tag */}
-              <div className="mt-5 flex items-center justify-between">
-                <span className="text-xs font-semibold text-gold-300 bg-gold-400/10 border border-gold-400/20 rounded-full px-3 py-1">
-                  {service.detail}
-                </span>
-                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-gold-400 group-hover:translate-x-1 transition-all duration-200" aria-hidden="true" />
-              </div>
+                {/* Detail tag */}
+                <div className="mt-5 flex items-center justify-between">
+                  <span className="text-xs font-semibold text-gold-300 bg-gold-400/10 border border-gold-400/20 rounded-full px-3 py-1">
+                    {service.detail}
+                  </span>
+                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-gold-400 group-hover:translate-x-1 transition-all duration-200" aria-hidden="true" />
+                </div>
+              </Link>
             </Reveal>
           ))}
         </div>

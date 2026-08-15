@@ -13,7 +13,7 @@ const PROJECTS = [
     location: 'Westbrook Estates',
     year: '2024',
     type: 'GAF Timberline HDZ - Weathered Wood',
-    before: '/videos/hero-1-poster.jpg',
+    before: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=85&fit=crop',
     after: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&q=85&fit=crop',
     featured: true,
   },
