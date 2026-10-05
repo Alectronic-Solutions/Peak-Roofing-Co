@@ -1,10 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, ArrowUp } from 'lucide-react'
+import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, ArrowUp, ArrowRight, Star } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
 import Link from 'next/link'
-import { YEARS_IN_BUSINESS } from '@/lib/company'
+import { YEARS_IN_BUSINESS, PHONE_DISPLAY, PHONE_HREF, EMAIL, RATING, REVIEW_COUNT, asset } from '@/lib/company'
+import { submitForm } from '@/lib/forms'
 
 const SERVICES = [
   { label: 'Roof Replacement', href: '/services/roof-replacement/' },
@@ -40,45 +41,43 @@ function scrollToTop() {
 
 function NewsletterForm() {
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'sending' | 'done'>('idle')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email) return
     setStatus('sending')
-    try {
-      await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ access_key: 'YOUR_ACCESS_KEY_HERE', email, subject: 'Newsletter Signup' }),
-      })
-      setStatus('done')
-    } catch {
-      setStatus('done')
-    }
+    const ok = await submitForm({ email, subject: 'Newsletter Signup' })
+    setStatus(ok ? 'done' : 'error')
   }
 
   if (status === 'done') {
-    return <p className="text-gold-400 text-xs font-semibold mt-4">You&apos;re subscribed, thanks!</p>
+    return <p className="text-gold-400 text-xs font-semibold mt-4" role="status">You&apos;re subscribed, thanks!</p>
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-5 flex gap-2">
+    <form onSubmit={handleSubmit} className="mt-3 flex gap-2">
+      <label htmlFor="newsletter-email" className="sr-only">Email address</label>
       <input
+        id="newsletter-email"
+        autoComplete="email"
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email"
         required
-        className="flex-1 min-w-0 bg-white/[0.05] border border-white/[0.10] text-white placeholder-slate-400 rounded-xl px-3 py-2 text-sm focus-visible:ring-0 focus-visible:border-gold-400/70 focus:outline-none"
+        className="flex-1 min-w-0 min-h-[44px] bg-white/[0.05] border border-white/[0.10] text-white placeholder-slate-400 rounded-xl px-3 py-2 text-sm focus-visible:ring-0 focus-visible:border-gold-400/70 focus:outline-none"
       />
       <button
         type="submit"
         disabled={status === 'sending'}
-        className="shrink-0 bg-gold-500 hover:bg-gold-400 text-forest-950 font-bold rounded-xl px-4 py-2 text-xs transition-colors disabled:opacity-60"
+        className="shrink-0 min-h-[44px] bg-gold-500 hover:bg-gold-400 text-forest-950 font-bold rounded-xl px-4 py-2 text-xs transition-colors disabled:opacity-60"
       >
-        Subscribe
+        {status === 'sending' ? 'Sending…' : 'Subscribe'}
       </button>
+      {status === 'error' && (
+        <p className="sr-only" role="alert">Subscription failed. Please try again.</p>
+      )}
     </form>
   )
 }
@@ -88,9 +87,54 @@ export function Footer() {
 
   return (
     <footer className="bg-forest-950 border-t border-white/[0.08]">
+      {/* Pre-footer CTA */}
+      <div className="relative overflow-hidden border-b border-white/[0.08]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={asset('/videos/hero-3-poster.jpg')}
+          alt=""
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover opacity-25"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-forest-950 via-forest-950/90 to-forest-950/60" />
+        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-14 lg:py-20 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+          <div className="max-w-2xl">
+            <p className="flex items-center gap-2 text-xs font-semibold text-slate-300">
+              <span className="flex" aria-hidden="true">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-gold-400 text-gold-400" />
+                ))}
+              </span>
+              {RATING} from {REVIEW_COUNT} homeowners
+            </p>
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-[1.08] tracking-tight text-balance">
+              Be ready before the <span className="text-gold-400">next storm</span> hits.
+            </h2>
+            <p className="mt-3 text-slate-300 text-base sm:text-lg">
+              Free drone inspection, a fixed written price, and no pressure. Ever.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+            <Link
+              href="/#contact"
+              className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-xl bg-gold-500 px-7 text-[15px] font-bold text-forest-950 shadow-[0_8px_30px_rgba(245,158,11,0.35)] transition hover:bg-gold-400"
+            >
+              Get my free estimate
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <a
+              href={PHONE_HREF}
+              className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[0.06] px-7 text-[15px] font-semibold text-white transition hover:bg-white/[0.12]"
+            >
+              <Phone className="h-4 w-4 text-gold-400" aria-hidden="true" />
+              {PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </div>
 
       {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-14 pb-24 lg:pb-10">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-14 pb-28 lg:pb-10">
         <Reveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-10 sm:gap-x-8 sm:gap-y-12 lg:gap-12 mb-12">
 
           {/* Brand column: spans full width on mobile, 2 cols on sm */}
@@ -161,7 +205,7 @@ export function Footer() {
                 <li key={s.label}>
                   <Link
                     href={s.href}
-                    className="text-slate-300 text-sm hover:text-gold-400 transition-colors"
+                    className="inline-block py-0.5 text-slate-300 text-sm hover:text-gold-400 transition-colors"
                   >
                     {s.label}
                   </Link>
@@ -178,7 +222,7 @@ export function Footer() {
                 <li key={area.slug}>
                   <Link
                     href={`/service-areas/${area.slug}/`}
-                    className="text-slate-300 text-sm hover:text-gold-400 transition-colors"
+                    className="inline-block py-0.5 text-slate-300 text-sm hover:text-gold-400 transition-colors"
                   >
                     {area.label}
                   </Link>
@@ -193,25 +237,25 @@ export function Footer() {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="tel:+15555550100"
-                  className="flex items-center gap-2.5 text-slate-400 hover:text-gold-400 transition-colors group"
+                  href={PHONE_HREF}
+                  className="flex items-center gap-2.5 text-slate-300 hover:text-gold-400 transition-colors group"
                 >
-                  <Phone className="w-3.5 h-3.5 text-slate-400 group-hover:text-gold-400 flex-shrink-0 transition-colors" aria-hidden="true" />
-                  <span className="text-sm font-medium">(555) 555-0100</span>
+                  <Phone className="w-3.5 h-3.5 text-gold-400 flex-shrink-0 transition-colors" aria-hidden="true" />
+                  <span className="text-sm font-semibold">{PHONE_DISPLAY}</span>
                 </a>
                 <p className="text-slate-400 text-xs mt-1 pl-6">24/7 Storm Emergency</p>
               </li>
               <li>
                 <a
-                  href="mailto:info@peakroofingco.com"
-                  className="flex items-center gap-2.5 text-slate-400 hover:text-gold-400 transition-colors group"
+                  href={`mailto:${EMAIL}`}
+                  className="flex items-center gap-2.5 text-slate-300 hover:text-gold-400 transition-colors group"
                 >
-                  <Mail className="w-3.5 h-3.5 text-slate-400 group-hover:text-gold-400 flex-shrink-0 transition-colors" aria-hidden="true" />
-                  <span className="text-sm">info@peakroofingco.com</span>
+                  <Mail className="w-3.5 h-3.5 text-gold-400 flex-shrink-0 transition-colors" aria-hidden="true" />
+                  <span className="text-sm">{EMAIL}</span>
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
-                <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <MapPin className="w-3.5 h-3.5 text-gold-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
                   <p className="text-slate-300 text-sm">123 Industrial Blvd</p>
                   <p className="text-slate-300 text-sm">Springfield, IL 62701</p>
@@ -221,7 +265,7 @@ export function Footer() {
                 <div className="pl-[22px] space-y-0.5">
                   <p className="text-slate-400 text-xs">Mon–Fri: 7am–6pm</p>
                   <p className="text-slate-400 text-xs">Saturday: 8am–2pm</p>
-                  <p className="text-red-500/70 text-xs font-semibold mt-1.5">● 24/7 Storm Hotline</p>
+                  <p className="text-red-400 text-xs font-semibold mt-1.5">● 24/7 Storm Hotline</p>
                 </div>
               </li>
             </ul>

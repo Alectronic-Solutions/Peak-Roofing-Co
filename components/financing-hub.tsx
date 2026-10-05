@@ -61,7 +61,7 @@ export function FinancingHub() {
   const monthly = calcMonthlyPayment(principal, tier.apr, parseInt(tier.term))
 
   return (
-    <section id="financing" className="py-16 sm:py-20 lg:py-28 bg-forest-900">
+    <section id="financing" className="py-16 sm:py-20 lg:py-28 bg-forest-950">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
 
         {/* Header */}

@@ -24,7 +24,7 @@ const FILTERS: { value: FilterType; label: string }[] = [
 const STATS = [
   { value: ROOFS_COMPLETED_DISPLAY, label: 'Roofs Completed' },
   { value: `${YEARS_IN_BUSINESS} yrs`, label: 'In Business' },
-  { value: '$0 avg', label: 'Out-of-Pocket' },
+  { value: '1,200+', label: 'Insurance Claims' },
   { value: '4.9★', label: 'Avg Rating' },
 ]
 

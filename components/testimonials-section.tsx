@@ -13,7 +13,7 @@ const REVIEWS = [
     rating: 5,
     date: 'November 2024',
     title: 'Absolutely zero stress from start to finish',
-    body: 'After the October hail storm I was dreading the whole process. Peak Roofing handled everything - my insurance adjuster, the scheduling, the cleanup. I paid nothing out of pocket and have a brand new roof. I cannot recommend them enough.',
+    body: 'After the October hail storm I was dreading the whole process. Peak Roofing handled everything - my insurance adjuster, the scheduling, the cleanup. I paid my deductible and nothing else, and I have a brand new roof. I cannot recommend them enough.',
     service: 'Storm Damage + Insurance Claim',
     verified: true,
   },
@@ -95,7 +95,7 @@ function StarRating({ rating }: { rating: number }) {
 
 export function TestimonialsSection() {
   return (
-    <section id="reviews" className="py-16 sm:py-20 lg:py-28 bg-forest-950">
+    <section id="reviews" className="py-16 sm:py-20 lg:py-28 bg-forest-900">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
 
         {/* Header */}

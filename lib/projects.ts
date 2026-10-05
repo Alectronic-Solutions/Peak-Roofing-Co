@@ -87,7 +87,7 @@ export const PROJECTS: Project[] = [
     material: 'GAF Timberline HDZ, Slate',
     beforeImage: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80',
     afterImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
-    description: 'July 2022 derecho damaged main house, detached garage, and pole barn. Single comprehensive insurance claim covered all three structures. $0 out-of-pocket.',
+    description: 'July 2022 derecho damaged main house, detached garage, and pole barn. Single comprehensive insurance claim covered all three structures. Owner paid one deductible.',
     sqft: 4800,
     duration: '3 days',
   },

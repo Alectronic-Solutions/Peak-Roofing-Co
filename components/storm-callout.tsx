@@ -23,8 +23,8 @@ const STEPS = [
   },
   {
     num: '04',
-    title: '$0 Out of Pocket',
-    desc: 'We complete the repairs. On average, our homeowners pay nothing out of pocket. We absorb the deductible gap.',
+    title: 'Deductible Only',
+    desc: 'Insurance pays the approved claim directly. You pay your deductible and nothing more for covered work. No surprise invoices.',
   },
 ]
 
@@ -113,9 +113,9 @@ export function StormCallout() {
               {[
                 { icon: Clock, stat: '< 2 hrs', label: 'Response Time' },
                 { icon: Shield, stat: '24/7', label: 'Claims Support' },
-                { icon: DollarSign, stat: '$0', label: 'Avg. Out-of-Pocket' },
+                { icon: DollarSign, stat: '$0', label: 'Upfront Cost' },
               ].map(({ icon: Icon, stat, label }) => (
-                <div key={label} className="bg-white/[0.04] border border-white/[0.08] rounded-xl p-4 text-center">
+                <div key={label} className="bg-white/[0.04] border border-white/[0.08] rounded-xl px-2 py-4 sm:p-4 text-center">
                   <Icon className="w-4 h-4 text-red-400 mx-auto mb-2" aria-hidden="true" />
                   <p className="font-display text-xl font-bold text-white">
                     <CountUp value={stat} />
