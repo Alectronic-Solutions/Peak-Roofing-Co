@@ -1,7 +1,9 @@
 'use client'
 
 import { useRef, useEffect } from 'react'
-import { Phone, ArrowRight, Clock, Shield, DollarSign } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { Icon3D, type IconName } from '@/components/ui/icon-3d'
+import { PHONE_HREF, asset } from '@/lib/company'
 import { Reveal } from '@/components/ui/reveal'
 import { CountUp } from '@/components/ui/count-up'
 
@@ -14,17 +16,17 @@ const STEPS = [
   {
     num: '02',
     title: 'Damage Report & Estimate',
-    desc: 'You receive a detailed photo report and itemized estimate - the same documentation your insurer needs.',
+    desc: 'You get a marked-up photo report and an itemized estimate: the same documentation your insurer will ask for.',
   },
   {
     num: '03',
     title: 'We Handle Your Claim',
-    desc: 'Our licensed adjusters file and negotiate your claim directly with your insurance company.',
+    desc: 'Our licensed adjuster files the claim and meets your insurer’s adjuster on the roof.',
   },
   {
     num: '04',
     title: 'Deductible Only',
-    desc: 'Insurance pays the approved claim directly. You pay your deductible and nothing more for covered work. No surprise invoices.',
+    desc: 'Your insurer pays the approved claim. For covered work, your deductible is the only check you write.',
   },
 ]
 
@@ -70,14 +72,13 @@ export function StormCallout() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           ref={imgRef}
-          src="https://images.unsplash.com/photo-1504370805625-d32c54b16100?w=1800&q=80&fit=crop"
+          src={asset('/images/storm-callout.jpg')}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-[120%] object-cover object-center will-change-transform -top-[10%]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-forest-950/97 via-forest-950/92 to-forest-950/90" />
+        <div className="absolute inset-0 bg-gradient-to-r from-forest-950/95 via-forest-950/85 to-forest-950/70" />
         <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-transparent to-forest-950/60" />
-        <div className="absolute inset-0 bg-forest-950/40" />
       </div>
 
       {/* Top red accent line */}
@@ -92,7 +93,7 @@ export function StormCallout() {
             <div className="inline-flex items-center gap-2.5 bg-red-500/10 border border-red-500/30 rounded-full px-4 py-2 mb-8 max-w-full">
               <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse flex-shrink-0" aria-hidden="true" />
               <span className="text-red-400 font-bold text-xs uppercase tracking-[0.12em] sm:tracking-[0.18em] leading-snug">
-                Storm Damage Alert: Act Before Your Claim Window Closes
+                Storm crews on call 24/7
               </span>
             </div>
 
@@ -102,21 +103,21 @@ export function StormCallout() {
             </h2>
 
             <p className="text-slate-300 text-lg leading-relaxed mb-8 max-w-xl">
-              Hail and wind damage isn't always visible from the ground. Our drone
-              inspection finds hidden structural damage before it becomes a{' '}
-              <span className="text-white font-semibold">$40,000 leak</span> - and before
-              your insurance claim window expires.
+              Hail bruises and wind-lifted shingles rarely show from the ground. A drone inspection finds them
+              while they are still a{' '}
+              <span className="text-white font-semibold">roof repair, not a ceiling repair</span>, and while your
+              claim window is still open.
             </p>
 
             {/* Key stats */}
             <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-10">
-              {[
-                { icon: Clock, stat: '< 2 hrs', label: 'Response Time' },
-                { icon: Shield, stat: '24/7', label: 'Claims Support' },
-                { icon: DollarSign, stat: '$0', label: 'Upfront Cost' },
-              ].map(({ icon: Icon, stat, label }) => (
+              {([
+                { icon: 'clock', stat: '< 2 hrs', label: 'Response Time' },
+                { icon: 'shield', stat: '24/7', label: 'Storm Line' },
+                { icon: 'coin', stat: '$0', label: 'Upfront Cost' },
+              ] as { icon: IconName; stat: string; label: string }[]).map(({ icon, stat, label }) => (
                 <div key={label} className="bg-white/[0.04] border border-white/[0.08] rounded-xl px-2 py-4 sm:p-4 text-center">
-                  <Icon className="w-4 h-4 text-red-400 mx-auto mb-2" aria-hidden="true" />
+                  <Icon3D name={icon} size={38} className="mx-auto mb-1.5" />
                   <p className="font-display text-xl font-bold text-white">
                     <CountUp value={stat} />
                   </p>
@@ -137,12 +138,12 @@ export function StormCallout() {
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </a>
               <a
-                href="tel:+15555550100"
+                href={PHONE_HREF}
                 className="inline-flex items-center justify-center gap-2 border border-white/20 text-white
                            hover:bg-white/[0.06] hover:border-white/30 font-semibold px-7 py-4 rounded-xl
                            transition-all duration-200 text-sm"
               >
-                <Phone className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+                <Icon3D name="phone" size={22} />
                 Call Storm Hotline
               </a>
             </div>
@@ -178,9 +179,9 @@ export function StormCallout() {
             {/* Disclaimer */}
             <div className="mt-8 p-4 bg-white/[0.04] border border-white/[0.08] rounded-xl">
               <p className="text-slate-200 text-xs leading-relaxed">
-                <span className="text-white font-semibold">Free 30-Point Inspection. No obligation.</span>{' '}
-                Most insurance policies have a 1–2 year claim window for storm damage.
-                Don't wait until it's too late.
+                <span className="text-white font-semibold">Free drone inspection, no obligation.</span>{' '}
+                Most Illinois policies give you one to two years from the storm date to file. Your policy sets the exact
+                deadline.
               </p>
             </div>
           </Reveal>

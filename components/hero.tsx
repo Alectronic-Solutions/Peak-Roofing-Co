@@ -1,13 +1,14 @@
 import Link from 'next/link'
-import { Shield, Star, Award, ArrowRight, CheckCircle, PhoneCall } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { Icon3D, type IconName } from '@/components/ui/icon-3d'
 import { LeadCaptureForm } from '@/components/lead-capture-form'
 import { HeroVideoBackground } from '@/components/hero-video-background'
 import { YEARS_IN_BUSINESS, PHONE_DISPLAY, PHONE_HREF, RATING, REVIEW_COUNT, LICENSE } from '@/lib/company'
 
-const TRUST_ITEMS = [
-  { icon: Shield, label: 'Licensed & Insured', sub: LICENSE },
-  { icon: Award, label: 'GAF Master Elite®', sub: 'Top 2% nationally' },
-  { icon: Star, label: `${YEARS_IN_BUSINESS} Years Local`, sub: 'Family owned since 1987' },
+const TRUST_ITEMS: { icon: IconName; label: string; sub: string }[] = [
+  { icon: 'shield', label: 'Licensed & Insured', sub: LICENSE },
+  { icon: 'medal', label: 'GAF Master Elite®', sub: 'Top 2% nationally' },
+  { icon: 'team', label: `${YEARS_IN_BUSINESS} Years Local`, sub: 'Family owned since 1987' },
 ]
 
 const QUICK_FACTS = [
@@ -40,9 +41,9 @@ export function HeroSection() {
               {...rise(0)}
               className="animate-rise inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-forest-950/40 py-1.5 pl-2 pr-4 text-xs text-slate-200 backdrop-blur-md transition-colors hover:border-gold-400/40"
             >
-              <span className="flex items-center gap-0.5 rounded-full bg-gold-400/15 px-2 py-0.5" aria-hidden="true">
+              <span className="flex items-center gap-px" aria-hidden="true">
                 {[0, 1, 2, 3, 4].map((i) => (
-                  <Star key={i} className="h-3 w-3 fill-gold-400 text-gold-400" />
+                  <Icon3D key={i} name="star" size={15} />
                 ))}
               </span>
               <span>
@@ -55,9 +56,9 @@ export function HeroSection() {
               {...rise(80)}
               className="animate-rise mt-6 font-display text-[clamp(2.6rem,7vw,4.5rem)] font-bold leading-[1.02] tracking-tight text-white"
             >
-              Your Roof, Done{' '}
+              Roofs built for{' '}
               <span className="relative inline-block whitespace-nowrap text-gold-400">
-                Right.
+                Illinois weather.
                 <svg
                   viewBox="0 0 200 12"
                   preserveAspectRatio="none"
@@ -67,13 +68,13 @@ export function HeroSection() {
                   <path d="M2 9 C 50 3, 150 3, 198 8" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="animate-draw" />
                 </svg>
               </span>
-              <span className="block text-slate-300">The First Time.</span>
+              <span className="block text-slate-300">Since 1987.</span>
             </h1>
 
             <p {...rise(160)} className="animate-rise mt-6 max-w-xl text-base leading-relaxed text-slate-200 sm:text-lg sm:leading-[1.7]">
-              Storm damage or a planned replacement, Springfield has trusted Peak for{' '}
-              <span className="font-medium text-white">{YEARS_IN_BUSINESS} years</span>. One named foreman, a drone-documented
-              estimate, and a warranty in writing.
+              Hail repair, wind damage, or a planned re-roof. You get one named foreman, a drone-documented estimate with a
+              fixed price, and a 10-year workmanship warranty in writing. Family owned in Springfield for{' '}
+              <span className="font-medium text-white">{YEARS_IN_BUSINESS} years</span>.
             </p>
 
             <div {...rise(240)} className="animate-rise mt-8 flex flex-col gap-3 min-[420px]:flex-row min-[420px]:items-center">
@@ -88,7 +89,7 @@ export function HeroSection() {
                 href={PHONE_HREF}
                 className="inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded-xl border border-white/20 bg-white/[0.08] px-6 text-[15px] font-semibold text-white backdrop-blur-md transition hover:border-white/35 hover:bg-white/[0.14]"
               >
-                <PhoneCall className="h-4 w-4 text-gold-400" aria-hidden="true" />
+                <Icon3D name="phone" size={22} />
                 {PHONE_DISPLAY}
               </a>
             </div>
@@ -96,7 +97,7 @@ export function HeroSection() {
             <ul {...rise(320)} className="animate-rise mt-8 grid gap-2.5 sm:grid-cols-1" aria-label="Key benefits">
               {QUICK_FACTS.map((fact) => (
                 <li key={fact} className="flex items-center gap-3">
-                  <CheckCircle className="h-4 w-4 flex-shrink-0 text-gold-400" aria-hidden="true" />
+                  <Icon3D name="check" size={20} />
                   <span className="text-sm text-slate-200">{fact}</span>
                 </li>
               ))}
@@ -108,9 +109,7 @@ export function HeroSection() {
                   key={item.label}
                   className="flex items-center gap-3 rounded-xl border border-white/[0.1] bg-forest-950/40 px-3.5 py-3 backdrop-blur-md"
                 >
-                  <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg border border-gold-400/25 bg-gold-400/10">
-                    <item.icon className="h-4 w-4 text-gold-400" aria-hidden="true" />
-                  </span>
+                  <Icon3D name={item.icon} size={34} />
                   <span className="min-w-0">
                     <span className="block text-[13px] font-semibold leading-tight text-white">{item.label}</span>
                     <span className="mt-0.5 block truncate text-[11px] text-slate-400">{item.sub}</span>

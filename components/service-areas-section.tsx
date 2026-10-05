@@ -2,20 +2,21 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Clock, MapPin } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { Icon3D } from '@/components/ui/icon-3d'
 import { Reveal } from '@/components/ui/reveal'
 import { CITIES } from '@/lib/cities'
 
 /** Bearing in degrees (0 = east, -90 = north) for placing each town on the coverage diagram. */
 const BEARING: Record<string, number> = {
   springfield: 0,
-  westbrook: 195,
-  chatham: 118,
-  sherman: -82,
-  auburn: 100,
+  chatham: 100,
+  sherman: -88,
+  auburn: 118,
   rochester: 12,
-  riverton: -35,
-  'lakeview-heights': 48,
+  riverton: -30,
+  taylorville: 48,
+  petersburg: -128,
 }
 
 const MAX_MILES = 35
@@ -43,8 +44,8 @@ export function ServiceAreasSection() {
               <span className="block text-slate-400">minutes from your door.</span>
             </h2>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-300">
-              We work within 35 miles of Springfield across Sangamon County and its neighbors. Crews are staged so a storm
-              call never waits on a cross-county drive.
+              We work within 35 miles of Springfield, across Sangamon County and into Christian, Menard, Logan, and Morgan
+              counties. After a storm we stage crews in the hardest-hit towns instead of driving out from the yard each day.
             </p>
           </Reveal>
 
@@ -64,11 +65,11 @@ export function ServiceAreasSection() {
                   }`}
                 >
                   <span className="flex items-center gap-2.5">
-                    <MapPin className="h-4 w-4 flex-shrink-0 text-gold-400" aria-hidden="true" />
+                    <Icon3D name="pin" size={22} />
                     <span className="text-sm font-semibold text-white">{city.name}</span>
                   </span>
                   <span className="flex items-center gap-1 text-xs text-slate-400">
-                    <Clock className="h-3 w-3" aria-hidden="true" />
+                    <Icon3D name="clock" size={15} />
                     {city.avgResponseMinutes} min
                   </span>
                 </Link>

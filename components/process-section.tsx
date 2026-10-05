@@ -1,12 +1,13 @@
-import { PhoneCall, Aperture, ClipboardCheck, Hammer, BadgeCheck, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { Icon3D, type IconName } from '@/components/ui/icon-3d'
 import { Reveal } from '@/components/ui/reveal'
 
-const STEPS = [
-  { icon: PhoneCall, when: 'Day 1', title: 'Call or request online', body: 'A real person calls you back within 2 business hours to book a time that suits you.' },
-  { icon: Aperture, when: 'Day 1–2', title: 'Drone inspection', body: 'A 30-minute flight covers every plane of your roof. No ladders, no foot traffic on your shingles.' },
-  { icon: ClipboardCheck, when: 'Within 24 hrs', title: 'Itemized proposal', body: 'Annotated photos, a line-by-line scope, and a fixed price. Material samples brought to your door.' },
-  { icon: Hammer, when: 'Install day', title: 'One-day install', body: 'Crew arrives at 7 AM. Most homes are torn off, re-decked where needed, and roofed by sundown.' },
-  { icon: BadgeCheck, when: 'Same day', title: 'Walkthrough & warranty', body: 'We walk the job with you, sweep for nails, and register your manufacturer warranty on the spot.' },
+const STEPS: { icon: IconName; when: string; title: string; body: string }[] = [
+  { icon: 'phone', when: 'Day 1', title: 'Call or request online', body: 'A real person calls you back within 2 business hours to book a time that suits you.' },
+  { icon: 'drone', when: 'Day 1–2', title: 'Drone inspection', body: 'A 30-minute flight covers every plane of your roof. No ladders, no foot traffic on your shingles.' },
+  { icon: 'clipboard', when: 'Within 24 hrs', title: 'Itemized proposal', body: 'Annotated photos, a line-by-line scope, and a fixed price. Material samples brought to your door.' },
+  { icon: 'hammer', when: 'Install day', title: 'One-day install', body: 'Crew arrives at 7 AM. Most homes are torn off, re-decked where needed, and roofed by sundown.' },
+  { icon: 'seal', when: 'Same day', title: 'Walkthrough & warranty', body: 'We walk the job with you, sweep for nails, and register your manufacturer warranty on the spot.' },
 ]
 
 export function ProcessSection() {
@@ -19,7 +20,7 @@ export function ProcessSection() {
             From first call to final nail.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-slate-300">
-            A clear, five-step process with no surprises. Most replacements go from inspection to finished roof in under two weeks.
+            Five steps, each with a date attached. Most replacements go from inspection to finished roof in under two weeks.
           </p>
         </Reveal>
 
@@ -32,11 +33,12 @@ export function ProcessSection() {
           {/* Connector line (mobile) */}
           <div className="absolute bottom-8 left-7 top-8 w-px bg-gradient-to-b from-gold-400/40 via-gold-400/20 to-transparent lg:hidden" aria-hidden="true" />
 
-          {STEPS.map(({ icon: Icon, when, title, body }, i) => (
+          {STEPS.map(({ icon, when, title, body }, i) => (
             <Reveal as="li" key={title} delay={i * 90} className="relative flex gap-5 lg:flex-col lg:gap-0 lg:text-center">
-              <span className="relative z-10 flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl border border-gold-400/35 bg-forest-850 shadow-[0_0_0_6px_#04140E] lg:mx-auto">
-                <Icon className="h-6 w-6 text-gold-400" aria-hidden="true" />
-                <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-gold-500 font-display text-[11px] font-bold text-forest-950">
+              <span className="relative z-10 flex h-14 w-14 flex-shrink-0 items-center justify-center lg:mx-auto">
+                <span className="absolute inset-0 rounded-full bg-forest-950" aria-hidden="true" />
+                <Icon3D name={icon} size={54} className="relative" />
+                <span className="absolute -right-2 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-gold-500 font-display text-[11px] font-bold text-forest-950 shadow-[0_0_0_3px_#04140E]">
                   {i + 1}
                 </span>
               </span>

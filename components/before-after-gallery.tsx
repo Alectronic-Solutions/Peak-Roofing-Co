@@ -5,46 +5,47 @@ import { ArrowRight } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
 import { CountUp } from '@/components/ui/count-up'
 import { BeforeAfterSlider } from '@/components/ui/before-after-slider'
-import { YEARS_IN_BUSINESS, ROOFS_COMPLETED_DISPLAY } from '@/lib/company'
+import { YEARS_IN_BUSINESS, ROOFS_COMPLETED_DISPLAY, RATING, asset } from '@/lib/company'
 
+/** Each pair shows the kind of roof we tear off next to what we install in its place. */
 const PROJECTS = [
   {
     id: 1,
-    label: 'Full Shingle Replacement',
-    location: 'Westbrook Estates',
-    year: '2024',
-    type: 'GAF Timberline HDZ - Weathered Wood',
-    before: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=85&fit=crop',
-    after: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&q=85&fit=crop',
-    featured: true,
+    label: 'Shingle replacement',
+    type: 'Curled 3-tab → architectural shingles',
+    detail: 'Cracked, curling shingles that let water under the laps. Replaced with GAF Timberline HDZ.',
+    before: asset('/images/ba-shingle-before.jpg'),
+    after: asset('/images/ba-shingle-after.jpg'),
+    beforeAlt: 'Old brown asphalt shingles, curled and cracked along the edges',
+    afterAlt: 'Close-up of new dark architectural asphalt shingles',
   },
   {
     id: 2,
-    label: 'Hail Storm Repair',
-    location: 'Maple Ridge',
-    year: '2024',
-    type: 'Insurance Claim - Deductible Only',
-    before: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=85&fit=crop',
-    after: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=900&q=85&fit=crop',
-    featured: false,
+    label: 'Flat roof replacement',
+    type: 'Split membrane → new membrane',
+    detail: 'A cracked, patched flat roof with an open hole, replaced with a new fully adhered membrane.',
+    before: asset('/images/ba-flat-before.jpg'),
+    after: asset('/images/ba-flat-after.jpg'),
+    beforeAlt: 'Cracked flat roof membrane with a hole worn through',
+    afterAlt: 'Roofer unrolling a new membrane across a flat roof',
   },
   {
     id: 3,
-    label: 'Complete Tear-Off & Install',
-    location: 'Lakeview Heights',
-    year: '2023',
-    type: 'Architectural Shingles + New Decking',
-    before: 'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=900&q=85&fit=crop',
-    after: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=85&fit=crop',
-    featured: false,
+    label: 'Re-roof after moss damage',
+    type: 'Moss-worn shingles → fresh install',
+    detail: 'Moss holds moisture against the shingles and lifts the edges. Tear-off, new underlayment, new roof.',
+    before: asset('/images/ba-moss-before.jpg'),
+    after: asset('/images/ba-moss-after.jpg'),
+    beforeAlt: 'Moss growing across an old asphalt shingle roof',
+    afterAlt: 'Roofer nailing new shingles over synthetic underlayment',
   },
 ]
 
 const STATS = [
   { value: ROOFS_COMPLETED_DISPLAY, label: 'Roofs Completed' },
   { value: String(YEARS_IN_BUSINESS), label: 'Years in Business' },
-  { value: '1,200+', label: 'Insurance Claims Won' },
-  { value: '4.9★', label: 'Google Rating' },
+  { value: '1,200+', label: 'Insurance Claims Filed' },
+  { value: RATING, label: 'Average rating (of 5)' },
 ]
 
 function SliderCard({
@@ -59,14 +60,17 @@ function SliderCard({
   return (
     <div className={`relative overflow-hidden rounded-2xl group ${tall ? 'row-span-2' : ''}`}>
       <div className={`relative w-full ${heightClass}`}>
-        <BeforeAfterSlider
-          beforeSrc={project.before}
-          afterSrc={project.after}
-          beforeAlt={`${project.label} - before Peak Roofing Co`}
-          afterAlt={`${project.label} - after Peak Roofing Co`}
-          ariaLabel={`Before and after comparison: ${project.label}`}
-          initialPosition={55}
-        />
+        {/* Absolute so the slider fills the card even when its height comes from min-height (tall card). */}
+        <div className="absolute inset-0">
+          <BeforeAfterSlider
+            beforeSrc={project.before}
+            afterSrc={project.after}
+            beforeAlt={project.beforeAlt}
+            afterAlt={project.afterAlt}
+            ariaLabel={`Compare: ${project.type}`}
+            initialPosition={55}
+          />
+        </div>
 
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
@@ -74,12 +78,12 @@ function SliderCard({
         {/* Before/After labels */}
         <div className="absolute top-4 left-4 pointer-events-none">
           <span className="text-xs font-bold uppercase tracking-wider text-white/80 bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-md">
-            Before
+            What we find
           </span>
         </div>
         <div className="absolute top-4 right-4 pointer-events-none">
           <span className="text-xs font-bold uppercase tracking-wider text-gold-400 bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-md border border-gold-400/30">
-            After
+            What we install
           </span>
         </div>
 
@@ -87,7 +91,7 @@ function SliderCard({
         <div className="absolute bottom-0 left-0 right-0 p-5 pointer-events-none">
           <p className="text-[10px] text-gold-400 font-bold uppercase tracking-widest mb-1">{project.type}</p>
           <p className="text-white font-display font-semibold text-base leading-tight">{project.label}</p>
-          <p className="text-slate-400 text-xs mt-0.5">{project.location} · {project.year}</p>
+          <p className="text-slate-300 text-xs mt-1 leading-relaxed max-w-sm">{project.detail}</p>
         </div>
       </div>
     </div>
@@ -111,8 +115,8 @@ export function BeforeAfterGallery() {
               Before &amp; After
             </h2>
             <p className="mt-4 text-slate-300 max-w-md text-base leading-relaxed">
-              Drag the slider to compare. Every project is backed by our{' '}
-              <span className="text-white font-medium">10-Year Workmanship Warranty</span>.
+              Drag the slider to compare the roofs we tear off with what goes back on. Every install carries our{' '}
+              <span className="text-white font-medium">10-year workmanship warranty</span>.
             </p>
           </div>
           <Link

@@ -1,5 +1,7 @@
 import Link from 'next/link'
-import { Phone, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { Icon3D } from '@/components/ui/icon-3d'
+import { PHONE_DISPLAY, PHONE_HREF } from '@/lib/company'
 import { Button } from '@/components/ui/button'
 
 interface InlineCtaProps {
@@ -12,7 +14,7 @@ interface InlineCtaProps {
 
 export default function InlineCta({
   heading = 'Ready for a free estimate?',
-  subtext = "We respond within 2 hours. No obligation, no pressure.",
+  subtext = 'We call back within 2 business hours, and the estimate is free.',
   primaryLabel = 'Get Free Estimate',
   primaryHref = '/#contact',
   variant = 'gold',
@@ -50,11 +52,11 @@ export default function InlineCta({
               </Link>
             </Button>
             <a
-              href="tel:+15555550100"
+              href={PHONE_HREF}
               className="flex items-center gap-2 text-white font-semibold hover:text-gold-400 transition-colors text-sm"
             >
-              <Phone className="w-4 h-4" />
-              (555) 555-0100
+              <Icon3D name="phone" size={24} />
+              {PHONE_DISPLAY}
             </a>
           </div>
         </div>

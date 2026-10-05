@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
+import { Icon3D } from '@/components/ui/icon-3d'
 import { SERVICE_NAV } from '@/lib/navigation'
 import { SERVICES as SERVICE_DATA } from '@/lib/services'
 
@@ -15,7 +16,7 @@ const DETAILS: Record<string, { blurb: string; detail: string }> = {
     detail: 'Deductible-only on approved claims',
   },
   'drone-inspections': {
-    blurb: 'FAA-certified pilots cover every inch of your roof in under 30 minutes. 4K photo report in 24 hours.',
+    blurb: 'FAA-certified pilots photograph every slope of your roof in under 30 minutes. Marked-up 4K report in 24 hours.',
     detail: 'Free with estimate',
   },
   'insurance-claims': {
@@ -33,8 +34,7 @@ const DETAILS: Record<string, { blurb: string; detail: string }> = {
 }
 
 const slugOf = (href: string) => href.split('/').filter(Boolean).pop() ?? ''
-const imageFor = (slug: string) =>
-  SERVICE_DATA.find((s) => s.slug === slug)?.heroImage.replace(/w=\d+/, 'w=900') ?? ''
+const imageFor = (slug: string) => SERVICE_DATA.find((s) => s.slug === slug)?.cardImage ?? ''
 
 export function ServicesSection() {
   return (
@@ -44,12 +44,12 @@ export function ServicesSection() {
           <div className="max-w-2xl">
             <span className="text-gold-400 text-xs font-bold uppercase tracking-[0.18em]">What We Do</span>
             <h2 className="mt-4 font-display text-4xl lg:text-[3.25rem] font-bold text-white leading-[1.08] tracking-tight">
-              Every Roofing Service,
-              <span className="block text-slate-400">One Accountable Crew.</span>
+              Roofing, repairs,
+              <span className="block text-slate-400">and the paperwork in between.</span>
             </h2>
           </div>
           <p className="max-w-md text-slate-300 text-base leading-relaxed lg:text-right">
-            Emergency tarps to full commercial re-roofs. Licensed, insured, and backed by a written warranty.
+            From a same-night emergency tarp to a full commercial re-roof, done by our own crews under a written warranty.
           </p>
         </Reveal>
 
@@ -57,7 +57,6 @@ export function ServicesSection() {
         <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 scroll-px-5 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 lg:gap-5">
           {SERVICE_NAV.map((service, i) => {
             const slug = slugOf(service.href)
-            const Icon = service.icon!
             const { blurb, detail } = DETAILS[slug]
             return (
               <Reveal key={service.href} delay={(i % 3) * 80} className="h-full w-[84%] flex-shrink-0 snap-start sm:w-auto">
@@ -82,10 +81,8 @@ export function ServicesSection() {
                     </span>
                   </div>
 
-                  <div className="relative -mt-7 flex flex-1 flex-col px-6 pb-6">
-                    <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-gold-400/30 bg-forest-800 shadow-lg">
-                      <Icon className="h-5 w-5 text-gold-400" aria-hidden="true" />
-                    </span>
+                  <div className="relative -mt-10 flex flex-1 flex-col px-6 pb-6">
+                    <Icon3D name={service.icon!} size={60} className="-ml-1.5 mb-2 transition-transform duration-500 group-hover:-translate-y-1" />
                     <h3 className="font-display text-xl font-bold text-white transition-colors group-hover:text-gold-300">
                       {service.label}
                     </h3>
@@ -105,7 +102,7 @@ export function ServicesSection() {
         <Reveal delay={120} className="mt-8 sm:mt-10 flex flex-col items-start justify-between gap-5 rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6 sm:flex-row sm:items-center sm:p-7">
           <div>
             <p className="font-semibold text-white">Not sure what you need?</p>
-            <p className="mt-0.5 text-sm text-slate-300">We&apos;ll fly a drone over your roof and tell you, free and with zero obligation.</p>
+            <p className="mt-0.5 text-sm text-slate-300">We&apos;ll fly a drone over your roof and tell you what we see. It&apos;s free, with no obligation.</p>
           </div>
           <a
             href="#contact"

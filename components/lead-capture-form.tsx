@@ -11,9 +11,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { CheckCircle, Loader2, Star, Lock, ArrowRight } from 'lucide-react'
+import { Loader2, ArrowRight } from 'lucide-react'
+import { Icon3D } from '@/components/ui/icon-3d'
 import { submitForm } from '@/lib/forms'
-import { PHONE_DISPLAY, PHONE_HREF, REVIEW_COUNT } from '@/lib/company'
+import { PHONE_DISPLAY, PHONE_HREF, RATING, REVIEW_COUNT } from '@/lib/company'
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -40,7 +41,7 @@ export function LeadCaptureForm() {
       phone: formData.get('phone'),
       zip: formData.get('zip'),
       roof_age: roofAge,
-      subject: 'New Estimate Request - Peak Roofing Co',
+      subject: 'New estimate request | Peak Roofing Co',
     })
     setState(ok ? 'success' : 'error')
   }
@@ -48,14 +49,12 @@ export function LeadCaptureForm() {
   if (state === 'success') {
     return (
       <div className="bg-forest-800 border border-gold-400/30 rounded-2xl p-8 text-center shadow-[0_0_60px_rgba(245,158,11,0.1)] animate-scale-in" role="status">
-        <div className="w-16 h-16 bg-gold-400/10 border border-gold-400/30 rounded-full flex items-center justify-center mx-auto mb-5">
-          <CheckCircle className="w-8 h-8 text-gold-400" aria-hidden="true" />
-        </div>
+        <Icon3D name="check" size={72} className="mx-auto mb-4" />
         <h3 className="font-display text-2xl font-bold text-white mb-2">
           We'll Call You Within 2 Hours
         </h3>
         <p className="text-slate-300 text-sm leading-relaxed">
-          Our crew is reviewing your request. Watch for a call from{' '}
+          Someone from our office will call you to set up a time. Watch for a call from{' '}
           <span className="text-white font-medium">{PHONE_DISPLAY}</span>.
         </p>
       </div>
@@ -84,13 +83,13 @@ export function LeadCaptureForm() {
         {/* Inline social proof */}
         <div className="flex items-center gap-2 py-3 px-3 sm:px-4 bg-white/[0.03] border border-white/[0.06] rounded-xl">
           <div className="flex items-center gap-1.5">
-            <div className="flex">
+            <div className="flex gap-px" aria-hidden="true">
               {[1,2,3,4,5].map((s) => (
-                <Star key={s} className="w-3 h-3 fill-gold-400 text-gold-400" aria-hidden="true" />
+                <Icon3D key={s} name="star" size={15} />
               ))}
             </div>
             <span className="text-slate-300 text-xs">
-              <span className="text-white font-semibold">{REVIEW_COUNT}</span> five-star reviews
+              <span className="text-white font-semibold">{RATING}</span> average from {REVIEW_COUNT} reviews
             </span>
           </div>
         </div>
@@ -204,8 +203,8 @@ export function LeadCaptureForm() {
         </Button>
 
         <div className="flex items-center justify-center gap-2 text-slate-400 text-xs">
-          <Lock className="w-3 h-3 flex-shrink-0" aria-hidden="true" />
-          <p>Your info is secure. We never share or sell your data.</p>
+          <Icon3D name="lock" size={16} />
+          <p>We only use your details to contact you about this estimate.</p>
         </div>
 
       </form>

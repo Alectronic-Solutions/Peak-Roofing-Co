@@ -1,17 +1,19 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { MapPin, Clock, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { Icon3D } from '@/components/ui/icon-3d'
 import { Reveal } from '@/components/ui/reveal'
 import PageHero from '@/components/page-hero'
 import InlineCta from '@/components/inline-cta'
 import LocalSeoSchema from '@/components/local-seo-schema'
 import { Footer } from '@/components/footer'
 import { CITIES } from '@/lib/cities'
+import { PHONE_DISPLAY, PHONE_HREF, asset } from '@/lib/company'
 
 export const metadata: Metadata = {
   title: 'Roofing Service Areas | Springfield IL & Surrounding Communities | Peak Roofing Co',
   description:
-    'Peak Roofing Co serves Springfield, Westbrook, Chatham, Sherman, Auburn, Rochester, Riverton, and Lakeview Heights. Licensed roofing contractors since 1987.',
+    'Peak Roofing Co serves Springfield, Chatham, Sherman, Auburn, Rochester, Riverton, Taylorville, and Petersburg. Licensed roofing contractor since 1987.',
   alternates: { canonical: '/service-areas/' },
 }
 
@@ -22,9 +24,10 @@ export default function ServiceAreasPage() {
 
       <PageHero
         eyebrow="Where We Work"
-        title="Serving Springfield & Surrounding Communities."
-        subtitle="Residential and commercial. 35-mile radius from Springfield."
+        title="Where we work"
+        subtitle="Residential and commercial roofing within 35 miles of Springfield, across five central Illinois counties."
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Service Areas', href: '/service-areas/' }]}
+        bgImage={asset('/images/hero-areas.jpg')}
         ctaLabel="Get Free Estimate"
         ctaHref="/#contact"
       />
@@ -45,7 +48,7 @@ export default function ServiceAreasPage() {
                 {/* Center pin */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="flex flex-col items-center gap-1">
-                    <MapPin className="w-7 h-7 text-gold-500" />
+                    <Icon3D name="pin" size={48} />
                     <span className="text-white text-xs font-bold font-display">Springfield</span>
                   </div>
                 </div>
@@ -115,13 +118,13 @@ export default function ServiceAreasPage() {
                     {city.roofsCompleted} roofs completed
                   </div>
                   <div className="flex items-center gap-2 text-xs text-slate-400">
-                    <Clock className="w-3 h-3" />
+                    <Icon3D name="clock" size={16} />
                     ~{city.avgResponseMinutes} min avg response
                   </div>
                   {city.milesFromHQ > 0 && (
                     <div className="flex items-center gap-2 text-xs text-slate-400">
-                      <MapPin className="w-3 h-3" />
-                      {city.milesFromHQ} miles from HQ
+                      <Icon3D name="pin" size={16} />
+                      {city.milesFromHQ} miles from our yard
                     </div>
                   )}
                 </div>
@@ -144,18 +147,19 @@ export default function ServiceAreasPage() {
               central Illinois, there&apos;s a good chance we cover your area. Call us and we&apos;ll confirm.
             </p>
             <a
-              href="tel:+15555550100"
+              href={PHONE_HREF}
               className="inline-flex items-center gap-2 text-gold-400 hover:text-gold-300 font-semibold transition-colors"
             >
-              Call (555) 555-0100 to check coverage →
+              <Icon3D name="phone" size={24} />
+              Call {PHONE_DISPLAY} to check coverage
             </a>
           </Reveal>
         </div>
       </section>
 
       <InlineCta
-        heading="Ready to protect your home?"
-        subtext="We serve your area. Response within 2 hours, guaranteed."
+        heading="In our area? Get a free estimate."
+        subtext="We call back within 2 business hours, and the drone inspection is free."
         primaryLabel="Get Free Estimate"
         primaryHref="/#contact"
       />

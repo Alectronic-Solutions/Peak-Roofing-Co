@@ -1,28 +1,28 @@
-import { HardHat, Aperture, FileCheck2, Sparkles, Quote } from 'lucide-react'
+import { Icon3D, type IconName } from '@/components/ui/icon-3d'
 import { Reveal } from '@/components/ui/reveal'
 import { CountUp } from '@/components/ui/count-up'
 import { YEARS_IN_BUSINESS, ROOFS_COMPLETED_DISPLAY, asset } from '@/lib/company'
 
-const REASONS = [
+const REASONS: { icon: IconName; title: string; body: string }[] = [
   {
-    icon: HardHat,
+    icon: 'hardhat',
     title: 'One named foreman, start to finish',
     body: 'The person who quotes your roof is on site the day it’s installed. You get their cell number, not a call center.',
   },
   {
-    icon: Aperture,
+    icon: 'drone',
     title: 'Every estimate is drone-documented',
     body: '4K imagery of every plane of your roof, so you see exactly what we see before you spend a dollar.',
   },
   {
-    icon: FileCheck2,
+    icon: 'doc',
     title: 'Warranty in writing, registered on the spot',
     body: '10-year workmanship warranty from us, plus your GAF manufacturer warranty registered in your name at the walkthrough.',
   },
   {
-    icon: Sparkles,
+    icon: 'magnet',
     title: 'Cleaner than we found it',
-    body: 'Tarped landscaping, a magnetic nail sweep of the whole lot, and a same-day haul-off. Every job, no exceptions.',
+    body: 'Tarps over the landscaping, a magnetic nail sweep of the whole lot, and the old roof hauled off the same day.',
   },
 ]
 
@@ -46,7 +46,7 @@ export function WhyUsSection() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-transparent to-transparent" />
             <figure className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/10 bg-forest-950/70 p-5 backdrop-blur-md sm:inset-x-6 sm:bottom-6">
-              <Quote className="h-5 w-5 text-gold-400" aria-hidden="true" />
+              <Icon3D name="quote" size={30} />
               <blockquote className="mt-2 text-sm leading-relaxed text-slate-200 sm:text-[15px]">
                 “I still review every estimate myself. If I wouldn’t put it on my own house, it doesn’t go on yours.”
               </blockquote>
@@ -80,11 +80,9 @@ export function WhyUsSection() {
           </Reveal>
 
           <ul className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
-            {REASONS.map(({ icon: Icon, title, body }, i) => (
+            {REASONS.map(({ icon, title, body }, i) => (
               <Reveal as="li" key={title} delay={(i % 2) * 80} className="flex gap-4 sm:block">
-                <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-gold-400/25 bg-gold-400/10 sm:mb-4">
-                  <Icon className="h-5 w-5 text-gold-400" aria-hidden="true" />
-                </span>
+                <Icon3D name={icon} size={52} className="sm:mb-3" />
                 <span>
                   <span className="block font-display text-base font-bold text-white">{title}</span>
                   <span className="mt-1.5 block text-sm leading-relaxed text-slate-300">{body}</span>

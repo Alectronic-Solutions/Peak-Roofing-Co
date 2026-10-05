@@ -5,10 +5,6 @@ const nextConfig = {
   assetPrefix: process.env.NODE_ENV === 'production' ? '/Peak-Roofing-Co/' : '',
   images: {
     unoptimized: true,
-    remotePatterns: [
-      { protocol: 'https', hostname: 'images.unsplash.com' },
-      { protocol: 'https', hostname: 'i.pravatar.cc' },
-    ],
   },
   trailingSlash: true,
 }

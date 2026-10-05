@@ -4,7 +4,8 @@ import { useState, FormEvent } from 'react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { CheckCircle, Loader2, Phone, Mail, MapPin, Clock, Shield, Award } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
+import { Icon3D, type IconName } from '@/components/ui/icon-3d'
 import { Reveal } from '@/components/ui/reveal'
 import { submitForm } from '@/lib/forms'
 import { PHONE_DISPLAY, PHONE_HREF, EMAIL, LICENSE } from '@/lib/company'
@@ -39,11 +40,11 @@ const SERVICES = [
   'General Question',
 ]
 
-const TRUST_ITEMS = [
-  { icon: Shield, text: 'Licensed & $2M Insured', sub: LICENSE },
-  { icon: Award, text: 'GAF Master Elite®', sub: 'Top 2% of contractors nationally' },
-  { icon: Clock, text: 'Response within 2 hours', sub: 'Mon–Fri 7am–6pm, Sat 8am–2pm' },
-  { icon: CheckCircle, text: 'BBB Accredited A+ Rating', sub: 'Verified since 2001' },
+const TRUST_ITEMS: { icon: IconName; text: string; sub: string }[] = [
+  { icon: 'shield', text: 'Licensed & $2M insured', sub: LICENSE },
+  { icon: 'medal', text: 'GAF Master Elite®', sub: 'Top 2% of contractors nationally' },
+  { icon: 'clock', text: 'Call back within 2 hours', sub: 'Mon–Fri 7am–6pm, Sat 8am–2pm' },
+  { icon: 'seal', text: 'BBB accredited, A+ rating', sub: 'Since 2001' },
 ]
 
 export function ContactForm() {
@@ -77,16 +78,14 @@ export function ContactForm() {
             Get in Touch
           </h2>
           <p className="mt-4 text-slate-300 text-lg leading-relaxed">
-            Fill out the form and someone from our crew will call you back within 2 hours.
+            Tell us what’s going on with your roof. Someone from our Springfield office will call you back within 2 business hours.
           </p>
         </Reveal>
 
         {formState === 'success' ? (
           <div className="max-w-lg mx-auto text-center py-16 animate-scale-in" role="status">
-            <div className="w-20 h-20 bg-gold-400/10 border border-gold-400/30 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-10 h-10 text-gold-400" aria-hidden="true" />
-            </div>
-            <h3 className="font-display text-3xl font-bold text-white mb-3">Message Received!</h3>
+            <Icon3D name="check" size={88} className="mx-auto mb-5" />
+            <h3 className="font-display text-3xl font-bold text-white mb-3">Got it. Thanks.</h3>
             <p className="text-slate-300 text-lg leading-relaxed mb-4">
               A team member will reach out within 2 business hours.
             </p>
@@ -211,7 +210,7 @@ export function ContactForm() {
                   rows={4}
                   value={fields.description}
                   onChange={(e) => update('description', e.target.value)}
-                  placeholder="Describe your situation - roof age, visible damage, urgency, questions about insurance..."
+                  placeholder="Roof age, any leaks or visible damage, whether there’s an insurance claim, how soon you need us…"
                   className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-400 focus-visible:ring-0 focus-visible:border-gold-400/70 rounded-xl hover:border-white/20 transition-colors resize-none"
                 />
               </div>
@@ -240,13 +239,12 @@ export function ContactForm() {
                     Sending your request…
                   </>
                 ) : (
-                  'Send Request - We\'ll Reply Within 2 Hours'
+                  'Send request'
                 )}
               </button>
 
               <p className="text-slate-400 text-xs text-center">
-                By submitting you authorize Peak Roofing Co to contact you regarding this inquiry.
-                We never share your information.
+                By sending this you agree that Peak Roofing Co may call or email you about this request. We don’t share your details.
               </p>
             </Reveal>
 
@@ -258,9 +256,7 @@ export function ContactForm() {
                 <h3 className="font-display text-base font-bold text-white mb-5">Direct Contact</h3>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-gold-400/10 border border-gold-400/25 flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
-                    </div>
+                    <Icon3D name="phone" size={34} />
                     <div>
                       <a href={PHONE_HREF} className="text-white font-semibold text-sm hover:text-gold-400 transition-colors">
                         {PHONE_DISPLAY}
@@ -269,34 +265,28 @@ export function ContactForm() {
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-gold-400/10 border border-gold-400/25 flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
-                    </div>
+                    <Icon3D name="mail" size={34} />
                     <div>
                       <a href={`mailto:${EMAIL}`} className="text-white font-semibold text-sm hover:text-gold-400 transition-colors break-all">
                         {EMAIL}
                       </a>
-                      <p className="text-slate-400 text-xs mt-0.5">Replies within 2 hours</p>
+                      <p className="text-slate-400 text-xs mt-0.5">Replies within 1 business day</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-gold-400/10 border border-gold-400/25 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
-                    </div>
+                    <Icon3D name="pin" size={34} />
                     <div>
                       <p className="text-white font-semibold text-sm">123 Industrial Blvd</p>
                       <p className="text-slate-400 text-xs mt-0.5">Springfield, IL 62701</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-gold-400/10 border border-gold-400/25 flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
-                    </div>
+                    <Icon3D name="clock" size={34} />
                     <div>
                       <p className="text-white font-semibold text-sm">Office Hours</p>
                       <p className="text-slate-400 text-xs mt-0.5">Mon–Fri: 7am–6pm</p>
                       <p className="text-slate-400 text-xs">Saturday: 8am–2pm</p>
-                      <p className="text-red-400 text-xs font-semibold mt-1">● 24/7 Storm Hotline Active</p>
+                      <p className="text-red-400 text-xs font-semibold mt-1">Storm line answered 24/7</p>
                     </div>
                   </li>
                 </ul>
@@ -307,8 +297,8 @@ export function ContactForm() {
                 <h3 className="font-display text-base font-bold text-white mb-5">Why Trust Us</h3>
                 <ul className="space-y-4">
                   {TRUST_ITEMS.map((item) => (
-                    <li key={item.text} className="flex items-start gap-3">
-                      <item.icon className="w-4 h-4 text-gold-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                    <li key={item.text} className="flex items-center gap-3">
+                      <Icon3D name={item.icon} size={34} />
                       <div>
                         <p className="text-slate-200 text-sm font-medium">{item.text}</p>
                         <p className="text-slate-400 text-xs mt-0.5">{item.sub}</p>

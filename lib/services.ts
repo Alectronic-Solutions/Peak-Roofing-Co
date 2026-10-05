@@ -1,3 +1,6 @@
+import type { IconName } from '@/components/ui/icon-3d'
+import { asset } from './company'
+
 export interface Service {
   slug: string
   title: string
@@ -8,7 +11,9 @@ export interface Service {
   price: string
   priceDetail: string
   heroImage: string
-  icon: string
+  /** Smaller crop of the hero for cards. */
+  cardImage: string
+  icon: IconName
   badge?: string
   features: string[]
   processSteps: { title: string; description: string }[]
@@ -23,26 +28,27 @@ export const SERVICES: Service[] = [
     title: 'Roof Replacement',
     shortTitle: 'Replacement',
     eyebrow: 'Full Replacement',
-    tagline: 'A complete tear-off and install, done right the first time.',
+    tagline: 'A complete tear-off and new roof, usually finished in one day.',
     description:
       'When repairs stop making sense, a full replacement protects your home for the next 30 years. We handle everything from tear-off to final inspection.',
     price: 'From $4.50/sq ft',
     priceDetail: '$4.50–$8.00 per sq ft depending on pitch, materials, and decking condition.',
-    heroImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80',
-    icon: 'home',
+    heroImage: asset('/images/hero-roof-replacement.jpg'),
+    cardImage: asset('/images/hero-roof-replacement-sm.jpg'),
+    icon: 'house',
     features: [
       'Full tear-off of existing shingles and underlayment',
       'Ice & water shield barrier on all eaves and valleys',
-      'GAF Timberline® shingles, 30-year warranty',
+      'GAF Timberline® HDZ shingles with a lifetime limited warranty',
       'New drip edge, ridge cap, and flashing',
       'Deck inspection and replacement of damaged boards',
       'Final drone post-install quality inspection',
-      'Same-day cleanup, zero debris left behind',
+      'Same-day cleanup and a magnetic nail sweep of the yard',
       'Manufacturer warranty registered in your name',
     ],
     processSteps: [
       { title: 'Free Drone Assessment', description: 'We fly a drone to map your roof\'s condition, identify soft spots, and measure square footage. No ladders, no guessing.' },
-      { title: 'Material Selection', description: 'Choose from 3 shingle grades, 8 color palettes, and optional upgraded underlayment. We provide physical samples.' },
+      { title: 'Material Selection', description: 'Pick your shingle line and color from physical samples held up against your siding, plus optional upgraded underlayment.' },
       { title: 'Full Tear-Off & Install', description: 'Our crew arrives at 7 AM, completes tear-off, installs ice barrier, new decking (if needed), and all new shingles, typically in one day.' },
       { title: 'Final Walkthrough & Warranty', description: 'We walk the entire roof with you, point out every detail, and register your manufacturer warranty on the spot.' },
     ],
@@ -52,7 +58,7 @@ export const SERVICES: Service[] = [
       { q: 'How long does a full replacement take?', a: 'Most homes are completed in a single day. Larger homes or complex roofs (multiple dormers, steep pitch) may take two days. We\'ll give you a firm timeline before work begins.' },
       { q: 'Do I need to leave my home during the replacement?', a: 'You don\'t have to, but many homeowners prefer to because of noise. There\'s no need to relocate: work is entirely exterior.' },
       { q: 'What happens to my gutters?', a: 'We carefully remove and reinstall existing gutters. If they\'re damaged or you want new gutters, we can quote that separately.' },
-      { q: 'Is the 30-year warranty on materials or labor?', a: 'Your GAF warranty covers materials for 30 years. Our written workmanship warranty covers labor for 10 years. Both are transferable if you sell the home.' },
+      { q: 'What is covered by the manufacturer vs. by Peak?', a: 'GAF\'s lifetime limited warranty covers the shingles. Our written workmanship warranty covers the installation for 10 years. Both transfer if you sell the home.' },
       { q: 'What shingle colors do you offer?', a: 'GAF Timberline offers 30+ color options. We bring physical samples to every estimate appointment so you can see them against your home\'s siding.' },
       { q: 'Can you match my existing shingle color?', a: 'In most cases, yes, especially with GAF\'s broad palette. On partial replacements we always bring samples to get the closest match.' },
     ],
@@ -63,13 +69,14 @@ export const SERVICES: Service[] = [
     title: 'Storm Damage Repair',
     shortTitle: 'Storm Repair',
     eyebrow: 'Storm & Hail Damage',
-    tagline: 'Drone inspection within 2 hours. On approved claims, you pay only your deductible.',
+    tagline: 'A drone over your roof within 2 hours of your call. On approved claims, you pay your deductible.',
     description:
       'Hail and wind damage is often invisible from the ground. Our FAA-certified drone finds every impact point and we handle your insurance claim start to finish.',
     price: 'Deductible only',
     priceDetail: 'We work directly with your insurer. Your deductible is all you pay in most cases.',
-    heroImage: 'https://images.unsplash.com/photo-1504370805625-d32c54b16100?w=1600&q=80',
-    icon: 'cloud-lightning',
+    heroImage: asset('/images/hero-storm.jpg'),
+    cardImage: asset('/images/hero-storm-sm.jpg'),
+    icon: 'storm',
     badge: 'Most Urgent',
     features: [
       'FAA Part 107 certified drone inspection within 2 hours',
@@ -85,10 +92,10 @@ export const SERVICES: Service[] = [
       { title: 'Free Drone Inspection', description: 'We dispatch within 2 hours of your call. Our drone captures 4K imagery of every square foot: hail dents, lifted shingles, cracked flashing, granule loss.' },
       { title: 'Damage Report & Estimate', description: 'You receive a full PDF damage report with annotated photos and a written estimate, exactly what your insurance company needs.' },
       { title: 'We Handle Your Claim', description: 'Our on-staff adjuster files your claim, attends the insurer\'s inspection, and negotiates to ensure every item is covered.' },
-      { title: 'Deductible Only', description: 'Insurance pays the approved claim. We build. You pay your deductible and nothing more for covered work. No surprises, no upsells.' },
+      { title: 'Deductible Only', description: 'Insurance pays the approved claim and we build the roof. For covered work, your deductible is all you pay.' },
     ],
     pricingNote:
-      'For legitimate storm claims, your insurance covers the full replacement cost minus your deductible. We\'ve handled 1,200+ claims and fight for every valid one. If your claim is denied, we re-inspect and re-appeal at no charge.',
+      'For legitimate storm claims, your insurance covers the full replacement cost minus your deductible. We\'ve handled 1,200+ claims and push back on underpaid estimates with documentation. If your claim is denied, we re-inspect and re-appeal at no charge.',
     faqs: [
       { q: 'How do I know if my roof has hail damage?', a: 'Hail damage is almost impossible to spot from the ground. Look for granules in your gutters, dented AC fins, or dings on aluminum trim. Call us for a free drone inspection and we\'ll show you exactly what\'s there.' },
       { q: 'Will filing a claim raise my insurance rates?', a: 'Storm damage claims are typically categorized as "weather events" and don\'t affect your personal rate. Your insurer can confirm this. We\'ve never seen a client dropped for filing a legitimate hail claim.' },
@@ -108,8 +115,9 @@ export const SERVICES: Service[] = [
       'Our FAA Part 107 certified pilots fly a complete roof inspection so you know exactly what\'s up there. No ladders, no risk, no guessing.',
     price: 'Free with estimate',
     priceDetail: 'Free with every estimate appointment. Standalone inspection: $149.',
-    heroImage: 'https://images.unsplash.com/photo-1508444845599-5c89863b1c44?w=1600&q=80',
-    icon: 'aperture',
+    heroImage: asset('/images/hero-drone.jpg'),
+    cardImage: asset('/images/hero-drone-sm.jpg'),
+    icon: 'drone',
     features: [
       'FAA Part 107 certified pilots, fully insured',
       '4K imagery of every square foot of roof surface',
@@ -122,7 +130,7 @@ export const SERVICES: Service[] = [
     ],
     processSteps: [
       { title: 'Schedule Your Flight', description: 'Book online or by phone. We arrive at the agreed time with a fully charged drone fleet and FAA credentials.' },
-      { title: 'Full Roof Survey', description: 'Our pilot systematically covers every plane of your roof in overlapping passes; nothing is missed. Flight takes 15–30 minutes.' },
+      { title: 'Full Roof Survey', description: 'Our pilot systematically covers every plane of your roof in overlapping passes. The flight takes 15–30 minutes.' },
       { title: '4K Analysis', description: 'We review footage frame-by-frame, annotate every defect, and measure affected areas for accurate scoping.' },
       { title: 'Report Delivery', description: 'You receive a professional PDF with annotated photos, a condition summary, and a written estimate within 24 hours.' },
     ],
@@ -144,11 +152,12 @@ export const SERVICES: Service[] = [
     eyebrow: 'On-Staff Licensed Adjuster',
     tagline: 'We file, negotiate, and close your claim. You pay nothing extra.',
     description:
-      'Most homeowners leave money on the table when filing alone. Our on-staff licensed adjuster fights for the full replacement cost.',
+      'Insurers write their estimates from what their adjuster saw. Ours documents everything first, so the claim reflects the full scope of the damage.',
     price: 'Included, no extra fee',
     priceDetail: 'No additional fee for claims assistance. It\'s included with every storm repair job.',
-    heroImage: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&q=80',
-    icon: 'shield-check',
+    heroImage: asset('/images/hero-insurance.jpg'),
+    cardImage: asset('/images/hero-insurance-sm.jpg'),
+    icon: 'shield',
     features: [
       'On-staff licensed public adjuster',
       'We file the initial claim on your behalf',
@@ -157,7 +166,7 @@ export const SERVICES: Service[] = [
       'Work with all major carriers: State Farm, Allstate, USAA, Farmers, Liberty Mutual',
       'Document hidden damage before it\'s visible to the insurer',
       'No additional fee, included with every storm repair project',
-      '1,200+ claims filed on behalf of homeowners.',
+      '1,200+ claims filed on behalf of homeowners',
     ],
     processSteps: [
       { title: 'Free Damage Documentation', description: 'We document every damaged item with 4K drone imagery before your insurer\'s adjuster visits, establishing a complete record.' },
@@ -183,11 +192,12 @@ export const SERVICES: Service[] = [
     eyebrow: 'Flexible Payment Plans',
     tagline: 'A new roof for as low as $189/month. Check your rate in 60 seconds.',
     description:
-      'Don\'t let budget hold back a necessary repair. We work with 12 lenders to get you the best rate, with no impact to your credit score to check.',
+      'Spread the cost of a roof over 5 to 15 years. We compare offers from 12 lenders, and checking your rate is a soft pull that does not affect your credit score.',
     price: 'From 6.9% APR',
     priceDetail: 'Rates from 6.9%–12.9% APR depending on credit score and term. Soft pull only to check rates.',
-    heroImage: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600&q=80',
-    icon: 'credit-card',
+    heroImage: asset('/images/hero-financing.jpg'),
+    cardImage: asset('/images/hero-financing-sm.jpg'),
+    icon: 'card',
     features: [
       'Check your rate in 60 seconds, no credit impact',
       '3 financing tiers to match every credit profile',
@@ -196,7 +206,7 @@ export const SERVICES: Service[] = [
       'Terms from 12 to 180 months',
       'No prepayment penalty, pay off early anytime',
       'Deferred payment options available',
-      'Work begins immediately after approval',
+      'Install scheduled as soon as you approve',
     ],
     processSteps: [
       { title: 'Check Your Rate', description: 'Fill out a 2-minute form online or in person. Soft credit pull only, zero impact to your score.' },
@@ -225,11 +235,12 @@ export const SERVICES: Service[] = [
       'From small retail buildings to multi-tenant complexes, we install and maintain all flat and low-slope commercial roofing systems with minimal business disruption.',
     price: 'Custom quote',
     priceDetail: 'Commercial projects are quoted per square foot based on system type, size, and access. Contact us for a site visit.',
-    heroImage: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80',
-    icon: 'building-2',
+    heroImage: asset('/images/hero-commercial.jpg'),
+    cardImage: asset('/images/hero-commercial-sm.jpg'),
+    icon: 'building',
     features: [
       'TPO (Thermoplastic Polyolefin) single-ply membrane systems',
-      'EPDM rubber roofing, 40+ year lifespan',
+      'EPDM rubber roofing with a 25–30 year service life',
       'Modified bitumen for high-traffic flat roofs',
       'Roof coating and restoration as an alternative to full replacement',
       'Preventive maintenance contracts with scheduled inspections',

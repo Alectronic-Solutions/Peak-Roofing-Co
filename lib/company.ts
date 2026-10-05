@@ -3,8 +3,9 @@ import { CITIES } from './cities'
 // TODO: this is demo/placeholder business data. Before going live, replace:
 //  - Phone number: (555) 555-0100 / tel:+15555550100, search-and-replace across the codebase
 //  - Web3Forms access key in lib/forms.ts (forms run in demo mode until it's set)
-//  - i.pravatar.cc fake avatars in testimonials-section.tsx, about/page.tsx
-//  - Recycled stock photos in lib/projects.ts (before/after pairs currently reused across projects)
+//  - Stock photography in public/images (sources in lib/photo-credits.ts): swap in real job photos,
+//    team headshots, and same-roof before/after pairs for components/before-after-gallery.tsx
+//  - Sample reviews in lib/reviews.ts: replace with real customer reviews (with permission)
 //  - Placeholder social links (footer.tsx `href: '#'`) and generic sameAs URLs (local-seo-schema.tsx)
 //  - public/og-default.jpg is a cropped hero poster used as a placeholder OG/Twitter share image, replace with real branded creative
 

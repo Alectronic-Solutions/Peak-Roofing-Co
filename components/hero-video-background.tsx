@@ -5,9 +5,9 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { asset } from '@/lib/company'
 
 const CLIPS = [
-  { name: 'hero-1', caption: 'Full re-deck · Springfield' },
-  { name: 'hero-2', caption: 'Underlayment install · Westbrook' },
-  { name: 'hero-3', caption: 'Drone survey · Lakeview Heights' },
+  { name: 'hero-1', caption: 'New decking & underlayment' },
+  { name: 'hero-2', caption: 'Ice & water shield in a valley' },
+  { name: 'hero-3', caption: 'Drone view, mid-install' },
 ]
 
 /** Phones and portrait tablets get the 540×720 portrait crops (about half the bytes). */

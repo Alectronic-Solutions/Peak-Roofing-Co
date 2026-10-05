@@ -1,25 +1,11 @@
-import {
-  Home,
-  CloudLightning,
-  Aperture,
-  ShieldCheck,
-  CreditCard,
-  Building2,
-  Images,
-  Star,
-  SlidersHorizontal,
-  Users,
-  HelpCircle,
-  Mail,
-  type LucideIcon,
-} from 'lucide-react'
+import type { IconName } from '@/components/ui/icon-3d'
 import { CITIES } from './cities'
 
 export type NavItem = {
   label: string
   href: string
   description?: string
-  icon?: LucideIcon
+  icon?: IconName
 }
 
 export type NavMenu = {
@@ -30,12 +16,12 @@ export type NavMenu = {
 }
 
 export const SERVICE_NAV: NavItem[] = [
-  { label: 'Roof Replacement', href: '/services/roof-replacement/', description: 'Full tear-off & GAF install, usually in one day', icon: Home },
-  { label: 'Storm Damage Repair', href: '/services/storm-damage/', description: 'Hail & wind repair with same-day tarping', icon: CloudLightning },
-  { label: 'Drone Inspections', href: '/services/drone-inspections/', description: '4K roof report in 24 hours, free with estimate', icon: Aperture },
-  { label: 'Insurance Claims', href: '/services/insurance-claims/', description: 'On-staff adjuster files and negotiates for you', icon: ShieldCheck },
-  { label: 'Commercial Roofing', href: '/services/commercial-roofing/', description: 'TPO, EPDM & flat-roof systems', icon: Building2 },
-  { label: 'Financing', href: '/services/financing/', description: 'From 6.9% APR, no credit impact to check', icon: CreditCard },
+  { label: 'Roof Replacement', href: '/services/roof-replacement/', description: 'Full tear-off & GAF install, usually in one day', icon: 'house' },
+  { label: 'Storm Damage Repair', href: '/services/storm-damage/', description: 'Hail & wind repair with same-day tarping', icon: 'storm' },
+  { label: 'Drone Inspections', href: '/services/drone-inspections/', description: '4K roof report in 24 hours, free with estimate', icon: 'drone' },
+  { label: 'Insurance Claims', href: '/services/insurance-claims/', description: 'On-staff adjuster files and negotiates for you', icon: 'shield' },
+  { label: 'Commercial Roofing', href: '/services/commercial-roofing/', description: 'TPO, EPDM & flat-roof systems', icon: 'building' },
+  { label: 'Financing', href: '/services/financing/', description: 'From 6.9% APR, no credit impact to check', icon: 'card' },
 ]
 
 export const NAV_MENUS: NavMenu[] = [
@@ -45,9 +31,9 @@ export const NAV_MENUS: NavMenu[] = [
     href: '/gallery/',
     layout: 'list',
     items: [
-      { label: 'Project Gallery', href: '/gallery/', description: '12 recent projects, filterable by type', icon: Images },
-      { label: 'Before & After', href: '/#gallery', description: 'Drag the slider on real transformations', icon: SlidersHorizontal },
-      { label: 'Customer Reviews', href: '/#reviews', description: '4.9 stars across 847 reviews', icon: Star },
+      { label: 'Project Gallery', href: '/gallery/', description: 'Recent jobs, filterable by type', icon: 'images' },
+      { label: 'Before & After', href: '/#gallery', description: 'Worn roofs next to what we install', icon: 'compare' },
+      { label: 'Customer Reviews', href: '/#reviews', description: '4.9 stars across 847 reviews', icon: 'star' },
     ],
   },
   {
@@ -65,9 +51,9 @@ export const NAV_MENUS: NavMenu[] = [
     href: '/about/',
     layout: 'list',
     items: [
-      { label: 'About Peak', href: '/about/', description: 'Family owned in Springfield since 1987', icon: Users },
-      { label: 'FAQ', href: '/faq/', description: 'Storm claims, financing, warranties', icon: HelpCircle },
-      { label: 'Contact', href: '/#contact', description: 'Call back within 2 business hours', icon: Mail },
+      { label: 'About Peak', href: '/about/', description: 'Family owned in Springfield since 1987', icon: 'team' },
+      { label: 'FAQ', href: '/faq/', description: 'Storm claims, financing, warranties', icon: 'help' },
+      { label: 'Contact', href: '/#contact', description: 'Call back within 2 business hours', icon: 'mail' },
     ],
   },
 ]

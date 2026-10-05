@@ -2,12 +2,13 @@
 
 import { useState } from 'react'
 import { Slider } from '@/components/ui/slider'
-import { CheckCircle, ArrowRight, Zap } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { Icon3D } from '@/components/ui/icon-3d'
 import { Reveal } from '@/components/ui/reveal'
 
 const FINANCING_TIERS = [
   {
-    name: 'Starter Protection',
+    name: '5-year plan',
     apr: 12.9,
     aprDisplay: '12.9%',
     term: '60 mo.',
@@ -17,7 +18,7 @@ const FINANCING_TIERS = [
     highlight: false,
   },
   {
-    name: 'Homeowner Choice',
+    name: '10-year plan',
     apr: 9.9,
     aprDisplay: '9.9%',
     term: '120 mo.',
@@ -27,7 +28,7 @@ const FINANCING_TIERS = [
     highlight: true,
   },
   {
-    name: 'Elite Finance',
+    name: '15-year plan',
     apr: 6.9,
     aprDisplay: '6.9%',
     term: '180 mo.',
@@ -36,12 +37,6 @@ const FINANCING_TIERS = [
     badge: 'Best Rate',
     highlight: false,
   },
-]
-
-const BENEFITS = [
-  'No prepayment penalty',
-  'Deferred interest options',
-  'Same-day approval',
 ]
 
 const COST_PER_SQFT = 4.5
@@ -76,8 +71,8 @@ export function FinancingHub() {
             <span className="text-gold-400">${Math.round(monthly)}/month</span>
           </h2>
           <p className="mt-5 text-slate-300 text-lg leading-relaxed">
-            We partner with 12 lenders to find your best rate. Checking your rate takes under
-            60 seconds and won't impact your credit score.
+            We compare offers from 12 lenders and show you all of them side by side. Checking your rate is a soft pull
+            and does not affect your credit score.
           </p>
         </Reveal>
 
@@ -89,9 +84,7 @@ export function FinancingHub() {
             {/* Calculator */}
             <Reveal className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-7 lg:p-8">
               <div className="flex items-center gap-2 mb-8">
-                <div className="w-7 h-7 rounded-lg bg-gold-400/10 border border-gold-400/25 flex items-center justify-center">
-                  <Zap className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
-                </div>
+                <Icon3D name="calculator" size={34} />
                 <span className="text-white font-semibold">Payment Estimator</span>
               </div>
 
@@ -162,7 +155,7 @@ export function FinancingHub() {
                   )}
                   <p className="font-display text-xl font-bold text-gold-400 mt-1">{t.aprDisplay}</p>
                   <p className="text-slate-400 text-xs mt-0.5">APR</p>
-                  <p className="text-white text-sm font-semibold mt-2">{t.term}</p>
+                  <p className="text-white text-sm font-semibold mt-2">{t.name}</p>
                   <p className="text-slate-400 text-xs">Credit {t.minCredit}</p>
                 </button>
               ))}
@@ -177,13 +170,13 @@ export function FinancingHub() {
               <h3 className="font-display text-lg font-bold text-white mb-5">Every Plan Includes</h3>
               <ul className="space-y-4">
                 {[
-                  { title: 'No Prepayment Penalty', desc: 'Pay off your loan early anytime - no fees, no surprises.' },
-                  { title: 'Deferred Interest Options', desc: 'Start paying when you\'re ready with flexible deferral windows.' },
-                  { title: 'Same-Day Approval', desc: 'Decision in under 60 seconds. No hard pull on your credit to check.' },
-                  { title: '12 Lender Network', desc: 'We shop rates across 12 lenders to guarantee you the best deal.' },
+                  { title: 'No prepayment penalty', desc: 'Pay the loan off early whenever you like, with no fee.' },
+                  { title: 'Payments start after the job', desc: 'Your first payment is due 30 days after the roof is finished.' },
+                  { title: 'Same-day decisions', desc: 'Most applications get an answer within minutes during business hours.' },
+                  { title: '12 lenders compared', desc: 'You see every offer we get back, side by side, and pick the one that fits.' },
                 ].map((item) => (
                   <li key={item.title} className="flex gap-4">
-                    <CheckCircle className="w-5 h-5 text-gold-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                    <Icon3D name="check" size={22} className="mt-px" />
                     <div>
                       <p className="text-white text-sm font-semibold">{item.title}</p>
                       <p className="text-slate-300 text-xs mt-0.5 leading-relaxed">{item.desc}</p>
@@ -201,11 +194,11 @@ export function FinancingHub() {
                            min-h-[56px] rounded-xl shadow-[0_4px_24px_rgba(245,158,11,0.3)]
                            hover:shadow-[0_4px_32px_rgba(245,158,11,0.5)] transition-all duration-300 text-[15px]"
               >
-                Check My Rate - No Credit Impact
+                Check my rate (no credit impact)
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </a>
               <p className="text-slate-400 text-[11px] text-center mt-4">
-                Financing provided by Peak Roofing Finance Partners. Terms subject to credit approval. Rates shown are representative.
+                Loans are made by third-party lenders, not Peak Roofing Co. All financing is subject to credit approval. Rates and payments shown are examples.
               </p>
             </Reveal>
           </div>

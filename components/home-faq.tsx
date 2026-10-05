@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { ArrowRight, Phone } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { Icon3D } from '@/components/ui/icon-3d'
 import { Reveal } from '@/components/ui/reveal'
 import FaqAccordion from '@/components/faq-accordion'
 import { PHONE_DISPLAY, PHONE_HREF } from '@/lib/company'
@@ -23,7 +24,7 @@ const FAQS = [
   },
   {
     q: 'What warranty do I get?',
-    a: 'A 10-year written workmanship warranty from Peak, plus GAF’s manufacturer warranty registered in your name. As a GAF Master Elite® contractor we can also offer extended System Plus and Golden Pledge coverage.',
+    a: 'A 10-year written workmanship warranty from Peak, plus GAF’s lifetime limited shingle warranty registered in your name. As a GAF Master Elite® contractor we can also offer GAF’s extended System Plus and Golden Pledge coverage.',
   },
 ]
 
@@ -44,7 +45,7 @@ export function HomeFaq() {
               href={PHONE_HREF}
               className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.05] px-5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
-              <Phone className="h-4 w-4 text-gold-400" aria-hidden="true" />
+              <Icon3D name="phone" size={22} />
               {PHONE_DISPLAY}
             </a>
             <Link
