@@ -1,11 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, ArrowUp, ArrowRight, Star } from 'lucide-react'
+import { Facebook, Instagram, Youtube, ArrowUp, ArrowRight } from 'lucide-react'
+import { Icon3D } from '@/components/ui/icon-3d'
 import { Reveal } from '@/components/ui/reveal'
 import Link from 'next/link'
-import { YEARS_IN_BUSINESS, PHONE_DISPLAY, PHONE_HREF, EMAIL, RATING, REVIEW_COUNT, asset } from '@/lib/company'
+import { PHONE_DISPLAY, PHONE_HREF, EMAIL, LICENSE, RATING, REVIEW_COUNT, asset } from '@/lib/company'
 import { submitForm } from '@/lib/forms'
+import { CITIES } from '@/lib/cities'
 
 const SERVICES = [
   { label: 'Roof Replacement', href: '/services/roof-replacement/' },
@@ -16,23 +18,14 @@ const SERVICES = [
   { label: 'Commercial Roofing', href: '/services/commercial-roofing/' },
 ]
 
-const SERVICE_AREAS = [
-  { label: 'Springfield', slug: 'springfield' },
-  { label: 'Westbrook', slug: 'westbrook' },
-  { label: 'Chatham', slug: 'chatham' },
-  { label: 'Sherman', slug: 'sherman' },
-  { label: 'Auburn', slug: 'auburn' },
-  { label: 'Rochester', slug: 'rochester' },
-  { label: 'Riverton', slug: 'riverton' },
-  { label: 'Lakeview Heights', slug: 'lakeview-heights' },
-]
+const SERVICE_AREAS = CITIES.map((c) => ({ label: c.name, slug: c.slug }))
 
 const CREDENTIALS = [
-  'State Contractor Lic. #RC-20847',
+  `State Contractor ${LICENSE}`,
   'GAF Master Elite® Certified Contractor',
   '$2M General Liability Insurance',
-  "Workers' Compensation - Full Coverage",
-  'BBB Accredited - A+ Rating Since 2001',
+  "Workers' compensation, full coverage",
+  'BBB accredited, A+ rating since 2001',
 ]
 
 function scrollToTop() {
@@ -102,7 +95,7 @@ export function Footer() {
             <p className="flex items-center gap-2 text-xs font-semibold text-slate-300">
               <span className="flex" aria-hidden="true">
                 {[0, 1, 2, 3, 4].map((i) => (
-                  <Star key={i} className="h-3.5 w-3.5 fill-gold-400 text-gold-400" />
+                  <Icon3D key={i} name="star" size={16} />
                 ))}
               </span>
               {RATING} from {REVIEW_COUNT} homeowners
@@ -111,7 +104,7 @@ export function Footer() {
               Be ready before the <span className="text-gold-400">next storm</span> hits.
             </h2>
             <p className="mt-3 text-slate-300 text-base sm:text-lg">
-              Free drone inspection, a fixed written price, and no pressure. Ever.
+              A free drone inspection and a fixed written price. If the roof has years left, we’ll tell you.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
@@ -126,7 +119,7 @@ export function Footer() {
               href={PHONE_HREF}
               className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/[0.06] px-7 text-[15px] font-semibold text-white transition hover:bg-white/[0.12]"
             >
-              <Phone className="h-4 w-4 text-gold-400" aria-hidden="true" />
+              <Icon3D name="phone" size={22} />
               {PHONE_DISPLAY}
             </a>
           </div>
@@ -158,8 +151,8 @@ export function Footer() {
             </Link>
 
             <p className="text-slate-300 text-sm leading-relaxed max-w-sm mb-6">
-              Serving Springfield and surrounding communities with integrity, craftsmanship, and
-              guaranteed results for over {YEARS_IN_BUSINESS} years.
+              Family-owned roofing contractor re-roofing Springfield and the towns around it since 1987. Residential,
+              commercial, and storm work.
             </p>
 
             {/* Credentials */}
@@ -179,7 +172,7 @@ export function Footer() {
             </div>
 
             {/* Social links */}
-            <div className="flex gap-2.5">
+            <div className="-ml-3 flex gap-1">
               {[
                 { icon: Facebook, label: 'Facebook', href: '#' },
                 { icon: Instagram, label: 'Instagram', href: '#' },
@@ -189,9 +182,9 @@ export function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.07] flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/[0.08] hover:border-white/[0.14] transition-all duration-200"
+                  className="flex h-11 w-11 items-center justify-center text-slate-300 transition-colors duration-200 hover:text-gold-300"
                 >
-                  <Icon className="w-4 h-4" aria-hidden="true" />
+                  <Icon className="h-5 w-5" aria-hidden="true" />
                 </a>
               ))}
             </div>
@@ -240,32 +233,32 @@ export function Footer() {
                   href={PHONE_HREF}
                   className="flex items-center gap-2.5 text-slate-300 hover:text-gold-400 transition-colors group"
                 >
-                  <Phone className="w-3.5 h-3.5 text-gold-400 flex-shrink-0 transition-colors" aria-hidden="true" />
+                  <Icon3D name="phone" size={22} />
                   <span className="text-sm font-semibold">{PHONE_DISPLAY}</span>
                 </a>
-                <p className="text-slate-400 text-xs mt-1 pl-6">24/7 Storm Emergency</p>
+                <p className="text-slate-400 text-xs mt-1 pl-8">24/7 storm line</p>
               </li>
               <li>
                 <a
                   href={`mailto:${EMAIL}`}
                   className="flex items-center gap-2.5 text-slate-300 hover:text-gold-400 transition-colors group"
                 >
-                  <Mail className="w-3.5 h-3.5 text-gold-400 flex-shrink-0 transition-colors" aria-hidden="true" />
+                  <Icon3D name="mail" size={22} />
                   <span className="text-sm">{EMAIL}</span>
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
-                <MapPin className="w-3.5 h-3.5 text-gold-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <Icon3D name="pin" size={22} />
                 <div>
                   <p className="text-slate-300 text-sm">123 Industrial Blvd</p>
                   <p className="text-slate-300 text-sm">Springfield, IL 62701</p>
                 </div>
               </li>
               <li>
-                <div className="pl-[22px] space-y-0.5">
+                <div className="pl-8 space-y-0.5">
                   <p className="text-slate-400 text-xs">Mon–Fri: 7am–6pm</p>
                   <p className="text-slate-400 text-xs">Saturday: 8am–2pm</p>
-                  <p className="text-red-400 text-xs font-semibold mt-1.5">● 24/7 Storm Hotline</p>
+                  <p className="text-red-400 text-xs font-semibold mt-1.5">Storm line answered 24/7</p>
                 </div>
               </li>
             </ul>
@@ -287,6 +280,7 @@ export function Footer() {
                 <li><Link href="/privacy-policy/" className="text-slate-400 text-xs hover:text-white transition-colors">Privacy Policy</Link></li>
                 <li><Link href="/terms/" className="text-slate-400 text-xs hover:text-white transition-colors">Terms of Service</Link></li>
                 <li><Link href="/sitemap/" className="text-slate-400 text-xs hover:text-white transition-colors">Sitemap</Link></li>
+                <li><Link href="/photo-credits/" className="text-slate-400 text-xs hover:text-white transition-colors">Photo credits</Link></li>
               </ul>
             </nav>
           </div>

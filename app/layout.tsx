@@ -4,6 +4,7 @@ import './globals.css'
 import { Navbar } from '@/components/navbar'
 import { MobileActionBar } from '@/components/mobile-action-bar'
 import ScrollProgressBar from '@/components/scroll-progress-bar'
+import { Icon3DDefs } from '@/components/ui/icon-3d'
 import { SITE_URL, BASE_PATH } from '@/lib/company'
 
 const inter = Inter({
@@ -57,11 +58,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      <head>
-        <link rel="preconnect" href="https://images.unsplash.com" />
-        <link rel="preconnect" href="https://i.pravatar.cc" crossOrigin="" />
-      </head>
       <body className="font-sans antialiased">
+        <Icon3DDefs />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-gold-500 focus:text-forest-950 focus:font-bold focus:px-4 focus:py-2 focus:rounded-lg"

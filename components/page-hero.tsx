@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ChevronRight, Phone } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
+import { Icon3D } from '@/components/ui/icon-3d'
 import { Button } from '@/components/ui/button'
-import { SITE_URL } from '@/lib/company'
+import { SITE_URL, PHONE_DISPLAY, PHONE_HREF, asset } from '@/lib/company'
 
 interface BreadcrumbItem {
   label: string
@@ -28,7 +29,7 @@ export default function PageHero({
   breadcrumbs,
   ctaLabel,
   ctaHref,
-  bgImage = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80',
+  bgImage = asset('/images/hero-services.jpg'),
   variant = 'default',
   showPhone = false,
 }: PageHeroProps) {
@@ -76,7 +77,7 @@ export default function PageHero({
                   <Link href={crumb.href} className="hover:text-gold-400 transition-colors">
                     {crumb.label}
                   </Link>
-                  <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-500" aria-hidden="true" />
                 </>
               ) : (
                 <span className="text-gold-400 font-medium">{crumb.label}</span>
@@ -132,11 +133,11 @@ export default function PageHero({
             )}
             {showPhone && (
               <a
-                href="tel:+15555550100"
+                href={PHONE_HREF}
                 className="flex items-center gap-2 text-white font-semibold hover:text-gold-400 transition-colors"
               >
-                <Phone className="w-4 h-4" />
-                (555) 555-0100
+                <Icon3D name="phone" size={24} />
+                {PHONE_DISPLAY}
               </a>
             )}
           </div>

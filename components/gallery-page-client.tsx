@@ -1,66 +1,69 @@
 'use client'
 
 import { useState } from 'react'
-import { Play } from 'lucide-react'
+import Image from 'next/image'
 import { Reveal } from '@/components/ui/reveal'
 import { CountUp } from '@/components/ui/count-up'
-import { BeforeAfterSlider } from '@/components/ui/before-after-slider'
+import { Icon3D, type IconName } from '@/components/ui/icon-3d'
 import PageHero from '@/components/page-hero'
 import InlineCta from '@/components/inline-cta'
 import { Footer } from '@/components/footer'
-import { PROJECTS } from '@/lib/projects'
-import { YEARS_IN_BUSINESS, ROOFS_COMPLETED_DISPLAY } from '@/lib/company'
+import { PROJECTS, type Project } from '@/lib/projects'
+import { YEARS_IN_BUSINESS, ROOFS_COMPLETED_DISPLAY, RATING, asset } from '@/lib/company'
 
-type FilterType = 'all' | 'replacement' | 'storm' | 'commercial' | 'insurance'
+type FilterType = 'all' | Project['type']
 
 const FILTERS: { value: FilterType; label: string }[] = [
-  { value: 'all', label: 'All Projects' },
-  { value: 'replacement', label: 'Roof Replacement' },
-  { value: 'storm', label: 'Storm Repair' },
+  { value: 'all', label: 'All projects' },
+  { value: 'replacement', label: 'Roof replacement' },
+  { value: 'storm', label: 'Storm repair' },
   { value: 'commercial', label: 'Commercial' },
-  { value: 'insurance', label: 'Insurance Claims' },
+  { value: 'insurance', label: 'Insurance claims' },
 ]
 
-const STATS = [
-  { value: ROOFS_COMPLETED_DISPLAY, label: 'Roofs Completed' },
-  { value: `${YEARS_IN_BUSINESS} yrs`, label: 'In Business' },
-  { value: '1,200+', label: 'Insurance Claims' },
-  { value: '4.9★', label: 'Avg Rating' },
-]
-
-const TYPE_COLORS: Record<string, string> = {
-  replacement: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-  storm: 'bg-red-500/20 text-red-300 border-red-500/30',
-  commercial: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
-  insurance: 'bg-green-500/20 text-green-300 border-green-500/30',
+const TYPE_META: Record<Project['type'], { label: string; icon: IconName; tone: string }> = {
+  replacement: { label: 'Replacement', icon: 'house', tone: 'text-gold-300 border-gold-400/30 bg-gold-400/10' },
+  storm: { label: 'Storm', icon: 'storm', tone: 'text-red-300 border-red-400/30 bg-red-500/10' },
+  commercial: { label: 'Commercial', icon: 'building', tone: 'text-slate-200 border-white/20 bg-white/[0.06]' },
+  insurance: { label: 'Insurance', icon: 'shield', tone: 'text-emerald-300 border-emerald-400/30 bg-emerald-500/10' },
 }
 
-function SliderCard({ project }: { project: (typeof PROJECTS)[0] }) {
+const STATS = [
+  { value: ROOFS_COMPLETED_DISPLAY, label: 'Roofs completed' },
+  { value: `${YEARS_IN_BUSINESS} yrs`, label: 'In business' },
+  { value: '1,200+', label: 'Insurance claims filed' },
+  { value: RATING, label: 'Average rating (of 5)' },
+]
+
+function ProjectCard({ project }: { project: Project }) {
+  const meta = TYPE_META[project.type]
   return (
-    <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl overflow-hidden group">
-      <div className="relative aspect-[4/3]">
-        <BeforeAfterSlider
-          beforeSrc={project.beforeImage}
-          afterSrc={project.afterImage}
-          beforeAlt={`Before: ${project.title}`}
-          afterAlt={`After: ${project.title}`}
-          ariaLabel={`Before and after comparison: ${project.title}`}
+    <article className="group flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.04]">
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <Image
+          src={project.image}
+          alt={project.imageAlt}
+          fill
+          sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        {/* Labels */}
-        <span className="absolute top-3 left-3 bg-black/50 text-white text-xs font-bold px-2.5 py-1 rounded-lg backdrop-blur-sm pointer-events-none">Before</span>
-        <span className="absolute top-3 right-3 bg-black/50 text-white text-xs font-bold px-2.5 py-1 rounded-lg backdrop-blur-sm pointer-events-none">After</span>
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-950/70 via-transparent to-transparent" />
+        <span
+          className={`absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider backdrop-blur-sm ${meta.tone}`}
+        >
+          <Icon3D name={meta.icon} size={16} />
+          {meta.label}
+        </span>
       </div>
-      <div className="p-5">
-        <div className="flex items-start justify-between gap-3 mb-2">
-          <h3 className="font-display font-bold text-white text-base">{project.title}</h3>
-          <span className={`text-[10px] font-bold uppercase tracking-widest border rounded-full px-2.5 py-0.5 shrink-0 ${TYPE_COLORS[project.type]}`}>
-            {project.type}
-          </span>
-        </div>
-        <p className="text-slate-400 text-xs mb-2">{project.location} · {project.year} · {project.sqft.toLocaleString()} sq ft</p>
-        <p className="text-slate-400 text-xs leading-relaxed">{project.description}</p>
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="font-display text-base font-bold text-white">{project.title}</h3>
+        <p className="mt-1 text-xs text-slate-400">
+          {project.location} · {project.year} · {project.sqft.toLocaleString()} sq ft · {project.duration}
+        </p>
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-300">{project.description}</p>
+        <p className="mt-4 text-xs font-semibold text-gold-300">{project.material}</p>
       </div>
-    </div>
+    </article>
   )
 }
 
@@ -72,22 +75,28 @@ export default function GalleryPageClient() {
   return (
     <>
       <PageHero
-        eyebrow="Project Gallery"
-        title={`${ROOFS_COMPLETED_DISPLAY.replace('+', '')} Projects. See the Proof.`}
-        subtitle="Every project starts with a free drone inspection and ends with a post-install walkthrough."
+        eyebrow="Our Work"
+        title="Recent projects"
+        subtitle="A sample of jobs from the last few years across Springfield and the surrounding towns, from storm tarps to full commercial re-roofs."
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Our Work', href: '/gallery/' }]}
+        bgImage={asset('/images/hero-gallery.jpg')}
         ctaLabel="Get Free Estimate"
         ctaHref="/#contact"
       />
 
       {/* Filter Bar */}
-      <section className="bg-forest-950 py-8 sticky top-[72px] lg:top-[80px] z-40 border-b border-white/[0.08]">
+      <section className="bg-forest-950 py-6 sticky top-[68px] lg:top-[76px] z-40 border-b border-white/[0.08]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0" aria-label="Project filters">
+          <div
+            className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0"
+            role="group"
+            aria-label="Filter projects"
+          >
             {FILTERS.map((f) => (
               <button
                 key={f.value}
                 onClick={() => setFilter(f.value)}
+                aria-pressed={filter === f.value}
                 className={`shrink-0 text-sm font-semibold rounded-xl px-5 py-2.5 transition-all ${
                   filter === f.value
                     ? 'bg-gold-500 text-forest-950'
@@ -106,12 +115,9 @@ export default function GalleryPageClient() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((project) => (
-              <SliderCard key={project.id} project={project} />
+              <ProjectCard key={project.id} project={project} />
             ))}
           </div>
-          {filtered.length === 0 && (
-            <p className="text-slate-400 text-center py-20">No projects found for this filter.</p>
-          )}
         </div>
       </section>
 
@@ -131,34 +137,9 @@ export default function GalleryPageClient() {
         </div>
       </section>
 
-      {/* Video Placeholder */}
-      <section className="bg-forest-900 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <h2 className="font-display font-bold text-white text-2xl sm:text-3xl mb-8">See us in action</h2>
-          </Reveal>
-          <Reveal className="grid sm:grid-cols-3 gap-5">
-            {['Full Roof Replacement Timelapse', 'Drone Inspection Walkthrough', 'Before & After: Storm Claim'].map((title) => (
-              <div
-                key={title}
-                className="bg-white/[0.04] border border-white/[0.08] rounded-2xl overflow-hidden aspect-video flex items-center justify-center cursor-pointer group hover:border-gold-500/30 transition-all"
-              >
-                <div className="text-center">
-                  <div className="w-12 h-12 rounded-full bg-gold-500/10 border border-gold-500/20 flex items-center justify-center mx-auto mb-3 group-hover:bg-gold-500/20 transition-colors">
-                    <Play className="w-5 h-5 text-gold-500 ml-0.5" />
-                  </div>
-                  <p className="text-white text-sm font-semibold px-4">{title}</p>
-                  <p className="text-slate-400 text-xs mt-1">Coming soon</p>
-                </div>
-              </div>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-
       <InlineCta
-        heading="Your roof could be next."
-        subtext="We'll send a drone up, document everything, and give you a written estimate within 24 hours."
+        heading="Want to know where your roof stands?"
+        subtext="We'll fly a drone over it, mark up what we find, and send a written estimate within 24 hours."
         primaryLabel="Get Free Estimate"
         primaryHref="/#contact"
       />

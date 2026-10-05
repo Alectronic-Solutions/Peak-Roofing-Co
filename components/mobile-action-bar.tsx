@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Phone, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { Icon3D } from '@/components/ui/icon-3d'
 import { PHONE_HREF } from '@/lib/company'
 
 /**
@@ -54,7 +55,7 @@ export function MobileActionBar() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-60" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
           </span>
-          <Phone className="h-4 w-4" aria-hidden="true" />
+          <Icon3D name="phone" size={22} />
           Call 24/7
         </a>
         <Link

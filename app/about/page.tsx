@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { CheckCircle2, Award, Users, Heart } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
+import { Icon3D, type IconName } from '@/components/ui/icon-3d'
 import { CountUp } from '@/components/ui/count-up'
 import PageHero from '@/components/page-hero'
 import InlineCta from '@/components/inline-cta'
 import LocalSeoSchema from '@/components/local-seo-schema'
 import { Footer } from '@/components/footer'
-import { YEARS_IN_BUSINESS, ROOFS_COMPLETED_DISPLAY } from '@/lib/company'
+import { YEARS_IN_BUSINESS, ROOFS_COMPLETED_DISPLAY, LICENSE, RATING, REVIEW_COUNT, asset } from '@/lib/company'
 
 export const metadata: Metadata = {
   title: 'About Peak Roofing Co | Springfield\'s Trusted Roofer Since 1987',
@@ -18,33 +18,33 @@ export const metadata: Metadata = {
 const STATS = [
   { value: `${YEARS_IN_BUSINESS} yrs`, label: 'In Business' },
   { value: ROOFS_COMPLETED_DISPLAY, label: 'Roofs Completed' },
-  { value: '4.9★', label: 'Average Rating' },
-  { value: '847', label: 'Reviews' },
+  { value: RATING, label: 'Average Rating' },
+  { value: REVIEW_COUNT, label: 'Reviews' },
 ]
 
-const VALUES = [
+const VALUES: { icon: IconName; title: string; description: string }[] = [
   {
-    icon: CheckCircle2,
+    icon: 'hardhat',
     title: 'Accountability',
     description:
-      'Every project has a named foreman who is your single point of contact from estimate to final walkthrough. No hand-offs, no excuses.',
+      'Every project has a named foreman who is your single point of contact from estimate to final walkthrough. Nobody hands you off halfway through.',
   },
   {
-    icon: Award,
+    icon: 'hammer',
     title: 'Craftsmanship',
     description:
-      'We use GAF Timberline® shingles, ice & water barriers on every eave, and conduct a post-install drone inspection on every job.',
+      'GAF Timberline® shingles, ice & water shield at every eave and valley, and a drone flight over every finished roof before we collect final payment.',
   },
   {
-    icon: Heart,
+    icon: 'doc',
     title: 'Transparency',
     description:
-      'Detailed written estimates before any work begins. If the scope changes, you know before we do anything. No hidden fees. Ever.',
+      'An itemized written estimate before any work starts. If we find something that changes the scope, we call you before we touch it.',
   },
 ]
 
 const CREDENTIALS = [
-  'Illinois Contractor License #RC-20847',
+  `Illinois roofing contractor, ${LICENSE}`,
   'GAF Master Elite® Certified (Top 2% Nationally)',
   '$2M General Liability Insurance',
   "Workers' Compensation: Full Coverage",
@@ -53,27 +53,39 @@ const CREDENTIALS = [
   'FAA Part 107 Drone Pilots',
 ]
 
+const RECOGNITION: { icon: IconName; label: string; sub: string }[] = [
+  { icon: 'medal', label: 'GAF Master Elite®', sub: 'Since 2008' },
+  { icon: 'seal', label: 'BBB A+', sub: 'Accredited since 2001' },
+  { icon: 'trophy', label: 'Angi Super Service', sub: '6 years running' },
+  { icon: 'star', label: `${RATING} average`, sub: `${REVIEW_COUNT} reviews` },
+  { icon: 'hardhat', label: 'OSHA 10-hour', sub: 'Every crew member' },
+  { icon: 'drone', label: 'FAA Part 107', sub: 'Licensed drone pilots' },
+]
+
 const TEAM = [
   {
     name: 'James Harlow',
     title: 'Founder & Owner',
     tenure: `${YEARS_IN_BUSINESS} years`,
-    bio: 'Started Peak Roofing with one truck and a three-person crew. Still personally reviews every estimate.',
-    image: 'https://i.pravatar.cc/256?img=57',
+    bio: 'Started Peak Roofing with one truck and two friends in 1987. Still reads every estimate before it goes out.',
+    image: asset('/images/team-founder.jpg'),
+    position: 'object-[center_30%]',
   },
   {
     name: 'Maria Santos',
     title: 'Office Manager',
     tenure: '14 years',
-    bio: 'Coordinates every job from scheduling to final payment. The reason our 2-hour response time is actually true.',
-    image: 'https://i.pravatar.cc/256?img=47',
+    bio: 'Runs the office: scheduling, permits, and insurance paperwork. If your install date moves, she is the one who calls you.',
+    image: asset('/images/team-office.jpg'),
+    position: 'object-[30%_center]',
   },
   {
     name: 'Tyler Brooks',
     title: 'Lead Foreman',
     tenure: '11 years',
-    bio: 'GAF-certified installer with 11 years on Peak crews. Personally inspects every completed roof before sign-off.',
-    image: 'https://i.pravatar.cc/256?img=33',
+    bio: 'GAF-certified installer and the foreman on most of our residential jobs. Walks every finished roof before sign-off.',
+    image: asset('/images/team-foreman.jpg'),
+    position: 'object-[center_25%]',
   },
 ]
 
@@ -84,7 +96,7 @@ const TIMELINE = [
   { year: 2008, event: 'Achieved GAF Master Elite® certification. Top 2% of U.S. contractors.' },
   { year: 2015, event: 'Launched FAA-certified drone inspection fleet.' },
   { year: 2020, event: 'Added in-house licensed insurance adjuster for storm claim assistance.' },
-  { year: 2024, event: `Surpassed ${ROOFS_COMPLETED_DISPLAY.replace('+', '')} completed roofs. 4.9-star average across 847 reviews.` },
+  { year: 2024, event: `Passed ${ROOFS_COMPLETED_DISPLAY.replace('+', '')} completed roofs.` },
 ]
 
 export default function AboutPage() {
@@ -94,10 +106,10 @@ export default function AboutPage() {
 
       <PageHero
         eyebrow="Our Story"
-        title={`${YEARS_IN_BUSINESS} Years. One Promise.`}
-        subtitle="Family-owned since 1987. We still answer the phone ourselves."
+        title="Family owned since 1987"
+        subtitle="A Springfield roofing company that still answers its own phone."
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'About', href: '/about/' }]}
-        bgImage="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80"
+        bgImage={asset('/images/hero-about.jpg')}
       />
 
       {/* Origin Story */}
@@ -112,18 +124,17 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-slate-300 text-base leading-relaxed">
                 <p>
-                  In 1987, James Harlow loaded a pickup truck with tools, hired two friends, and started knocking on
-                  doors in Springfield. The pitch was simple: honest work, fair prices, and showing up when you said
-                  you would.
+                  In 1987, James Harlow loaded a pickup with tools, hired two friends, and started knocking on doors in
+                  Springfield. Most of the early work was patching leaks and re-roofing garages for neighbors.
                 </p>
                 <p>
-                  It worked. Word spread. The crew grew. By 2001, Peak Roofing had earned its BBB A+ accreditation. By
-                  2008, GAF awarded us Master Elite® status, held by fewer than 2% of roofing contractors
-                  nationwide.
+                  The crew grew mostly by referral. Peak earned BBB accreditation in 2001, and in 2008 GAF certified us as
+                  a Master Elite® contractor, a status held by fewer than 2% of U.S. roofers.
                 </p>
                 <p>
-                  Today we operate a 20-person crew with a full drone fleet, an in-house insurance adjuster, and {ROOFS_COMPLETED_DISPLAY}
-                  completed roofs across Springfield and the surrounding region. James still reviews every estimate.
+                  Today there are 20 of us, with our own drone pilots and a licensed adjuster on staff, and{' '}
+                  {ROOFS_COMPLETED_DISPLAY} roofs behind us across Springfield and the surrounding towns. James still reads
+                  every estimate before it goes out.
                 </p>
               </div>
             </div>
@@ -174,15 +185,13 @@ export default function AboutPage() {
               What We Stand For
             </p>
             <h2 className="font-display font-bold text-white text-3xl sm:text-4xl text-center mb-12">
-              Three values. No exceptions.
+              What we hold ourselves to
             </h2>
           </Reveal>
           <Reveal className="grid sm:grid-cols-3 gap-6">
             {VALUES.map((v) => (
               <div key={v.title} className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-7">
-                <div className="w-11 h-11 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center mb-5">
-                  <v.icon className="w-5 h-5 text-gold-500" />
-                </div>
+                <Icon3D name={v.icon} size={60} className="-ml-1 mb-4" />
                 <h3 className="font-display font-bold text-white text-xl mb-3">{v.title}</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">{v.description}</p>
               </div>
@@ -198,31 +207,28 @@ export default function AboutPage() {
             <div>
               <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3">Licensed & Certified</p>
               <h2 className="font-display font-bold text-white text-3xl sm:text-4xl mb-6">
-                Every credential. No shortcuts.
+                Licensed, insured, certified
               </h2>
               <ul className="space-y-3">
                 {CREDENTIALS.map((c) => (
                   <li key={c} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-4 h-4 text-gold-500 shrink-0 mt-0.5" />
+                    <Icon3D name="check" size={20} />
                     <span className="text-slate-300 text-sm">{c}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-8">
-              <p className="text-xs font-bold uppercase tracking-widest text-gold-400 mb-6">Recognition & Awards</p>
-              <div className="grid grid-cols-3 gap-5">
-                {['GAF Master Elite®', 'BBB A+', 'Angi Top Pro', 'HomeAdvisor Elite', "OSHA Certified", 'FAA Part 107'].map(
-                  (award) => (
-                    <div
-                      key={award}
-                      className="aspect-square rounded-xl bg-white/5 border border-white/10 flex items-center justify-center"
-                    >
-                      <span className="text-white/40 text-[10px] font-bold text-center px-2 leading-tight">{award}</span>
-                    </div>
-                  )
-                )}
-              </div>
+              <p className="text-xs font-bold uppercase tracking-widest text-gold-400 mb-6">Recognition</p>
+              <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-7">
+                {RECOGNITION.map((item) => (
+                  <li key={item.label} className="flex flex-col items-center text-center">
+                    <Icon3D name={item.icon} size={56} />
+                    <span className="mt-2 text-sm font-semibold text-white leading-tight">{item.label}</span>
+                    <span className="mt-0.5 text-xs text-slate-400">{item.sub}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </Reveal>
         </div>
@@ -248,10 +254,10 @@ export default function AboutPage() {
                 <div className="relative aspect-[4/3] bg-forest-800 overflow-hidden">
                   <Image
                     src={member.image}
-                    alt={member.name}
+                    alt={`${member.name}, ${member.title}`}
                     fill
                     sizes="(min-width: 1024px) 33vw, 100vw"
-                    className="object-cover opacity-80"
+                    className={`object-cover grayscale ${member.position}`}
                   />
                 </div>
                 <div className="p-6">
@@ -276,16 +282,13 @@ export default function AboutPage() {
       <section className="bg-forest-800 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="flex items-start gap-6">
-            <div className="w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center shrink-0">
-              <Users className="w-5 h-5 text-gold-500" />
-            </div>
+            <Icon3D name="heart" size={60} />
             <div>
               <p className="text-gold-400 text-xs font-bold uppercase tracking-widest mb-2">Giving Back</p>
               <h3 className="font-display font-bold text-white text-2xl mb-3">Rooted in Springfield</h3>
               <p className="text-slate-300 leading-relaxed max-w-2xl">
-                Every fall, we partner with Habitat for Humanity to donate crew time and materials for low-income
-                housing roofs. We also host an annual &quot;Free Inspection Day&quot; for veterans and active military
-                families. Springfield built Peak Roofing, and we invest right back.
+                Every fall our crews donate time and materials to roof a Habitat for Humanity build in Sangamon County.
+                Each spring we also run a free inspection day for veterans and military families.
               </p>
             </div>
           </Reveal>
@@ -293,8 +296,8 @@ export default function AboutPage() {
       </section>
 
       <InlineCta
-        heading="Ready to work with Springfield's most trusted roofer?"
-        subtext="Call us or submit online. We'll have someone out within 2 hours."
+        heading="Want to meet the crew?"
+        subtext="Book a free drone inspection. The foreman who quotes your roof is the one who builds it."
         primaryLabel="Get Free Estimate"
         primaryHref="/#contact"
       />

@@ -9,11 +9,18 @@ export interface City {
   roofsCompleted: string
   avgResponseMinutes: number
   recentStorms: string[]
-  servingSlogan: string
   localFact: string
-  testimonialNames: string[]
-  testimonialQuotes: string[]
 }
+
+/**
+ * Storm events referenced across the site. Keep city storm lists, project notes, and the
+ * storm-damage page pulling from the same three events so the story stays consistent.
+ */
+export const STORM_EVENTS = {
+  hail2024: 'April 2024: hail up to 2" across Sangamon County',
+  wind2023: 'August 2023: 70+ mph straight-line winds',
+  storm2022: 'July 2022: severe thunderstorms, 80 mph gusts',
+} as const
 
 export const CITIES: City[] = [
   {
@@ -25,41 +32,10 @@ export const CITIES: City[] = [
     milesFromHQ: 0,
     population: '114,000',
     roofsCompleted: '2,400+',
-    avgResponseMinutes: 45,
-    recentStorms: [
-      'April 2024: 2.5" hailstones, Sangamon County',
-      'August 2023: 75 mph straight-line winds',
-      'June 2022: Category EF1 tornado warning',
-    ],
-    servingSlogan: "Springfield's #1 Rated Roofer",
-    localFact: 'Springfield experiences an average of 3–4 significant hail events per year, making proactive inspection critical.',
-    testimonialNames: ['Margaret T., Springfield', 'Robert K., Springfield'],
-    testimonialQuotes: [
-      '"Peak had a drone over my house within 90 minutes of my call. Claim approved, new roof on. I paid my deductible and nothing else."',
-      '"Decades in Springfield and they still answer the phone themselves. That alone sets them apart."',
-    ],
-  },
-  {
-    slug: 'westbrook',
-    name: 'Westbrook',
-    county: 'Sangamon County',
-    state: 'IL',
-    zip: '62704',
-    milesFromHQ: 8,
-    population: '22,000',
-    roofsCompleted: '310+',
-    avgResponseMinutes: 55,
-    recentStorms: [
-      'April 2024: 2.5" hail, same system as Springfield',
-      'September 2023: Heavy straight-line wind event',
-    ],
-    servingSlogan: 'Westbrook Homeowners Trust Peak',
-    localFact: 'Westbrook Estates was our single largest project corridor in 2024: 47 homes after the April hail event.',
-    testimonialNames: ['David P., Westbrook', 'Susan M., Westbrook'],
-    testimonialQuotes: [
-      '"They replaced our roof in Westbrook Estates and the whole street noticed. Three neighbors hired them the same week."',
-      '"Professional from estimate to cleanup. Best home investment we\'ve made."',
-    ],
+    avgResponseMinutes: 35,
+    recentStorms: [STORM_EVENTS.hail2024, STORM_EVENTS.wind2023, STORM_EVENTS.storm2022],
+    localFact:
+      'Most Springfield homes we re-roof were built between 1950 and 1990, so we budget for a decking check on every older roof before we quote.',
   },
   {
     slug: 'chatham',
@@ -67,20 +43,13 @@ export const CITIES: City[] = [
     county: 'Sangamon County',
     state: 'IL',
     zip: '62629',
-    milesFromHQ: 12,
-    population: '13,000',
+    milesFromHQ: 10,
+    population: '14,000',
     roofsCompleted: '185+',
-    avgResponseMinutes: 60,
-    recentStorms: [
-      'May 2024: Severe thunderstorm, golf ball hail',
-      'October 2023: Wind-driven rain event',
-    ],
-    servingSlogan: 'Chatham\'s Trusted Roofing Crew',
-    localFact: 'Chatham\'s newer construction neighborhoods often have builder-grade shingles reaching end-of-life simultaneously, so we inspect entire subdivisions.',
-    testimonialNames: ['Linda & James W., Chatham'],
-    testimonialQuotes: [
-      '"We had three estimates. Peak was the only contractor who showed us drone footage of exactly what needed fixing. No question who to hire."',
-    ],
+    avgResponseMinutes: 45,
+    recentStorms: [STORM_EVENTS.hail2024, STORM_EVENTS.wind2023],
+    localFact:
+      'Many Chatham subdivisions went up in the 2000s with builder-grade shingles that are now reaching the end of their life at the same time.',
   },
   {
     slug: 'sherman',
@@ -88,20 +57,13 @@ export const CITIES: City[] = [
     county: 'Sangamon County',
     state: 'IL',
     zip: '62684',
-    milesFromHQ: 15,
-    population: '4,200',
+    milesFromHQ: 9,
+    population: '4,500',
     roofsCompleted: '98+',
-    avgResponseMinutes: 65,
-    recentStorms: [
-      'April 2024: Hail event (2"+ stones)',
-      'July 2022: Derecho with 80+ mph gusts',
-    ],
-    servingSlogan: 'Sherman IL Roofing Experts',
-    localFact: 'Sherman\'s rural properties often have outbuildings and pole barns that also need storm inspection, so we quote all structures at the same visit.',
-    testimonialNames: ['Thomas & Carol N., Sherman'],
-    testimonialQuotes: [
-      '"They handled our farmhouse, detached garage, and barn in one visit. One claim, one contractor, one check. Couldn\'t be easier."',
-    ],
+    avgResponseMinutes: 45,
+    recentStorms: [STORM_EVENTS.hail2024, STORM_EVENTS.storm2022],
+    localFact:
+      'A lot of Sherman properties have detached garages and pole barns, so we inspect and quote every structure on the same visit.',
   },
   {
     slug: 'auburn',
@@ -110,19 +72,12 @@ export const CITIES: City[] = [
     state: 'IL',
     zip: '62615',
     milesFromHQ: 18,
-    population: '4,800',
+    population: '4,700',
     roofsCompleted: '75+',
-    avgResponseMinutes: 70,
-    recentStorms: [
-      'April 2024: Hail tracked through Sangamon County',
-      'June 2021: Tornado warning, significant wind damage',
-    ],
-    servingSlogan: 'Auburn IL Roofing by Peak',
-    localFact: 'Auburn homeowners frequently deal with older shake or slate roofs, and we have certified installers for all legacy roofing materials.',
-    testimonialNames: ['Carol B., Auburn'],
-    testimonialQuotes: [
-      '"My 1940s home had original cedar shake. Peak was the only company that knew how to properly assess and replace it. Incredible workmanship."',
-    ],
+    avgResponseMinutes: 55,
+    recentStorms: [STORM_EVENTS.hail2024, STORM_EVENTS.storm2022],
+    localFact:
+      'Auburn has a good number of older homes with original cedar shake under later layers, which changes how a tear-off has to be done.',
   },
   {
     slug: 'rochester',
@@ -130,20 +85,13 @@ export const CITIES: City[] = [
     county: 'Sangamon County',
     state: 'IL',
     zip: '62563',
-    milesFromHQ: 10,
-    population: '3,900',
+    milesFromHQ: 8,
+    population: '4,000',
     roofsCompleted: '120+',
-    avgResponseMinutes: 55,
-    recentStorms: [
-      'May 2024: Severe hail warning issued',
-      'August 2023: Wind event, multiple downed trees',
-    ],
-    servingSlogan: 'Rochester\'s Roofing Specialists',
-    localFact: 'Rochester\'s growth in new construction means many homes hit the 10-year mark simultaneously, an ideal time for a free inspection before warranty expires.',
-    testimonialNames: ['Mike H., Rochester'],
-    testimonialQuotes: [
-      '"Had them inspect before our home warranty expired. They found two areas of concern the builder hadn\'t addressed. Saved us thousands."',
-    ],
+    avgResponseMinutes: 40,
+    recentStorms: [STORM_EVENTS.hail2024, STORM_EVENTS.wind2023],
+    localFact:
+      'Rochester grew quickly in the 2010s, and a lot of those roofs are passing the 10-year mark. That is a good time for an inspection, before small flashing issues become leaks.',
   },
   {
     slug: 'riverton',
@@ -151,41 +99,41 @@ export const CITIES: City[] = [
     county: 'Sangamon County',
     state: 'IL',
     zip: '62561',
-    milesFromHQ: 14,
-    population: '3,200',
+    milesFromHQ: 7,
+    population: '3,400',
     roofsCompleted: '88+',
-    avgResponseMinutes: 65,
-    recentStorms: [
-      'April 2024: Hail event affecting North Sangamon',
-      'March 2023: Late winter ice storm',
-    ],
-    servingSlogan: 'Peak Roofing Serves Riverton IL',
-    localFact: 'Riverton\'s proximity to the Sangamon River means ice damming is a concern every winter, so we install ice & water shield on all projects here as standard.',
-    testimonialNames: ['Janet R., Riverton'],
-    testimonialQuotes: [
-      '"After years of ice dam problems, Peak re-roofed with the proper underlayment. First winter without a leak in a decade."',
-    ],
+    avgResponseMinutes: 40,
+    recentStorms: [STORM_EVENTS.hail2024, STORM_EVENTS.wind2023],
+    localFact:
+      'Homes near the Sangamon River see more ice damming than most, so we run ice & water shield 6 feet up from the eaves on every Riverton job.',
   },
   {
-    slug: 'lakeview-heights',
-    name: 'Lakeview Heights',
-    county: 'Sangamon County',
+    slug: 'taylorville',
+    name: 'Taylorville',
+    county: 'Christian County',
     state: 'IL',
-    zip: '62703',
-    milesFromHQ: 5,
-    population: '8,500',
-    roofsCompleted: '215+',
-    avgResponseMinutes: 50,
-    recentStorms: [
-      'April 2024: 2" hail, direct path through neighborhood',
-      'July 2023: Microburst, 90 mph gusts reported',
-    ],
-    servingSlogan: 'Lakeview Heights\' Trusted Roofer',
-    localFact: 'Lakeview Heights had more storm claims than any other Springfield neighborhood in 2024; we responded to 63 homes in a single week.',
-    testimonialNames: ['Patricia K., Lakeview Heights'],
-    testimonialQuotes: [
-      '"They were in the neighborhood within hours of the storm. Had a drone up, report written, and claim filed before any other contractor even called back."',
-    ],
+    zip: '62568',
+    milesFromHQ: 27,
+    population: '10,500',
+    roofsCompleted: '160+',
+    avgResponseMinutes: 60,
+    recentStorms: [STORM_EVENTS.hail2024, STORM_EVENTS.storm2022],
+    localFact:
+      'After the April 2024 hail we re-roofed 47 Taylorville homes in six weeks, most of them on the same few streets on the north side of town.',
+  },
+  {
+    slug: 'petersburg',
+    name: 'Petersburg',
+    county: 'Menard County',
+    state: 'IL',
+    zip: '62675',
+    milesFromHQ: 20,
+    population: '2,200',
+    roofsCompleted: '90+',
+    avgResponseMinutes: 55,
+    recentStorms: [STORM_EVENTS.wind2023, STORM_EVENTS.storm2022],
+    localFact:
+      'Petersburg has many 19th-century homes with steep pitches and multiple valleys. They take longer to roof well, and we schedule them as two-day jobs.',
   },
 ]
 

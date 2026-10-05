@@ -3,18 +3,8 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import {
-  Phone,
-  Menu,
-  X,
-  ChevronDown,
-  ArrowRight,
-  Star,
-  Clock,
-  ShieldCheck,
-  MapPin,
-  BadgeCheck,
-} from 'lucide-react'
+import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react'
+import { Icon3D } from '@/components/ui/icon-3d'
 import { NAV_MENUS, type NavMenu } from '@/lib/navigation'
 import { PHONE_DISPLAY, PHONE_HREF, LICENSE, RATING, REVIEW_COUNT, asset } from '@/lib/company'
 
@@ -28,21 +18,21 @@ const MENU_INTRO: Record<string, { eyebrow: string; title: string; body: string;
     cta: 'All services',
   },
   'Our Work': {
-    eyebrow: 'Proof, not promises',
+    eyebrow: 'Our work',
     title: 'See the work before you hire us.',
-    body: 'Real projects across Sangamon County, documented from tear-off to final walkthrough.',
+    body: 'Recent jobs across Sangamon County and the towns around it, from emergency tarps to full re-roofs.',
     cta: 'Browse the gallery',
   },
   'Service Areas': {
     eyebrow: 'Where we work',
     title: 'Local crews within 35 miles of Springfield.',
-    body: 'Crews are staged across the county so storm response stays under 70 minutes.',
+    body: 'Average response is under an hour anywhere in our area, and faster inside Springfield.',
     cta: 'All service areas',
   },
   Company: {
     eyebrow: 'Since 1987',
     title: 'Family owned. Still answering our own phone.',
-    body: 'Three generations of Springfield homeowners have trusted Peak with their roof.',
+    body: 'Founded by James Harlow in 1987 and still run out of the same Springfield yard.',
     cta: 'Our story',
   },
 }
@@ -118,7 +108,7 @@ function FeatureCard({ menu }: { menu: NavMenu }) {
         <span className="relative">
           <span className="text-[10px] font-bold uppercase tracking-widest text-gold-400">Featured project</span>
           <span className="mt-1.5 block font-display text-lg font-bold leading-snug text-white">
-            Westbrook Estates: 47 roofs after the April hail.
+            Taylorville: 47 roofs after the April 2024 hail.
           </span>
           <span className="mt-1 block text-xs text-slate-300">Insurance-funded · Deductible only</span>
         </span>
@@ -130,9 +120,7 @@ function FeatureCard({ menu }: { menu: NavMenu }) {
     return (
       <div className="flex h-full flex-col justify-between rounded-xl border border-white/10 bg-forest-950/60 p-5">
         <div>
-          <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-gold-400/25 bg-gold-400/10">
-            <MapPin className="h-5 w-5 text-gold-400" aria-hidden="true" />
-          </span>
+          <Icon3D name="pin" size={48} />
           <p className="mt-4 font-display text-lg font-bold text-white leading-snug">Not sure if you&apos;re in range?</p>
           <p className="mt-1.5 text-sm text-slate-300 leading-relaxed">
             Give us your ZIP and we&apos;ll confirm coverage on the call.
@@ -142,7 +130,7 @@ function FeatureCard({ menu }: { menu: NavMenu }) {
           href={PHONE_HREF}
           className="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-gold-500 px-4 py-2.5 text-sm font-bold text-forest-950 transition hover:bg-gold-400"
         >
-          <Phone className="h-4 w-4" aria-hidden="true" />
+          <Icon3D name="phone" size={20} />
           {PHONE_DISPLAY}
         </a>
       </div>
@@ -155,8 +143,8 @@ function FeatureCard({ menu }: { menu: NavMenu }) {
       <ul className="mt-3 space-y-3">
         {['GAF Master Elite® (top 2%)', 'BBB A+ since 2001', LICENSE, '$2M liability + full workers’ comp'].map(
           (item) => (
-            <li key={item} className="flex items-start gap-2.5 text-sm text-slate-200">
-              <BadgeCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-gold-400" aria-hidden="true" />
+            <li key={item} className="flex items-center gap-2.5 text-sm text-slate-200">
+              <Icon3D name="seal" size={20} />
               {item}
             </li>
           )
@@ -203,11 +191,13 @@ function MegaPanel({ menu, isActive }: { menu: NavMenu; isActive: (href: string)
                 }`}
               >
                 {item.icon ? (
-                  <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-gold-400/20 bg-gold-400/10 transition-colors group-hover/item:border-gold-400/45 group-hover/item:bg-gold-400/20">
-                    <item.icon className="h-4 w-4 text-gold-400" aria-hidden="true" />
-                  </span>
+                  <Icon3D
+                    name={item.icon}
+                    size={38}
+                    className="-my-0.5 transition-transform duration-300 group-hover/item:-translate-y-0.5"
+                  />
                 ) : (
-                  <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-gold-400/70" aria-hidden="true" />
+                  <Icon3D name="pin" size={20} className="mt-px" />
                 )}
                 <span className="min-w-0">
                   <span
@@ -357,7 +347,7 @@ export function Navbar() {
                   24/7 Storm Hotline: {PHONE_DISPLAY}
                 </a>
                 <span className="flex items-center gap-1.5">
-                  <Clock className="h-3.5 w-3.5 text-gold-400" aria-hidden="true" />
+                  <Icon3D name="clock" size={16} />
                   Mon–Fri 7a–6p · Sat 8a–2p
                 </span>
               </div>
@@ -365,7 +355,7 @@ export function Navbar() {
                 <a href="/#reviews" className="flex items-center gap-1.5 hover:text-white">
                   <span className="flex" aria-hidden="true">
                     {[0, 1, 2, 3, 4].map((i) => (
-                      <Star key={i} className="h-3 w-3 fill-gold-400 text-gold-400" />
+                      <Icon3D key={i} name="star" size={13} />
                     ))}
                   </span>
                   <span>
@@ -373,7 +363,7 @@ export function Navbar() {
                   </span>
                 </a>
                 <span className="flex items-center gap-1.5">
-                  <ShieldCheck className="h-3.5 w-3.5 text-gold-400" aria-hidden="true" />
+                  <Icon3D name="shield" size={16} />
                   Licensed &amp; insured · {LICENSE}
                 </span>
               </div>
@@ -450,9 +440,7 @@ export function Navbar() {
                 className="hidden xl:flex items-center gap-2.5 group"
                 aria-label={`Call ${PHONE_DISPLAY}`}
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-gold-400/30 bg-gold-400/10 transition-colors group-hover:bg-gold-400/20">
-                  <Phone className="h-4 w-4 text-gold-400" aria-hidden="true" />
-                </span>
+                <Icon3D name="phone" size={36} className="transition-transform duration-300 group-hover:-translate-y-0.5" />
                 <span className="leading-none">
                   <span className="block text-[10px] font-semibold uppercase tracking-wider text-slate-400">Call or text</span>
                   <span className="mt-1 block text-sm font-bold text-white">{PHONE_DISPLAY}</span>
@@ -469,10 +457,10 @@ export function Navbar() {
 
               <a
                 href={PHONE_HREF}
-                className="flex sm:hidden h-11 w-11 items-center justify-center rounded-full border border-gold-400/30 bg-gold-400/10 text-gold-400"
+                className="flex sm:hidden h-11 w-11 items-center justify-center"
                 aria-label={`Call ${PHONE_DISPLAY}`}
               >
-                <Phone className="h-[18px] w-[18px]" aria-hidden="true" />
+                <Icon3D name="phone" size={34} />
               </a>
 
               <button
@@ -568,11 +556,7 @@ export function Navbar() {
                                   isActive(item.href) ? 'bg-gold-400/10' : ''
                                 }`}
                               >
-                                {item.icon && (
-                                  <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-gold-400/20 bg-gold-400/10">
-                                    <item.icon className="h-4 w-4 text-gold-400" aria-hidden="true" />
-                                  </span>
-                                )}
+                                {item.icon && <Icon3D name={item.icon} size={36} />}
                                 <span className="min-w-0">
                                   <span
                                     className={`block text-[15px] font-semibold leading-tight ${
@@ -610,17 +594,17 @@ export function Navbar() {
 
             <div className="mt-6 grid grid-cols-2 gap-3 rounded-2xl border border-white/[0.08] bg-forest-950/50 p-4 text-xs">
               <div className="flex items-center gap-2 text-slate-300">
-                <Star className="h-4 w-4 flex-shrink-0 fill-gold-400 text-gold-400" aria-hidden="true" />
+                <Icon3D name="star" size={18} />
                 <span>
                   <strong className="text-white">{RATING}</strong> · {REVIEW_COUNT} reviews
                 </span>
               </div>
               <div className="flex items-center gap-2 text-slate-300">
-                <ShieldCheck className="h-4 w-4 flex-shrink-0 text-gold-400" aria-hidden="true" />
+                <Icon3D name="shield" size={18} />
                 {LICENSE}
               </div>
               <div className="col-span-2 flex items-center gap-2 text-slate-300">
-                <Clock className="h-4 w-4 flex-shrink-0 text-gold-400" aria-hidden="true" />
+                <Icon3D name="clock" size={18} />
                 Office Mon–Fri 7a–6p · Sat 8a–2p · Storm line 24/7
               </div>
             </div>
@@ -631,7 +615,7 @@ export function Navbar() {
               href={PHONE_HREF}
               className="flex min-h-[52px] items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.06] text-sm font-bold text-white"
             >
-              <Phone className="h-4 w-4 text-gold-400" aria-hidden="true" />
+              <Icon3D name="phone" size={22} />
               Call now
             </a>
             <Link

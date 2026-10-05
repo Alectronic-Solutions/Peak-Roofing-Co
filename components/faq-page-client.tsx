@@ -5,7 +5,7 @@ import PageHero from '@/components/page-hero'
 import FaqAccordion from '@/components/faq-accordion'
 import InlineCta from '@/components/inline-cta'
 import { Footer } from '@/components/footer'
-import { YEARS_IN_BUSINESS } from '@/lib/company'
+import { YEARS_IN_BUSINESS, PHONE_DISPLAY, PHONE_HREF, asset } from '@/lib/company'
 
 type Category = 'general' | 'storm' | 'financing' | 'process' | 'warranty'
 
@@ -21,17 +21,17 @@ const FAQS: Record<Category, { q: string; a: string }[]> = {
   general: [
     { q: 'How long have you been in business?', a: `Peak Roofing Co was founded in 1987 by James Harlow. We have been serving Springfield and surrounding communities for ${YEARS_IN_BUSINESS} years.` },
     { q: 'Are you licensed and insured?', a: 'Yes. We hold Illinois Contractor License #RC-20847 and carry $2M general liability insurance and full workers\' compensation coverage. We\'re happy to provide certificates of insurance before any work begins.' },
-    { q: 'What areas do you serve?', a: 'We serve a 35-mile radius from Springfield, including Westbrook, Chatham, Sherman, Auburn, Rochester, Riverton, Lakeview Heights, and surrounding areas in Sangamon, Morgan, Menard, Logan, and Christian counties.' },
+    { q: 'What areas do you serve?', a: 'Everywhere within about 35 miles of Springfield, including Chatham, Sherman, Auburn, Rochester, Riverton, Taylorville, and Petersburg, across Sangamon, Christian, Menard, Logan, and Morgan counties.' },
     { q: 'Are you GAF certified?', a: 'Yes. We are a GAF Master Elite® Certified Contractor. This certification is held by fewer than 2% of roofing contractors in the U.S. It qualifies your home for GAF\'s enhanced warranty programs.' },
     { q: 'Do you offer free estimates?', a: 'Yes. Every estimate includes a free drone inspection of your roof. No ladders, no risk, no obligation.' },
-    { q: 'What makes Peak Roofing different from other contractors?', a: `We have a licensed insurance adjuster on staff, an FAA-certified drone fleet for inspections, a 10-year workmanship warranty, and a ${YEARS_IN_BUSINESS}-year track record. James Harlow still reviews every estimate personally.` },
-    { q: 'Do you have reviews I can read?', a: 'We have 847 reviews across Google, BBB, and Angi with an average rating of 4.9 stars. You can find our Google reviews linked from the homepage.' },
+    { q: 'Who will actually work on my roof?', a: 'Our own employees, led by the same foreman who quoted the job. We don’t subcontract residential work. James Harlow, who founded the company in 1987, still reviews every estimate.' },
+    { q: 'Do you have reviews I can read?', a: 'We have 847 reviews across Google, the BBB, and Angi, averaging 4.9 stars. A few recent ones are on our homepage.' },
     { q: 'What is your BBB rating?', a: 'We have maintained an A+ rating with the Better Business Bureau since 2001.' },
   ],
   storm: [
-    { q: 'How do I know if my roof has hail damage?', a: 'Hail damage is almost impossible to spot from the ground. Signs include granules in your gutters, dented aluminum trim or AC fins, or soft spots when walking the roof. Call us. Our free drone inspection will show you exactly what\'s there with 4K imagery.' },
-    { q: 'How long do I have to file an Illinois storm claim?', a: 'Illinois homeowners generally have 1–2 years from the storm date, depending on your specific policy. However, the sooner you file, the better. Hidden water damage compounds quickly and can void coverage.' },
-    { q: 'Will filing a claim raise my insurance rates?', a: `Storm and hail damage are weather events, not homeowner negligence. Most policies treat these as no-fault claims that don't affect your rate. In ${YEARS_IN_BUSINESS} years, we've never seen a client lose coverage from a legitimate storm claim.` },
+    { q: 'How do I know if my roof has hail damage?', a: 'It is hard to spot from the ground. Look for shingle granules collecting in your gutters and for dents in gutters, downspouts, or AC fins. A free drone inspection will show you what is up there in 4K photos.' },
+    { q: 'How long do I have to file an Illinois storm claim?', a: 'Most Illinois policies allow one to two years from the storm date; your policy sets the exact deadline. Filing sooner is better, because water damage that spreads after the storm may not be covered.' },
+    { q: 'Will filing a claim raise my insurance rates?', a: 'Weather claims are generally treated differently from claims caused by neglect, but every insurer handles them its own way. Ask your agent before you file; we can give you the inspection report to help you decide.' },
     { q: 'What if the insurance adjuster says there\'s minimal damage?', a: 'We supplement underpaid claims routinely. Our licensed adjuster will re-document the damage, compare against established hail impact standards, and appeal the decision. We don\'t walk away from a valid claim.' },
     { q: 'What will I pay on an insurance-covered roof?', a: 'Your deductible. Your insurer pays the rest of the approved claim, and we never bill you above your deductible for covered work. We also never waive, rebate, or absorb deductibles; that practice is insurance fraud, and any contractor offering it is putting you at risk.' },
     { q: 'What is a public adjuster?', a: 'A public adjuster is a licensed professional who works for the homeowner, not the insurance company, to document damage and negotiate your claim settlement. Ours is on staff and included at no additional fee with every storm repair project.' },
@@ -42,27 +42,27 @@ const FAQS: Record<Category, { q: string; a: string }[]> = {
     { q: 'Will checking my rate affect my credit score?', a: 'No. We use a soft credit pull to check rates, which has zero impact on your credit score. A hard inquiry only occurs if you accept and close a loan.' },
     { q: 'What credit score do I need?', a: 'We have financing options for scores as low as 580. Our best rates (6.9% APR) require 720+. Even with challenged credit, we\'ll work to find an option.' },
     { q: 'How quickly can I get approved?', a: 'Most approvals are returned within minutes during business hours. Same-day approval is the norm.' },
-    { q: 'What are the financing terms available?', a: 'We offer three tiers: Starter Protection (12.9% APR, 60 months, 580+ credit), Homeowner Choice (9.9% APR, 120 months, 640+ credit), and Elite Finance (6.9% APR, 180 months, 720+ credit). No prepayment penalty on any tier.' },
+    { q: 'What are the financing terms available?', a: 'Three example plans: 5 years at 12.9% APR (580+ credit), 10 years at 9.9% APR (640+ credit), and 15 years at 6.9% APR (720+ credit). Your actual rate depends on the lender and your credit. No prepayment penalty on any plan.' },
     { q: 'Can I pay off my loan early?', a: 'Yes. None of our financing products include prepayment penalties. Pay off at any time. You only owe interest on the remaining balance.' },
     { q: 'When do payments start?', a: 'Monthly payments begin 30 days after project completion.' },
-    { q: 'What if I\'m denied?', a: 'We\'ll work with you. We offer direct payment plans for customers who don\'t qualify for third-party financing. We\'ve never turned away a homeowner who genuinely needed a roof.' },
+    { q: 'What if I\'m denied?', a: 'Ask us about a direct payment plan. For homeowners who don\'t qualify with a lender, we can often split the cost into a few scheduled payments.' },
     { q: 'How much can I finance?', a: 'Financing is available for projects from $2,500 to $75,000. Most residential replacements fall in the $8,500–$18,000 range.' },
   ],
   process: [
     { q: 'How long does a roof replacement take?', a: 'Most residential replacements are completed in a single day. Larger homes (3,000+ sq ft), complex roof systems, or projects requiring significant decking replacement may take two days. We\'ll give you a firm timeline before work begins.' },
     { q: 'Do I need to be home during the installation?', a: 'You don\'t have to be home, but we recommend being available for a final walkthrough at completion. Work is entirely exterior. No interior access required.' },
-    { q: 'What happens to my gutters?', a: 'We carefully remove and reinstall existing gutters. If they\'re damaged or you want new gutters, we can quote that separately. No gutter damage from our installation process.' },
+    { q: 'What happens to my gutters?', a: 'We work around them and protect them during tear-off. If they\'re damaged or you want new gutters, we can quote that separately.' },
     { q: 'How noisy is the installation process?', a: 'Roof installation is loud, primarily from nail guns and tear-off. Most jobs run 7 AM to 6 PM. Many homeowners choose to be out of the house for comfort, but it\'s not required.' },
-    { q: 'What is the cleanup process?', a: 'We use magnetic sweepers on all driveways and yards to capture loose nails, roll up and haul away all old materials, and leave the property cleaner than we found it. Cleanup is included in every project.' },
+    { q: 'What is the cleanup process?', a: 'Old roofing goes straight into a dumpster or trailer, and we run magnetic sweepers over the driveway, lawn, and beds for nails before we leave. Cleanup is included in every job.' },
     { q: 'Can I pick my shingle color?', a: 'Absolutely. We bring physical GAF shingle samples to every estimate so you can see them against your siding and trim before committing. Over 30 color options available.' },
     { q: 'What is a drone post-install inspection?', a: 'After every installation, we fly a drone survey of the completed roof before final payment is collected. We\'re looking for any ridge cap issues, missed flashing points, or damaged shingles from installation. It\'s our final quality check.' },
   ],
   warranty: [
-    { q: 'What warranty do you offer?', a: 'We provide a 10-year workmanship warranty on all labor. Materials are covered by GAF\'s 30-year limited manufacturer warranty. Both warranties are in writing and provided at project completion.' },
-    { q: 'Is the warranty transferable if I sell my home?', a: 'Yes. Both the workmanship warranty and GAF manufacturer warranty are transferable to new homeowners at no charge. This can be a meaningful selling point when listing your home.' },
+    { q: 'What warranty do you offer?', a: 'A 10-year written workmanship warranty from us on the installation, and GAF\'s lifetime limited warranty on the shingles. You get both in writing at the final walkthrough.' },
+    { q: 'Is the warranty transferable if I sell my home?', a: 'Yes. Our workmanship warranty transfers to the next owner at no charge, and GAF\'s shingle warranty can be transferred once under GAF\'s terms.' },
     { q: 'What does the workmanship warranty cover?', a: 'Our 10-year workmanship warranty covers any defects in installation: improper flashing, misapplied shingles, missed decking fastening patterns, etc. It does not cover storm damage, tree impact, or damage from unauthorized modifications.' },
     { q: 'What voids the warranty?', a: 'The workmanship warranty is voided by: unauthorized roof work by other contractors, installation of rooftop equipment without our consultation, and intentional damage. Normal weathering and storm events do not void the warranty.' },
-    { q: 'What is GAF\'s enhanced warranty (System Plus)?', a: 'Because we are GAF Master Elite® certified, your project may qualify for GAF\'s System Plus or Golden Pledge warranty, which extends coverage to 50 years on shingles and 25 years on workmanship, significantly beyond our standard 10/30-year offering. Ask us at estimate time.' },
+    { q: 'What are GAF\'s enhanced warranties?', a: 'As a GAF Master Elite® contractor we can register qualifying roofs for GAF\'s System Plus or Golden Pledge warranties. They add longer non-prorated material coverage, and Golden Pledge adds up to 25 years of GAF-backed workmanship coverage. Ask about them at your estimate.' },
   ],
 }
 
@@ -73,8 +73,9 @@ export default function FaqPageClient() {
     <>
       <PageHero
         eyebrow="FAQ"
-        title="Got Questions? We've Got Answers."
-        subtitle={`${YEARS_IN_BUSINESS} years. Every question answered straight.`}
+        title="Roofing questions, answered"
+        subtitle="Storm claims, financing, warranties, and what to expect on install day."
+        bgImage={asset('/images/hero-faq.jpg')}
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'FAQ', href: '/faq/' }]}
       />
 
@@ -107,9 +108,9 @@ export default function FaqPageClient() {
 
       <InlineCta
         heading="Still have questions?"
-        subtext="Call us and we'll answer anything. No sales pitch."
-        primaryLabel="Call (555) 555-0100"
-        primaryHref="tel:+15555550100"
+        subtext="Call and talk to someone in our Springfield office."
+        primaryLabel={`Call ${PHONE_DISPLAY}`}
+        primaryHref={PHONE_HREF}
       />
 
       <Footer />

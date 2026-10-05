@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import { AlertTriangle } from 'lucide-react'
+import { Icon3D } from '@/components/ui/icon-3d'
 import { Reveal } from '@/components/ui/reveal'
 import ServicePageTemplate from '@/components/service-page-template'
 import { getService } from '@/lib/services'
+import { STORM_EVENTS } from '@/lib/cities'
 
 export const metadata: Metadata = {
   title: 'Storm Damage Roof Repair Springfield IL | Free Drone Inspection | Peak Roofing Co',
@@ -12,9 +13,9 @@ export const metadata: Metadata = {
 }
 
 const RECENT_STORMS = [
-  { date: 'April 2024', event: 'Sangamon County Hailstorm', severity: 'Severe', hail: '2.5" hailstones', claims: '400+' },
-  { date: 'August 2023', event: 'Straight-Line Wind Event', severity: 'High', hail: '75 mph gusts', claims: '180+' },
-  { date: 'June 2022', event: 'Springfield Derecho', severity: 'Extreme', hail: '90 mph gusts', claims: '320+' },
+  { date: 'April 2024', event: 'Sangamon County hailstorm', detail: STORM_EVENTS.hail2024.split(': ')[1], jobs: '400+' },
+  { date: 'August 2023', event: 'Straight-line wind event', detail: STORM_EVENTS.wind2023.split(': ')[1], jobs: '180+' },
+  { date: 'July 2022', event: 'Severe thunderstorms', detail: STORM_EVENTS.storm2022.split(': ')[1], jobs: '320+' },
 ]
 
 const CARRIERS = ['State Farm', 'Allstate', 'USAA', 'Farmers', 'Liberty Mutual', 'Nationwide']
@@ -28,8 +29,8 @@ export default function StormDamageServicePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
             <div className="flex items-center gap-2 mb-6">
-              <AlertTriangle className="w-4 h-4 text-red-400" />
-              <p className="text-red-400 text-xs font-bold uppercase tracking-widest">Recent Storm Events in Your Area</p>
+              <Icon3D name="alert" size={26} />
+              <p className="text-red-400 text-xs font-bold uppercase tracking-widest">Recent storms we responded to</p>
             </div>
           </Reveal>
           <Reveal className="grid sm:grid-cols-3 gap-4">
@@ -38,9 +39,8 @@ export default function StormDamageServicePage() {
                 <p className="text-gold-400 text-xs font-bold mb-1">{storm.date}</p>
                 <h3 className="text-white font-semibold text-sm mb-2">{storm.event}</h3>
                 <div className="flex flex-col gap-1">
-                  <p className="text-slate-400 text-xs">Severity: <span className="text-red-400 font-semibold">{storm.severity}</span></p>
-                  <p className="text-slate-400 text-xs">{storm.hail}</p>
-                  <p className="text-slate-400 text-xs">{storm.claims} homes affected</p>
+                  <p className="text-slate-300 text-xs">{storm.detail}</p>
+                  <p className="text-slate-400 text-xs">{storm.jobs} Peak inspections afterward</p>
                 </div>
               </div>
             ))}

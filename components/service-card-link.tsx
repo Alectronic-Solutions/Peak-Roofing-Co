@@ -1,27 +1,17 @@
 import Link from 'next/link'
-import { ArrowRight, Home, CloudLightning, Aperture, ShieldCheck, CreditCard, Building2 } from 'lucide-react'
-
-const ICONS: Record<string, React.ElementType> = {
-  home: Home,
-  'cloud-lightning': CloudLightning,
-  aperture: Aperture,
-  'shield-check': ShieldCheck,
-  'credit-card': CreditCard,
-  'building-2': Building2,
-}
+import { ArrowRight } from 'lucide-react'
+import { Icon3D, type IconName } from '@/components/ui/icon-3d'
 
 interface ServiceCardLinkProps {
   slug: string
   title: string
   description: string
   price: string
-  icon: string
+  icon: IconName
   badge?: string
 }
 
 export default function ServiceCardLink({ slug, title, description, price, icon, badge }: ServiceCardLinkProps) {
-  const Icon = ICONS[icon] ?? Home
-
   return (
     <Link
       href={`/services/${slug}/`}
@@ -32,9 +22,7 @@ export default function ServiceCardLink({ slug, title, description, price, icon,
           {badge}
         </span>
       )}
-      <div className="w-11 h-11 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center mb-4 group-hover:bg-gold-500/20 transition-colors">
-        <Icon className="w-5 h-5 text-gold-500" />
-      </div>
+      <Icon3D name={icon} size={52} className="-ml-1 mb-3 transition-transform duration-300 group-hover:-translate-y-0.5" />
       <h3 className="font-display font-bold text-white text-lg mb-2 group-hover:text-gold-400 transition-colors">
         {title}
       </h3>

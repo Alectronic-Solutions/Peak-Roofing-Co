@@ -3,6 +3,7 @@ import Link from 'next/link'
 import PageHero from '@/components/page-hero'
 import { Footer } from '@/components/footer'
 import { BASE_PATH } from '@/lib/company'
+import { CITIES } from '@/lib/cities'
 
 export const metadata: Metadata = {
   title: 'Sitemap | Peak Roofing Co',
@@ -42,14 +43,7 @@ const SECTIONS: SitemapSection[] = [
     title: 'Service Areas',
     links: [
       { label: 'All Service Areas', href: '/service-areas/' },
-      { label: 'Springfield', href: '/service-areas/springfield/' },
-      { label: 'Westbrook', href: '/service-areas/westbrook/' },
-      { label: 'Chatham', href: '/service-areas/chatham/' },
-      { label: 'Sherman', href: '/service-areas/sherman/' },
-      { label: 'Auburn', href: '/service-areas/auburn/' },
-      { label: 'Rochester', href: '/service-areas/rochester/' },
-      { label: 'Riverton', href: '/service-areas/riverton/' },
-      { label: 'Lakeview Heights', href: '/service-areas/lakeview-heights/' },
+      ...CITIES.map((city) => ({ label: city.name, href: `/service-areas/${city.slug}/` })),
     ],
   },
   {
@@ -57,6 +51,7 @@ const SECTIONS: SitemapSection[] = [
     links: [
       { label: 'Privacy Policy', href: '/privacy-policy/' },
       { label: 'Terms of Service', href: '/terms/' },
+      { label: 'Photo Credits', href: '/photo-credits/' },
     ],
   },
 ]
