@@ -1,5 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /api/
-
-Sitemap: https://alectronic-solutions.github.io/Peak-Roofing-Co/sitemap.xml
