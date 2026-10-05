@@ -6,6 +6,8 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { CheckCircle, Loader2, Phone, Mail, MapPin, Clock, Shield, Award } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
+import { submitForm } from '@/lib/forms'
+import { PHONE_DISPLAY, PHONE_HREF, EMAIL, LICENSE } from '@/lib/company'
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -38,7 +40,7 @@ const SERVICES = [
 ]
 
 const TRUST_ITEMS = [
-  { icon: Shield, text: 'Licensed & $2M Insured', sub: 'State Lic. #RC-20847' },
+  { icon: Shield, text: 'Licensed & $2M Insured', sub: LICENSE },
   { icon: Award, text: 'GAF Master Elite®', sub: 'Top 2% of contractors nationally' },
   { icon: Clock, text: 'Response within 2 hours', sub: 'Mon–Fri 7am–6pm, Sat 8am–2pm' },
   { icon: CheckCircle, text: 'BBB Accredited A+ Rating', sub: 'Verified since 2001' },
@@ -56,31 +58,22 @@ export function ContactForm() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setFormState('submitting')
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: 'YOUR_ACCESS_KEY_HERE',
-          subject: `New Contact - ${selectedService || 'General Inquiry'} | Peak Roofing Co`,
-          ...fields,
-          service: selectedService,
-        }),
-      })
-      const data = await res.json()
-      setFormState(data.success ? 'success' : 'error')
-    } catch {
-      setFormState('error')
-    }
+    const ok = await submitForm({
+      subject: `New Contact - ${selectedService || 'General Inquiry'} | Peak Roofing Co`,
+      ...fields,
+      service: selectedService,
+    })
+    setFormState(ok ? 'success' : 'error')
   }
 
   return (
-    <section id="contact" className="py-16 sm:py-20 lg:py-28 bg-forest-900">
+    <section id="contact" data-hide-action-bar className="py-16 sm:py-20 lg:py-28 bg-forest-900">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
 
         {/* Header */}
         <Reveal className="max-w-xl mb-10 lg:mb-16">
-          <h2 className="font-display text-4xl lg:text-[3.25rem] font-bold text-white leading-[1.08] tracking-tight">
+          <span className="text-gold-400 text-xs font-bold uppercase tracking-[0.18em]">Contact</span>
+          <h2 className="mt-4 font-display text-4xl lg:text-[3.25rem] font-bold text-white leading-[1.08] tracking-tight">
             Get in Touch
           </h2>
           <p className="mt-4 text-slate-300 text-lg leading-relaxed">
@@ -89,7 +82,7 @@ export function ContactForm() {
         </Reveal>
 
         {formState === 'success' ? (
-          <div className="max-w-lg mx-auto text-center py-16 animate-scale-in">
+          <div className="max-w-lg mx-auto text-center py-16 animate-scale-in" role="status">
             <div className="w-20 h-20 bg-gold-400/10 border border-gold-400/30 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle className="w-10 h-10 text-gold-400" aria-hidden="true" />
             </div>
@@ -99,8 +92,8 @@ export function ContactForm() {
             </p>
             <p className="text-slate-400 text-sm">
               For urgent matters, call{' '}
-              <a href="tel:+15555550100" className="text-gold-400 hover:text-gold-300 font-medium">
-                (555) 555-0100
+              <a href={PHONE_HREF} className="text-gold-400 hover:text-gold-300 font-medium">
+                {PHONE_DISPLAY}
               </a>
             </p>
           </div>
@@ -111,7 +104,7 @@ export function ContactForm() {
             <Reveal
               as="form"
               onSubmit={handleSubmit}
-              className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-7 lg:p-9 space-y-6"
+              className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-5 sm:p-7 lg:p-9 space-y-6"
             >
               {/* Name / Phone row */}
               <div className="grid sm:grid-cols-2 gap-5">
@@ -121,6 +114,8 @@ export function ContactForm() {
                   </Label>
                   <Input
                     id="cf-name"
+                    name="name"
+                    autoComplete="name"
                     required
                     value={fields.name}
                     onChange={(e) => update('name', e.target.value)}
@@ -134,7 +129,10 @@ export function ContactForm() {
                   </Label>
                   <Input
                     id="cf-phone"
+                    name="phone"
                     type="tel"
+                    autoComplete="tel"
+                    inputMode="tel"
                     required
                     value={fields.phone}
                     onChange={(e) => update('phone', e.target.value)}
@@ -151,7 +149,9 @@ export function ContactForm() {
                 </Label>
                 <Input
                   id="cf-email"
+                  name="email"
                   type="email"
+                  autoComplete="email"
                   required
                   value={fields.email}
                   onChange={(e) => update('email', e.target.value)}
@@ -167,6 +167,8 @@ export function ContactForm() {
                 </Label>
                 <Input
                   id="cf-address"
+                  name="address"
+                  autoComplete="street-address"
                   value={fields.address}
                   onChange={(e) => update('address', e.target.value)}
                   placeholder="123 Main St, Springfield, IL 62701"
@@ -186,7 +188,7 @@ export function ContactForm() {
                       type="button"
                       aria-pressed={selectedService === s}
                       onClick={() => setSelectedService(s === selectedService ? '' : s)}
-                      className={`text-xs font-semibold px-3.5 py-2 rounded-full border transition-all duration-200 ${
+                      className={`text-xs font-semibold px-3.5 min-h-[40px] rounded-full border transition-all duration-200 ${
                         selectedService === s
                           ? 'bg-gold-400/15 border-gold-400/50 text-gold-300'
                           : 'bg-white/[0.04] border-white/[0.10] text-slate-300 hover:text-white hover:border-white/25'
@@ -205,6 +207,7 @@ export function ContactForm() {
                 </Label>
                 <Textarea
                   id="cf-desc"
+                  name="description"
                   rows={4}
                   value={fields.description}
                   onChange={(e) => update('description', e.target.value)}
@@ -216,7 +219,7 @@ export function ContactForm() {
               {formState === 'error' && (
                 <p className="text-red-400 text-sm bg-red-950/30 border border-red-500/20 rounded-xl px-4 py-3" role="alert">
                   Submission failed. Please call us at{' '}
-                  <a href="tel:+15555550100" className="underline font-medium">(555) 555-0100</a>.
+                  <a href={PHONE_HREF} className="underline font-medium">{PHONE_DISPLAY}</a>.
                 </p>
               )}
 
@@ -259,8 +262,8 @@ export function ContactForm() {
                       <Phone className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
                     </div>
                     <div>
-                      <a href="tel:+15555550100" className="text-white font-semibold text-sm hover:text-gold-400 transition-colors">
-                        (555) 555-0100
+                      <a href={PHONE_HREF} className="text-white font-semibold text-sm hover:text-gold-400 transition-colors">
+                        {PHONE_DISPLAY}
                       </a>
                       <p className="text-slate-400 text-xs mt-0.5">24/7 Storm Emergency Line</p>
                     </div>
@@ -270,8 +273,8 @@ export function ContactForm() {
                       <Mail className="w-3.5 h-3.5 text-gold-400" aria-hidden="true" />
                     </div>
                     <div>
-                      <a href="mailto:info@peakroofingco.com" className="text-white font-semibold text-sm hover:text-gold-400 transition-colors">
-                        info@peakroofingco.com
+                      <a href={`mailto:${EMAIL}`} className="text-white font-semibold text-sm hover:text-gold-400 transition-colors break-all">
+                        {EMAIL}
                       </a>
                       <p className="text-slate-400 text-xs mt-0.5">Replies within 2 hours</p>
                     </div>

@@ -22,7 +22,7 @@ const COMPARISON = [
   { feature: '24/7 Emergency Line', peak: true, other: false },
   { feature: 'In-House Financing', peak: true, other: false },
   { feature: 'GAF Master Elite® Certified', peak: true, other: false },
-  { feature: '$0 Out-of-Pocket Storm Claims', peak: true, other: false },
+  { feature: 'Deductible-Only Storm Claims', peak: true, other: false },
   { feature: 'FAA-Certified Drone Pilots', peak: true, other: false },
 ]
 

@@ -11,7 +11,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { CheckCircle, Loader2, Star, Lock } from 'lucide-react'
+import { CheckCircle, Loader2, Star, Lock, ArrowRight } from 'lucide-react'
+import { submitForm } from '@/lib/forms'
+import { PHONE_DISPLAY, PHONE_HREF, REVIEW_COUNT } from '@/lib/company'
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -33,31 +35,19 @@ export function LeadCaptureForm() {
     setState('submitting')
 
     const formData = new FormData(e.currentTarget)
-    const payload = {
-      access_key: 'YOUR_ACCESS_KEY_HERE',
+    const ok = await submitForm({
       name: formData.get('name'),
       phone: formData.get('phone'),
       zip: formData.get('zip'),
       roof_age: roofAge,
       subject: 'New Estimate Request - Peak Roofing Co',
-    }
-
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(payload),
-      })
-      const data = await res.json()
-      setState(data.success ? 'success' : 'error')
-    } catch {
-      setState('error')
-    }
+    })
+    setState(ok ? 'success' : 'error')
   }
 
   if (state === 'success') {
     return (
-      <div className="bg-forest-800 border border-gold-400/30 rounded-2xl p-8 text-center shadow-[0_0_60px_rgba(245,158,11,0.1)] animate-scale-in">
+      <div className="bg-forest-800 border border-gold-400/30 rounded-2xl p-8 text-center shadow-[0_0_60px_rgba(245,158,11,0.1)] animate-scale-in" role="status">
         <div className="w-16 h-16 bg-gold-400/10 border border-gold-400/30 rounded-full flex items-center justify-center mx-auto mb-5">
           <CheckCircle className="w-8 h-8 text-gold-400" aria-hidden="true" />
         </div>
@@ -66,7 +56,7 @@ export function LeadCaptureForm() {
         </h3>
         <p className="text-slate-300 text-sm leading-relaxed">
           Our crew is reviewing your request. Watch for a call from{' '}
-          <span className="text-white font-medium">(555) 555-0100</span>.
+          <span className="text-white font-medium">{PHONE_DISPLAY}</span>.
         </p>
       </div>
     )
@@ -88,7 +78,7 @@ export function LeadCaptureForm() {
           <h2 className="font-display text-[1.4rem] font-bold text-white leading-tight">
             Get Your Free Roof Estimate
           </h2>
-          <p className="text-slate-400 text-sm mt-1">No commitment. Results within 24 hours.</p>
+          <p className="text-slate-400 text-sm mt-1">60 seconds. No commitment. Call back within 2 hours.</p>
         </div>
 
         {/* Inline social proof */}
@@ -100,7 +90,7 @@ export function LeadCaptureForm() {
               ))}
             </div>
             <span className="text-slate-300 text-xs">
-              <span className="text-white font-semibold">847</span> homeowners trust us
+              <span className="text-white font-semibold">{REVIEW_COUNT}</span> five-star reviews
             </span>
           </div>
         </div>
@@ -113,6 +103,7 @@ export function LeadCaptureForm() {
             <Input
               id="lead-name"
               name="name"
+              autoComplete="name"
               required
               placeholder="John Smith"
               className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-400
@@ -130,6 +121,8 @@ export function LeadCaptureForm() {
                 id="lead-phone"
                 name="phone"
                 type="tel"
+                autoComplete="tel"
+                inputMode="tel"
                 required
                 placeholder="(555) 000-0000"
                 className="bg-white/[0.04] border-white/[0.10] text-white placeholder:text-slate-400
@@ -144,6 +137,8 @@ export function LeadCaptureForm() {
               <Input
                 id="lead-zip"
                 name="zip"
+                autoComplete="postal-code"
+                inputMode="numeric"
                 required
                 placeholder="62701"
                 maxLength={5}
@@ -181,7 +176,7 @@ export function LeadCaptureForm() {
         {state === 'error' && (
           <p className="text-red-400 text-sm bg-red-950/30 border border-red-500/20 rounded-xl px-4 py-3" role="alert">
             Something went wrong. Please call us at{' '}
-            <a href="tel:+15555550100" className="underline font-medium">(555) 555-0100</a>.
+            <a href={PHONE_HREF} className="underline font-medium">{PHONE_DISPLAY}</a>.
           </p>
         )}
 
@@ -201,7 +196,10 @@ export function LeadCaptureForm() {
               Sending…
             </>
           ) : (
-            'Get My Free Estimate →'
+            <>
+              Get My Free Estimate
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </>
           )}
         </Button>
 

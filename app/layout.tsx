@@ -1,8 +1,8 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import { Navbar } from '@/components/navbar'
-import EmergencyBar from '@/components/emergency-bar'
+import { MobileActionBar } from '@/components/mobile-action-bar'
 import ScrollProgressBar from '@/components/scroll-progress-bar'
 import { SITE_URL, BASE_PATH } from '@/lib/company'
 
@@ -18,15 +18,23 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 })
 
-const TITLE = 'Peak Roofing Co | Expert Roofing Since 1987'
+const TITLE = 'Peak Roofing Co | Springfield, IL Roofing Contractor Since 1987'
 const DESCRIPTION =
-  'Licensed roofing contractors serving the region. Storm damage, replacements, inspections. 24/7 emergency line.'
+  'GAF Master Elite roofer serving Springfield and Sangamon County since 1987. Roof replacement, storm damage repair, free drone inspections, and insurance claim help. 24/7 storm line.'
+
+export const viewport: Viewport = {
+  themeColor: '#04140E',
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: TITLE,
   description: DESCRIPTION,
-  keywords: ['roofing contractor', 'roof replacement', 'storm damage', 'roof repair'],
+  keywords: ['Springfield IL roofer', 'roofing contractor', 'roof replacement', 'storm damage repair', 'hail damage', 'roof inspection'],
+  formatDetection: { telephone: false },
   alternates: { canonical: '/' },
   icons: {
     icon: `${BASE_PATH}/favicon.svg`,
@@ -63,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ScrollProgressBar />
         <Navbar />
         <main id="main-content">{children}</main>
-        <EmergencyBar />
+        <MobileActionBar />
       </body>
     </html>
   )

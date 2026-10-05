@@ -36,7 +36,7 @@ export const CITIES: City[] = [
     testimonialNames: ['Margaret T., Springfield', 'Robert K., Springfield'],
     testimonialQuotes: [
       '"Peak had a drone over my house within 90 minutes of my call. Claim approved, new roof on. I paid my deductible and nothing else."',
-      '"37 years in Springfield and they still answer the phone themselves. That alone sets them apart."',
+      '"Decades in Springfield and they still answer the phone themselves. That alone sets them apart."',
     ],
   },
   {

@@ -2,13 +2,23 @@ import { CITIES } from './cities'
 
 // TODO: this is demo/placeholder business data. Before going live, replace:
 //  - Phone number: (555) 555-0100 / tel:+15555550100, search-and-replace across the codebase
-//  - Web3Forms `access_key: 'YOUR_ACCESS_KEY_HERE'` in contact-form.tsx, footer.tsx, lead-capture-form.tsx
-//  - i.pravatar.cc fake avatars in testimonials-section.tsx, lead-capture-form.tsx, about/page.tsx
+//  - Web3Forms access key in lib/forms.ts (forms run in demo mode until it's set)
+//  - i.pravatar.cc fake avatars in testimonials-section.tsx, about/page.tsx
 //  - Recycled stock photos in lib/projects.ts (before/after pairs currently reused across projects)
 //  - Placeholder social links (footer.tsx `href: '#'`) and generic sameAs URLs (local-seo-schema.tsx)
 //  - public/og-default.jpg is a cropped hero poster used as a placeholder OG/Twitter share image, replace with real branded creative
 
 export const BASE_PATH = process.env.NODE_ENV === 'production' ? '/Peak-Roofing-Co' : ''
+
+/** Prefix a /public asset path with the basePath. next/image and raw <img>/<video> don't do this for string srcs. */
+export const asset = (path: string) => `${BASE_PATH}${path}`
+
+export const PHONE_DISPLAY = '(555) 555-0100'
+export const PHONE_HREF = 'tel:+15555550100'
+export const EMAIL = 'info@peakroofingco.com'
+export const LICENSE = 'IL Lic. #RC-20847'
+export const RATING = '4.9'
+export const REVIEW_COUNT = '847'
 
 export const SITE_URL =
   process.env.NODE_ENV === 'production'

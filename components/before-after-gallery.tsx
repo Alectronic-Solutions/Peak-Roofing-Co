@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { Reveal } from '@/components/ui/reveal'
 import { CountUp } from '@/components/ui/count-up'
@@ -22,7 +23,7 @@ const PROJECTS = [
     label: 'Hail Storm Repair',
     location: 'Maple Ridge',
     year: '2024',
-    type: 'Insurance Claim - $0 Out-of-Pocket',
+    type: 'Insurance Claim - Deductible Only',
     before: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=85&fit=crop',
     after: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=900&q=85&fit=crop',
     featured: false,
@@ -42,7 +43,7 @@ const PROJECTS = [
 const STATS = [
   { value: ROOFS_COMPLETED_DISPLAY, label: 'Roofs Completed' },
   { value: String(YEARS_IN_BUSINESS), label: 'Years in Business' },
-  { value: '$0', label: 'Avg. Out-of-Pocket' },
+  { value: '1,200+', label: 'Insurance Claims Won' },
   { value: '4.9★', label: 'Google Rating' },
 ]
 
@@ -95,7 +96,7 @@ function SliderCard({
 
 export function BeforeAfterGallery() {
   return (
-    <section id="gallery" className="py-16 sm:py-20 lg:py-28 bg-forest-950">
+    <section id="gallery" className="py-16 sm:py-20 lg:py-28 bg-forest-900">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
 
         {/* Header */}
@@ -111,16 +112,16 @@ export function BeforeAfterGallery() {
             </h2>
             <p className="mt-4 text-slate-300 max-w-md text-base leading-relaxed">
               Drag the slider to compare. Every project is backed by our{' '}
-              <span className="text-white font-medium">20-Year Craftsmanship Warranty</span>.
+              <span className="text-white font-medium">10-Year Workmanship Warranty</span>.
             </p>
           </div>
-          <a
+          <Link
             href="/gallery/"
             className="inline-flex items-center gap-2 text-sm font-semibold text-gold-400 hover:text-gold-300 transition-colors group flex-shrink-0"
           >
             See all projects
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-          </a>
+          </Link>
         </Reveal>
 
         {/* Bento grid */}
